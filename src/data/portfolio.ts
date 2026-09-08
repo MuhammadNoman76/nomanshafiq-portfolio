@@ -1,5 +1,5 @@
 function resolveSiteUrl(rawUrl?: string): string {
-  const fallback = "https://www.thenoman.online";
+  const fallback = "https://www.nomanshafiq.com";
   if (!rawUrl) return fallback;
   let trimmed = rawUrl.trim();
   if (!trimmed) return fallback;

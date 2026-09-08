@@ -5,7 +5,7 @@
 - Confirm `NEXT_PUBLIC_SITE_URL` is the exact canonical production domain.
 - Confirm every public route returns HTTP 200.
 - Keep HTTPS enabled and redirect HTTP to HTTPS.
-- Keep only one canonical hostname, for example `www.thenoman.online`.
+- Keep only one canonical hostname, for example `www.nomanshafiq.com`.
 - Verify the generated `/robots.txt` and `/sitemap.xml` after deployment.
 - Verify `/opengraph-image` loads publicly.
 - Test the homepage and project pages with Google Rich Results Test.

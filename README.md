@@ -68,7 +68,7 @@ A production `Dockerfile` is included for Azure Container Apps or any container 
 2. Make sure the homepage returns HTTP 200 publicly.
 3. Add the domain to Google Search Console.
 4. Put the verification token in `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`.
-5. Submit `https://www.thenoman.online/sitemap.xml`.
+5. Submit `https://www.nomanshafiq.com/sitemap.xml`.
 6. Request indexing for the homepage and the strongest project case studies.
 
 SEO can improve discoverability and click-through rate, but no implementation can guarantee a specific Google ranking. Useful content, reputation, links, crawlability, site reliability, and competition also matter.

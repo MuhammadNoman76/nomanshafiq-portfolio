@@ -12,13 +12,13 @@ He builds agentic AI systems, LLM applications, RAG workflows, multimodal AI pro
 - NLP and computer vision
 
 ## Selected projects
-- LangVoice: https://www.thenoman.online/work/langvoice
-- ResumeWorld: https://www.thenoman.online/work/resumeworld
-- Metamod: https://www.thenoman.online/work/metamod
-- ReelsBuilder: https://www.thenoman.online/work/reelsbuilder
-- LughaatNLP: https://www.thenoman.online/work/lughaat
+- LangVoice: https://www.nomanshafiq.com/work/langvoice
+- ResumeWorld: https://www.nomanshafiq.com/work/resumeworld
+- Metamod: https://www.nomanshafiq.com/work/metamod
+- ReelsBuilder: https://www.nomanshafiq.com/work/reelsbuilder
+- LughaatNLP: https://www.nomanshafiq.com/work/lughaat
 
 ## Profiles
-- Website: https://www.thenoman.online
+- Website: https://www.nomanshafiq.com
 - GitHub: https://github.com/MuhammadNoman76
 - LinkedIn: https://www.linkedin.com/in/muhammad-noman76/

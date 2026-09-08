@@ -2,11 +2,19 @@ import type { Metadata, Viewport } from "next";
 import { profile } from "@/data/portfolio";
 import "./globals.css";
 
-const siteUrl = profile.website;
+const siteUrl = profile.website || "https://www.nomanshafiq.com";
 const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
+function getSafeMetadataBase(): URL {
+  try {
+    return new URL(siteUrl);
+  } catch {
+    return new URL("https://www.nomanshafiq.com");
+  }
+}
+
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: getSafeMetadataBase(),
   title: {
     default: "Muhammad Noman | AI Engineer, Agentic AI & Full-Stack Developer",
     template: "%s | Muhammad Noman"
