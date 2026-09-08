@@ -1,3 +1,18 @@
+function resolveSiteUrl(rawUrl?: string): string {
+  const fallback = "https://www.thenoman.online";
+  if (!rawUrl) return fallback;
+  let trimmed = rawUrl.trim();
+  if (!trimmed) return fallback;
+  if (!/^https?:\/\//i.test(trimmed)) {
+    trimmed = `https://${trimmed}`;
+  }
+  try {
+    return new URL(trimmed).origin;
+  } catch {
+    return fallback;
+  }
+}
+
 export const profile = {
   name: "Muhammad Noman",
   shortName: "Noman",
@@ -5,7 +20,7 @@ export const profile = {
   location: "Karachi, Pakistan",
   github: "https://github.com/MuhammadNoman76",
   linkedin: "https://www.linkedin.com/in/muhammad-noman76/",
-  website: "https://www.thenoman.online",
+  website: resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL),
   resume: "/files/Muhammad-Noman-Resume.docx",
   role: "AI Engineer and Full-Stack Developer",
   company: "Bayseian",

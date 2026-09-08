@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { profile } from "@/data/portfolio";
 import "./globals.css";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || profile.website;
+const siteUrl = profile.website;
 const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 export const metadata: Metadata = {
