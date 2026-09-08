@@ -1,0 +1,24 @@
+# Muhammad Noman
+
+Muhammad Noman is a Lead AI Engineer and Full-Stack Developer based in Karachi, Pakistan.
+He builds agentic AI systems, LLM applications, RAG workflows, multimodal AI products, backend APIs, frontend applications, and cloud deployments.
+
+## Core expertise
+- Agentic AI, AI agents, multi-agent orchestration
+- LLM applications, RAG, fine-tuning, LLMOps
+- LangChain, LangGraph, Google ADK
+- Python, FastAPI, Node.js, Next.js, React, TypeScript
+- Microsoft Azure, Google Cloud Platform, Docker, CI/CD
+- NLP and computer vision
+
+## Selected projects
+- LangVoice: https://www.thenoman.online/work/langvoice
+- ResumeWorld: https://www.thenoman.online/work/resumeworld
+- Metamod: https://www.thenoman.online/work/metamod
+- ReelsBuilder: https://www.thenoman.online/work/reelsbuilder
+- LughaatNLP: https://www.thenoman.online/work/lughaat
+
+## Profiles
+- Website: https://www.thenoman.online
+- GitHub: https://github.com/MuhammadNoman76
+- LinkedIn: https://www.linkedin.com/in/muhammad-noman76/
