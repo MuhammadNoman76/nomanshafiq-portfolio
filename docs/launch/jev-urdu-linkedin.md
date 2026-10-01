@@ -11,7 +11,7 @@ Urdu in real products rarely comes in one form. People write in Urdu script, Rom
 
 Jev-Urdu turns text and typed questions into structured answers: support triage, sentiment, claim checking, consent, instruction boundaries, and tool-result verification. It is a decision model for application workflows.
 
-I developed the Urdu specialization and task interface around mmBERT-base and a decision head, then benchmarked the model against the Laya variants and TypeSafe's separate Jev API. Starting weights came from the multilingual checkpoint in Convai Innovations' Laya repository.
+I built the Urdu training and task interface around mmBERT-base and a decision head, then benchmarked the model against the Laya variants and TypeSafe's separate Jev API.
 
 A few results from my recorded benchmark run:
 
