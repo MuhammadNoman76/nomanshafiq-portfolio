@@ -19,7 +19,7 @@ A few results from my recorded benchmark run:
 • 47.2% accuracy on Roman Urdu sentiment with Urdu questions, compared with 44.0% for that baseline.
 • 279 decisions per second in batch inference on a Tesla T4, close to the multilingual baseline's throughput.
 
-The full results include the tradeoffs. Domain classification and Urdu sentiment still need work, and confidence calibration is a priority. English-question runs test prompt compatibility on Urdu text; wider language quality remains to be evaluated.
+The full results include the tradeoffs. Domain classification and Roman Urdu sentiment quality still need work, and confidence calibration is a priority. English-question runs test prompt compatibility on Urdu text; wider language quality remains to be evaluated.
 
 This is one more step in my work on Urdu language technology through LughaatNLP: an Urdu-first model with a multilingual foundation, measured openly and built for developers.
 

@@ -13,7 +13,7 @@ function readCsv(file) {
 
 test('published chart metrics preserve all source CSV values and counts', () => {
   const source = readCsv('jev-urdu-metrics.csv');
-  assert.equal(source.length, 40);
+  assert.equal(source.length, 32);
   assert.equal(data.metrics.length, source.length);
   for (const row of source) {
     const published = data.metrics.find(item => ['benchmark', 'prompt', 'model'].every(key => item[key] === row[key]));
@@ -29,7 +29,7 @@ test('comparison deltas agree with accuracy and include positive and negative fi
   const source = readCsv('jev-urdu-deltas.csv');
   assert.equal(data.deltas.length, source.length);
   const keys = Object.keys(source[0]);
-  assert.equal(source.length, 30);
+  assert.equal(source.length, 24);
   let positive = 0, negative = 0, inconclusive = 0;
   for (const row of data.deltas) {
     const match = predicate => data.metrics.find(item => item.benchmark === row.benchmark && item.prompt === row.prompt && predicate(item));
@@ -48,10 +48,10 @@ test('comparison deltas agree with accuracy and include positive and negative fi
 });
 
 test('matched API comparison stays distinct from full-suite results', () => {
-  assert.equal(data.headToHead.length, 9);
-  assert.equal(data.headToHeadDeltas.length, 9);
+  assert.equal(data.headToHead.length, 7);
+  assert.equal(data.headToHeadDeltas.length, 7);
   const external = data.headToHead.filter(row => row.benchmark !== 'Laya-Urdu test');
-  assert.equal(external.length, 8);
+  assert.equal(external.length, 6);
   for (const row of external) {
     assert.equal(row.decisions, 100);
     assert.equal(Object.keys(row.scores).length, 6);

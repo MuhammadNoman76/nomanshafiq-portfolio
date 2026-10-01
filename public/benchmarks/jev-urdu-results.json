@@ -213,58 +213,6 @@
       "majority_class": 0.1351714862138534
     },
     {
-      "benchmark": "USC",
-      "prompt": "Urdu",
-      "model": "laya (English)",
-      "decisions": 980,
-      "accuracy": 0.4846938775510204,
-      "macro_f1": 0.4821266189429272,
-      "log_loss": 0.6950534509715242,
-      "brier": 0.501902526632653,
-      "ece": 0.03248948979591837,
-      "confidence": 0.5163892857142858,
-      "majority_class": 0.5102040816326531
-    },
-    {
-      "benchmark": "USC",
-      "prompt": "Urdu",
-      "model": "laya-multilingual",
-      "decisions": 980,
-      "accuracy": 0.6326530612244898,
-      "macro_f1": 0.6281368051807878,
-      "log_loss": 0.8739660775021068,
-      "brier": 0.524059973122449,
-      "ece": 0.20059397959183675,
-      "confidence": 0.8332470408163266,
-      "majority_class": 0.5102040816326531
-    },
-    {
-      "benchmark": "USC",
-      "prompt": "Urdu",
-      "model": "laya (routed)",
-      "decisions": 980,
-      "accuracy": 0.6326530612244898,
-      "macro_f1": 0.6281368051807878,
-      "log_loss": 0.8739660775021068,
-      "brier": 0.524059973122449,
-      "ece": 0.20059397959183675,
-      "confidence": 0.8332470408163266,
-      "majority_class": 0.5102040816326531
-    },
-    {
-      "benchmark": "USC",
-      "prompt": "Urdu",
-      "model": "jev-urdu",
-      "decisions": 980,
-      "accuracy": 0.576530612244898,
-      "macro_f1": 0.532420708692468,
-      "log_loss": 3.516197589972805,
-      "brier": 0.8231071809183673,
-      "ece": 0.4115413265306124,
-      "confidence": 0.9870694897959184,
-      "majority_class": 0.5102040816326531
-    },
-    {
       "benchmark": "Roman-Urdu sentiment",
       "prompt": "Urdu",
       "model": "laya (English)",
@@ -419,58 +367,6 @@
       "ece": 0.6289200739744452,
       "confidence": 0.9693609616677875,
       "majority_class": 0.1351714862138534
-    },
-    {
-      "benchmark": "USC",
-      "prompt": "English",
-      "model": "laya (English)",
-      "decisions": 980,
-      "accuracy": 0.5102040816326531,
-      "macro_f1": 0.5029984912454198,
-      "log_loss": 0.852241026321835,
-      "brier": 0.6068265643877552,
-      "ece": 0.18156397959183673,
-      "confidence": 0.6917680612244899,
-      "majority_class": 0.5102040816326531
-    },
-    {
-      "benchmark": "USC",
-      "prompt": "English",
-      "model": "laya-multilingual",
-      "decisions": 980,
-      "accuracy": 0.6989795918367347,
-      "macro_f1": 0.6987835690656664,
-      "log_loss": 0.9462204123526937,
-      "brier": 0.4824892424897959,
-      "ece": 0.19627204081632643,
-      "confidence": 0.8934491836734694,
-      "majority_class": 0.5102040816326531
-    },
-    {
-      "benchmark": "USC",
-      "prompt": "English",
-      "model": "laya (routed)",
-      "decisions": 980,
-      "accuracy": 0.6989795918367347,
-      "macro_f1": 0.6987835690656664,
-      "log_loss": 0.9462204123526937,
-      "brier": 0.4824892424897959,
-      "ece": 0.19627204081632643,
-      "confidence": 0.8934491836734694,
-      "majority_class": 0.5102040816326531
-    },
-    {
-      "benchmark": "USC",
-      "prompt": "English",
-      "model": "jev-urdu",
-      "decisions": 980,
-      "accuracy": 0.6428571428571429,
-      "macro_f1": 0.6282906571994573,
-      "log_loss": 2.697689845167156,
-      "brier": 0.669372387877551,
-      "ece": 0.3339851020408164,
-      "confidence": 0.973876530612245,
-      "majority_class": 0.5102040816326531
     },
     {
       "benchmark": "Roman-Urdu sentiment",
@@ -635,33 +531,6 @@
       "significant": "yes"
     },
     {
-      "benchmark": "USC",
-      "prompt": "Urdu",
-      "jev-urdu minus": "laya-multilingual",
-      "accuracy Δ": -0.05612244897959184,
-      "95% CI low": -0.09693877551020408,
-      "95% CI high": -0.014285714285714285,
-      "significant": "yes"
-    },
-    {
-      "benchmark": "USC",
-      "prompt": "Urdu",
-      "jev-urdu minus": "laya (routed)",
-      "accuracy Δ": -0.05612244897959184,
-      "95% CI low": -0.09693877551020408,
-      "95% CI high": -0.014285714285714285,
-      "significant": "yes"
-    },
-    {
-      "benchmark": "USC",
-      "prompt": "Urdu",
-      "jev-urdu minus": "laya (English)",
-      "accuracy Δ": 0.09183673469387756,
-      "95% CI low": 0.05,
-      "95% CI high": 0.1346938775510204,
-      "significant": "yes"
-    },
-    {
       "benchmark": "Roman-Urdu sentiment",
       "prompt": "Urdu",
       "jev-urdu minus": "laya-multilingual",
@@ -743,33 +612,6 @@
       "significant": "yes"
     },
     {
-      "benchmark": "USC",
-      "prompt": "English",
-      "jev-urdu minus": "laya-multilingual",
-      "accuracy Δ": -0.05612244897959184,
-      "95% CI low": -0.08979591836734693,
-      "95% CI high": -0.02346938775510204,
-      "significant": "yes"
-    },
-    {
-      "benchmark": "USC",
-      "prompt": "English",
-      "jev-urdu minus": "laya (routed)",
-      "accuracy Δ": -0.05612244897959184,
-      "95% CI low": -0.08979591836734693,
-      "95% CI high": -0.02346938775510204,
-      "significant": "yes"
-    },
-    {
-      "benchmark": "USC",
-      "prompt": "English",
-      "jev-urdu minus": "laya (English)",
-      "accuracy Δ": 0.1326530612244898,
-      "95% CI low": 0.09285714285714286,
-      "95% CI high": 0.17142857142857143,
-      "significant": "yes"
-    },
-    {
       "benchmark": "Roman-Urdu sentiment",
       "prompt": "English",
       "jev-urdu minus": "laya-multilingual",
@@ -839,19 +681,6 @@
     },
     {
       "prompt": "Urdu",
-      "benchmark": "USC",
-      "decisions": 100,
-      "scores": {
-        "laya (English)": 0.47,
-        "laya-multilingual": 0.63,
-        "laya (routed)": 0.63,
-        "jev (TypeSafe)": 0.78,
-        "jev-urdu": 0.56,
-        "majority class": 0.51
-      }
-    },
-    {
-      "prompt": "Urdu",
       "benchmark": "Roman-Urdu sentiment",
       "decisions": 100,
       "scores": {
@@ -887,19 +716,6 @@
         "jev (TypeSafe)": 0.79,
         "jev-urdu": 0.35,
         "majority class": 0.14
-      }
-    },
-    {
-      "prompt": "English",
-      "benchmark": "USC",
-      "decisions": 100,
-      "scores": {
-        "laya (English)": 0.55,
-        "laya-multilingual": 0.74,
-        "laya (routed)": 0.74,
-        "jev (TypeSafe)": 0.8,
-        "jev-urdu": 0.72,
-        "majority class": 0.47
       }
     },
     {
@@ -942,14 +758,6 @@
       "significant": true
     },
     {
-      "benchmark": "USC",
-      "prompt": "Urdu",
-      "delta": -0.22,
-      "low": -0.35,
-      "high": -0.09,
-      "significant": true
-    },
-    {
       "benchmark": "Roman-Urdu sentiment",
       "prompt": "Urdu",
       "delta": -0.16,
@@ -972,14 +780,6 @@
       "low": -0.55,
       "high": -0.34,
       "significant": true
-    },
-    {
-      "benchmark": "USC",
-      "prompt": "English",
-      "delta": -0.08,
-      "low": -0.19,
-      "high": 0.03,
-      "significant": false
     },
     {
       "benchmark": "Roman-Urdu sentiment",

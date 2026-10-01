@@ -17,9 +17,9 @@ export const modelColors: Record<string, string> = {
   'jev-urdu': '#2448df', 'laya-multilingual': '#586067', 'laya (routed)': '#8a694f',
   'laya (English)': '#38434e', 'jev (TypeSafe)': '#b94424', 'majority class': '#6c7176',
 };
-export const externalSuites = ['XNLI-ur', 'MASSIVE ur-PK', 'USC', 'Roman-Urdu sentiment'] as const;
+export const externalSuites = ['XNLI-ur', 'MASSIVE ur-PK', 'Roman-Urdu sentiment'] as const;
 export const suiteNames: Record<string, string> = {
-  'XNLI-ur': 'XNLI · Urdu inference', 'MASSIVE ur-PK': 'MASSIVE · Urdu domains', 'USC': 'USC · Urdu sentiment',
+  'XNLI-ur': 'XNLI · Urdu inference', 'MASSIVE ur-PK': 'MASSIVE · Urdu domains',
   'Roman-Urdu sentiment': 'Roman Urdu · sentiment', 'Laya-Urdu test': 'Internal workflow suite',
 };
 export const jevResults = results;

@@ -1,6 +1,6 @@
 {
-  "url": "http://127.0.0.1:3000",
-  "recordedAt": "2026-10-01T14:45:55.035Z",
+  "url": "http://127.0.0.1:3007",
+  "recordedAt": "2026-10-01T15:48:39.153Z",
   "passed": 22,
   "checks": [
     "Layout / 320px: one H1, no document overflow",
