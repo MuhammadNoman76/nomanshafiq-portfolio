@@ -1,10 +1,10 @@
-Introducing Jev-Urdu — my Urdu-first decision model, built on a multilingual foundation.
+Introducing Jev-Urdu — my Urdu-first decision model, using the multilingual mmBERT-base encoder.
 
 Urdu in real products rarely comes in one form. People write in Urdu script, Roman Urdu, and a mix of Urdu and English. I wanted to build for that reality.
 
 Jev-Urdu turns text and typed questions into structured answers: support triage, sentiment, claim checking, consent, instruction boundaries, and tool-result verification. It is a decision model for application workflows.
 
-I developed the Urdu specialization and task interface on top of the open multilingual Laya / mmBERT foundation, then benchmarked the model against the Laya variants and TypeSafe's separate Jev API.
+I developed the Urdu specialization and task interface around mmBERT-base and a decision head, then benchmarked the model against the Laya variants and TypeSafe's separate Jev API. Starting weights came from the multilingual checkpoint in Convai Innovations' Laya repository.
 
 A few results from my recorded benchmark run:
 

@@ -30,7 +30,7 @@ export function formatMetric(value: number | null, metric: Metric): string {
 export function signedPoints(value: number): string { return `${value >= 0 ? '+' : '−'}${Math.abs(value * 100).toFixed(1)}`; }
 export const jevArticle = {
   title: 'Jev-Urdu: Urdu-first AI, measured in decisions.',
-  description: 'My Urdu-first decision model, built on a multilingual foundation. Explore real Urdu benchmarks, paired comparisons, batch throughput, and the tradeoffs behind the release.',
+  description: 'My Urdu-first decision model, using a multilingual mmBERT-base encoder. Explore real Urdu benchmarks, paired comparisons, batch throughput, and the tradeoffs behind the release.',
   path: '/blog/jev-urdu-benchmarks/',
   modelUrl: 'https://huggingface.co/muhammadnoman76/jev-urdu',
   date: '2026-10-01',

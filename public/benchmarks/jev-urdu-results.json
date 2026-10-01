@@ -3,7 +3,6 @@
   "hardware": "Tesla T4",
   "layaVersion": "0.3.22",
   "modelId": "muhammadnoman76/jev-urdu",
-  "baseModel": "convaiinnovations/laya (multilingual checkpoint)",
   "metrics": [
     {
       "benchmark": "Laya-Urdu test",
@@ -1019,5 +1018,47 @@
     "95% intervals use 2,000 paired bootstrap resamples of decisions.",
     "Published throughput is batch inference, not single-request latency or API throughput.",
     "Head-to-head scores and timing are transcribed from the saved report, which rounds them to three decimals."
+  ],
+  "encoderModel": "jhu-clsp/mmBERT-base",
+  "startingCheckpoint": {
+    "repository": "convaiinnovations/laya",
+    "subfolder": "multilingual"
+  },
+  "modelSizes": [
+    {
+      "model": "jev-urdu",
+      "parameterLabel": "321.9M",
+      "weightLabel": "643.8 MB",
+      "weightBytes": 643835514,
+      "sourceUrl": "https://huggingface.co/muhammadnoman76/jev-urdu/tree/main"
+    },
+    {
+      "model": "laya-multilingual",
+      "parameterLabel": "321.9M",
+      "weightLabel": "643.8 MB",
+      "weightBytes": 643835514,
+      "sourceUrl": "https://huggingface.co/convaiinnovations/laya/tree/main/multilingual"
+    },
+    {
+      "model": "laya (English)",
+      "parameterLabel": "421.3M",
+      "weightLabel": "842.6 MB",
+      "weightBytes": 842609210,
+      "sourceUrl": "https://huggingface.co/convaiinnovations/laya/tree/main"
+    },
+    {
+      "model": "laya (routed)",
+      "parameterLabel": "321.9M or 421.3M per request",
+      "weightLabel": "1.49 GB for both checkpoints",
+      "weightBytes": 1486444724,
+      "sourceUrl": "https://huggingface.co/convaiinnovations/laya"
+    },
+    {
+      "model": "jev (TypeSafe)",
+      "parameterLabel": "Not publicly disclosed",
+      "weightLabel": "Not available for download",
+      "weightBytes": null,
+      "sourceUrl": "https://docs.typesafe.ai/models"
+    }
   ]
 }
