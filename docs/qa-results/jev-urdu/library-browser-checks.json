@@ -1,0 +1,14 @@
+{
+  "url": "http://127.0.0.1:3008/blog/jev-urdu-benchmarks/",
+  "recordedAt": "2026-10-01T17:32:10.974Z",
+  "passed": 6,
+  "checks": [
+    "Library section 320px: published install, four code blocks, loaded logo, correct PyPI link, no stale helper/removed benchmark, no page overflow",
+    "Library section 390px: published install, four code blocks, loaded logo, correct PyPI link, no stale helper/removed benchmark, no page overflow",
+    "Library section 1440px: published install, four code blocks, loaded logo, correct PyPI link, no stale helper/removed benchmark, no page overflow",
+    "Three independent benchmark charts retained",
+    "Installation guide readable without JavaScript",
+    "No browser JavaScript errors"
+  ],
+  "errors": []
+}

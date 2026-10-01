@@ -33,5 +33,8 @@ export const jevArticle = {
   description: 'My Urdu-first decision model, using a multilingual mmBERT-base encoder. Explore real Urdu benchmarks, paired comparisons, batch throughput, and the tradeoffs behind the release.',
   path: '/blog/jev-urdu-benchmarks/',
   modelUrl: 'https://huggingface.co/muhammadnoman76/jev-urdu',
+  packageUrl: 'https://pypi.org/project/jev-urdu/0.1.0/',
+  documentationUrl: 'https://huggingface.co/muhammadnoman76/jev-urdu/blob/main/library/README.md',
+  sourceUrl: 'https://huggingface.co/muhammadnoman76/jev-urdu/tree/main/library',
   date: '2026-10-01',
 };

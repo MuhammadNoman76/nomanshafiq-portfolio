@@ -11,3 +11,5 @@ The new blog and archive were checked using the actual Next.js 16.3.8 production
 The screenshots capture the real exported article and charts. The imagegen cover and social card are conceptual launch artwork; the quantitative charts use the recorded JSON values. Wider-language quality, single-request latency, Lighthouse scores and formal accessibility certification are not asserted.
 
 The LinkedIn draft is in `docs/launch/jev-urdu-linkedin.txt` with accompanying editorial notes in the Markdown file. It has not been posted to LinkedIn.
+
+The PyPI library update adds a dedicated installation section and the library logo. `npm run verify` passed again. All three Python snippets were syntax-checked and their documented API names checked against the checksum-verified PyPI 0.1.0 wheel; no model inference rerun is claimed. Six focused browser groups passed, covering the section at 320, 390 and 1440 pixels, working image and release link, retained benchmark charts, readable installation without JavaScript, and no browser errors. The record is `library-browser-checks.json`, with fresh desktop and mobile screenshots.
