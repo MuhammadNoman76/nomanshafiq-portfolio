@@ -1,0 +1,16 @@
+{
+  "GL": "4.5 (Compatibility Profile) Mesa 25.0.7-2",
+  "renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+  "shaderCompilation": "passed (desktop GLSL, precision declaration removed)",
+  "drawTests": [
+    "hero",
+    "hero-flow",
+    "hero-reimagine",
+    "langvoice",
+    "resumeworld",
+    "metamod",
+    "reelsbuilder",
+    "lughaat"
+  ],
+  "note": "Native OpenGL test, not browser WebGL validation"
+}

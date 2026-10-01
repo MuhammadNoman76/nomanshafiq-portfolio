@@ -1,24 +1,17 @@
 # Muhammad Noman
 
-Muhammad Noman is a Lead AI Engineer and Full-Stack Developer based in Karachi, Pakistan.
-He builds agentic AI systems, LLM applications, RAG workflows, multimodal AI products, backend APIs, frontend applications, and cloud deployments.
+AI engineer and full-stack developer based in Karachi, Pakistan.
 
-## Core expertise
-- Agentic AI, AI agents, multi-agent orchestration
-- LLM applications, RAG, fine-tuning, LLMOps
-- LangChain, LangGraph, Google ADK
-- Python, FastAPI, Node.js, Next.js, React, TypeScript
-- Microsoft Azure, Google Cloud Platform, Docker, CI/CD
-- NLP and computer vision
-
-## Selected projects
-- LangVoice: https://www.nomanshafiq.com/work/langvoice
-- ResumeWorld: https://www.nomanshafiq.com/work/resumeworld
-- Metamod: https://www.nomanshafiq.com/work/metamod
-- ReelsBuilder: https://www.nomanshafiq.com/work/reelsbuilder
-- LughaatNLP: https://www.nomanshafiq.com/work/lughaat
-
-## Profiles
-- Website: https://www.nomanshafiq.com
+- Portfolio: https://www.nomanshafiq.com/
+- Projects: https://www.nomanshafiq.com/work/
+- LangVoice: https://www.nomanshafiq.com/work/langvoice/
+- ResumeWorld: https://www.nomanshafiq.com/work/resumeworld/
+- Metamod: https://www.nomanshafiq.com/work/metamod/
+- ReelsBuilder: https://www.nomanshafiq.com/work/reelsbuilder/
+- LughaatNLP: https://www.nomanshafiq.com/work/lughaat/
 - GitHub: https://github.com/MuhammadNoman76
 - LinkedIn: https://www.linkedin.com/in/muhammad-noman76/
+
+Specializations: agentic AI, LLM applications, voice technology, full-stack software, Azure and Google Cloud.
+
+Professional experience and project figures are self-reported in the owner's supplied resume, not independently verified live analytics. Conceptual project artwork is not a screenshot of a product interface. This file does not guarantee search ranking or AI-system citation.

@@ -1,11 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const config = {
+  output: 'export',
+  trailingSlash: true,
   reactStrictMode: true,
   poweredByHeader: false,
-  compress: true,
-  output: "export",
-  images: {
-    unoptimized: true
-  }
+  images: { unoptimized: true }
 };
-export default nextConfig;
+export default config;

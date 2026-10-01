@@ -1,0 +1,92 @@
+
+> noman-kinetic-portfolio@2.0.0 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: camera values clamp at both boundaries
+ok 1 - camera values clamp at both boundaries
+  ---
+  duration_ms: 1.908227
+  type: 'test'
+  ...
+# Subtest: interpolation preserves endpoints and midpoint
+ok 2 - interpolation preserves endpoints and midpoint
+  ---
+  duration_ms: 0.258461
+  type: 'test'
+  ...
+# Subtest: three mesh targets have stable topology
+ok 3 - three mesh targets have stable topology
+  ---
+  duration_ms: 31.720709
+  type: 'test'
+  ...
+# Subtest: all vertex indices are valid unsigned 16-bit values
+ok 4 - all vertex indices are valid unsigned 16-bit values
+  ---
+  duration_ms: 46.645367
+  type: 'test'
+  ...
+# Subtest: all vertex positions and normals are finite
+ok 5 - all vertex positions and normals are finite
+  ---
+  duration_ms: 29.449828
+  type: 'test'
+  ...
+# Subtest: surface normals are normalized
+ok 6 - surface normals are normalized
+  ---
+  duration_ms: 4.988833
+  type: 'test'
+  ...
+# Subtest: shape modes are distinct geometries, not CSS transforms
+ok 7 - shape modes are distinct geometries, not CSS transforms
+  ---
+  duration_ms: 6.97712
+  type: 'test'
+  ...
+# Subtest: Cloudflare Pages uses a real static export configuration
+ok 8 - Cloudflare Pages uses a real static export configuration
+  ---
+  duration_ms: 0.239193
+  type: 'test'
+  ...
+# Subtest: runtime is local and has no CDN or third-party fetch dependency
+ok 9 - runtime is local and has no CDN or third-party fetch dependency
+  ---
+  duration_ms: 2.393716
+  type: 'test'
+  ...
+# Subtest: all source assets and fallback shape views exist
+ok 10 - all source assets and fallback shape views exist
+  ---
+  duration_ms: 1.210839
+  type: 'test'
+  ...
+# Subtest: project routes are statically enumerated
+ok 11 - project routes are statically enumerated
+  ---
+  duration_ms: 0.689387
+  type: 'test'
+  ...
+# Subtest: reduced motion and WebGL fallback are explicit
+ok 12 - reduced motion and WebGL fallback are explicit
+  ---
+  duration_ms: 0.228237
+  type: 'test'
+  ...
+# Subtest: invalid mesh sizes fail before allocation
+ok 13 - invalid mesh sizes fail before allocation
+  ---
+  duration_ms: 1.040175
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 410.116516

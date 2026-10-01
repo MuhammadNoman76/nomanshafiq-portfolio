@@ -1,0 +1,1 @@
+export default function NotFound(){return <main id="main" className="shell not-found"><p className="eyebrow">404 / A SMALL DETOUR</p><h1>Not everything<br/>is meant to exist.</h1><p>This page doesn&apos;t. Let&apos;s get you back to something that does.</p><a href="/" className="round-link">Back to the portfolio <span aria-hidden="true">&#8599;</span></a></main>;}

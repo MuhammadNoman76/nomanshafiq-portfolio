@@ -1,0 +1,6 @@
+{
+  "scope": "TypeScript syntax/transpilation only. No Next/React framework typecheck or production build.",
+  "files": 12,
+  "errors": [],
+  "passed": true
+}

@@ -1,104 +1,23 @@
-import type { Metadata, Viewport } from "next";
-import { profile } from "@/data/portfolio";
-import "./globals.css";
-
-const siteUrl = profile.website || "https://www.nomanshafiq.com";
-const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
-
-function getSafeMetadataBase(): URL {
-  try {
-    return new URL(siteUrl);
-  } catch {
-    return new URL("https://www.nomanshafiq.com");
-  }
-}
-
-export const metadata: Metadata = {
-  metadataBase: getSafeMetadataBase(),
-  title: {
-    default: "Muhammad Noman | AI Engineer, Agentic AI & Full-Stack Developer",
-    template: "%s | Muhammad Noman"
-  },
-  description:
-    "Muhammad Noman is a Lead AI Engineer and Full-Stack Developer in Karachi, Pakistan, building AI agents, LLM applications, RAG systems, and production products with Python, Next.js, LangChain, Azure, and GCP.",
-  applicationName: "Muhammad Noman Portfolio",
-  authors: [{ name: profile.name, url: siteUrl }],
-  creator: profile.name,
-  publisher: profile.name,
-  category: "technology",
-  keywords: [
-    "Muhammad Noman",
-    "Muhammad Noman AI Engineer",
-    "AI Engineer Pakistan",
-    "AI Engineer Karachi",
-    "Lead AI Engineer",
-    "Agentic AI Engineer",
-    "AI Agent Developer",
-    "LLM Engineer",
-    "LangChain Developer",
-    "LangGraph Developer",
-    "RAG Developer",
-    "Full Stack AI Developer",
-    "Next.js Developer Pakistan",
-    "Python AI Developer",
-    "Azure AI Engineer",
-    "Google Cloud AI Engineer",
-    "AI Portfolio Pakistan"
-  ],
-  alternates: { canonical: "/" },
-  openGraph: {
-    title: "Muhammad Noman | AI Engineer & Product Builder",
-    description: "AI agents, LLM products, and full-stack systems designed, built, and shipped from Karachi to the world.",
-    url: siteUrl,
-    siteName: "Muhammad Noman",
-    locale: "en_PK",
-    type: "website",
-    images: [{ url: "/opengraph-image.png", width: 1200, height: 630, alt: "Muhammad Noman — AI Engineer and Full-Stack Developer" }]
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Muhammad Noman | AI Engineer & Product Builder",
-    description: "Agentic AI, LLM products, full-stack engineering, and cloud systems.",
-    images: ["/opengraph-image.png"]
-  },
-  robots: {
-    index: true,
-    follow: true,
-    nocache: false,
-    googleBot: {
-      index: true,
-      follow: true,
-      noimageindex: false,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1
-    }
-  },
-  verification: googleVerification ? { google: googleVerification } : undefined,
-  icons: { icon: "/favicon.svg" },
-  other: {
-    "geo.region": "PK-SD",
-    "geo.placename": "Karachi",
-    "profile:first_name": "Muhammad",
-    "profile:last_name": "Noman"
-  }
+import type { Metadata, Viewport } from 'next';
+import type { ReactNode } from 'react';
+import Script from 'next/script';
+import {siteUrl,profile} from '@/data/portfolio';
+import './globals.css';
+export const metadata:Metadata={
+ metadataBase:new URL(siteUrl),
+ title:{default:'Muhammad Noman - AI Engineer & Product Builder',template:'%s | Muhammad Noman'},
+ description:'Muhammad Noman is an AI engineer and full-stack developer in Karachi building agentic AI systems, voice technology, and production-ready digital products.',
+ alternates:{canonical:'/'},
+ openGraph:{type:'website',locale:'en_US',siteName:'Muhammad Noman',url:'/',title:'Muhammad Noman - Curiosity, made real.',description:'AI engineering, agentic systems, and products built for people.',images:[{url:'/og.png',width:1200,height:630,alt:'Muhammad Noman - AI engineer and product builder'}]},
+ twitter:{card:'summary_large_image',title:'Muhammad Noman - Curiosity, made real.',description:'AI engineering, agentic systems, and products built for people.',images:['/og.png']},
+ robots:{index:true,follow:true},authors:[{name:profile.name,url:siteUrl}],
+ icons:{icon:[{url:'/favicon.svg',type:'image/svg+xml'},{url:'/favicon-32.png',sizes:'32x32',type:'image/png'}],apple:'/apple-touch-icon.png'},
 };
-
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  themeColor: "#f6f3eb",
-  colorScheme: "light"
-};
-
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return (
-    <html lang="en-PK">
-      <head>
-        <link rel="me" href={profile.github} />
-        <link rel="me" href={profile.linkedin} />
-      </head>
-      <body>{children}</body>
-    </html>
-  );
+export const viewport:Viewport={width:'device-width',initialScale:1,themeColor:'#e9edf0'};
+export default function RootLayout({children}:{children:ReactNode}) {
+ const schema={'@context':'https://schema.org','@graph':[
+  {'@type':'Person','@id':`${siteUrl}/#person`,name:profile.name,url:siteUrl,jobTitle:profile.role,sameAs:[profile.github,profile.linkedin],knowsAbout:['Artificial intelligence','AI agents','Large language models','Full-stack development','Voice technology'],address:{'@type':'PostalAddress',addressLocality:'Karachi',addressCountry:'PK'}},
+  {'@type':'WebSite','@id':`${siteUrl}/#website`,url:siteUrl,name:profile.name,publisher:{'@id':`${siteUrl}/#person`},inLanguage:'en'}
+ ]};
+ return <html lang="en"><body>{children}<script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(schema).replace(/</g,'\\u003c')}}/><Script src="/engine/experience.mjs" type="module" strategy="afterInteractive"/></body></html>;
 }

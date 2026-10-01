@@ -1,0 +1,398 @@
+{
+  "scope": "Source-rendered visual preview and real enhancement JS; not a Next.js production build; WebGL browser context unavailable.",
+  "layoutChecks": [
+    {
+      "route": "/",
+      "width": 320,
+      "passed": true,
+      "client": 320,
+      "scroll": 320,
+      "h1": 1,
+      "body": 320
+    },
+    {
+      "route": "/",
+      "width": 375,
+      "passed": true,
+      "client": 375,
+      "scroll": 375,
+      "h1": 1,
+      "body": 375
+    },
+    {
+      "route": "/",
+      "width": 390,
+      "passed": true,
+      "client": 390,
+      "scroll": 390,
+      "h1": 1,
+      "body": 390
+    },
+    {
+      "route": "/",
+      "width": 600,
+      "passed": true,
+      "client": 600,
+      "scroll": 600,
+      "h1": 1,
+      "body": 600
+    },
+    {
+      "route": "/",
+      "width": 768,
+      "passed": true,
+      "client": 768,
+      "scroll": 768,
+      "h1": 1,
+      "body": 768
+    },
+    {
+      "route": "/",
+      "width": 1024,
+      "passed": true,
+      "client": 1024,
+      "scroll": 1024,
+      "h1": 1,
+      "body": 1024
+    },
+    {
+      "route": "/",
+      "width": 1280,
+      "passed": true,
+      "client": 1280,
+      "scroll": 1280,
+      "h1": 1,
+      "body": 1280
+    },
+    {
+      "route": "/",
+      "width": 1440,
+      "passed": true,
+      "client": 1440,
+      "scroll": 1440,
+      "h1": 1,
+      "body": 1440
+    },
+    {
+      "route": "/",
+      "width": 1920,
+      "passed": true,
+      "client": 1920,
+      "scroll": 1920,
+      "h1": 1,
+      "body": 1920
+    },
+    {
+      "route": "/",
+      "width": 2560,
+      "passed": true,
+      "client": 2560,
+      "scroll": 2560,
+      "h1": 1,
+      "body": 2560
+    },
+    {
+      "route": "work",
+      "width": 320,
+      "passed": true,
+      "client": 320,
+      "scroll": 320,
+      "h1": 1,
+      "body": 320
+    },
+    {
+      "route": "work",
+      "width": 768,
+      "passed": true,
+      "client": 768,
+      "scroll": 768,
+      "h1": 1,
+      "body": 768
+    },
+    {
+      "route": "work",
+      "width": 1440,
+      "passed": true,
+      "client": 1440,
+      "scroll": 1440,
+      "h1": 1,
+      "body": 1440
+    },
+    {
+      "route": "work/langvoice",
+      "width": 320,
+      "passed": true,
+      "client": 320,
+      "scroll": 320,
+      "h1": 1,
+      "body": 320
+    },
+    {
+      "route": "work/langvoice",
+      "width": 768,
+      "passed": true,
+      "client": 768,
+      "scroll": 768,
+      "h1": 1,
+      "body": 768
+    },
+    {
+      "route": "work/langvoice",
+      "width": 1440,
+      "passed": true,
+      "client": 1440,
+      "scroll": 1440,
+      "h1": 1,
+      "body": 1440
+    },
+    {
+      "route": "work/resumeworld",
+      "width": 320,
+      "passed": true,
+      "client": 320,
+      "scroll": 320,
+      "h1": 1,
+      "body": 320
+    },
+    {
+      "route": "work/resumeworld",
+      "width": 768,
+      "passed": true,
+      "client": 768,
+      "scroll": 768,
+      "h1": 1,
+      "body": 768
+    },
+    {
+      "route": "work/resumeworld",
+      "width": 1440,
+      "passed": true,
+      "client": 1440,
+      "scroll": 1440,
+      "h1": 1,
+      "body": 1440
+    },
+    {
+      "route": "work/metamod",
+      "width": 320,
+      "passed": true,
+      "client": 320,
+      "scroll": 320,
+      "h1": 1,
+      "body": 320
+    },
+    {
+      "route": "work/metamod",
+      "width": 768,
+      "passed": true,
+      "client": 768,
+      "scroll": 768,
+      "h1": 1,
+      "body": 768
+    },
+    {
+      "route": "work/metamod",
+      "width": 1440,
+      "passed": true,
+      "client": 1440,
+      "scroll": 1440,
+      "h1": 1,
+      "body": 1440
+    },
+    {
+      "route": "work/reelsbuilder",
+      "width": 320,
+      "passed": true,
+      "client": 320,
+      "scroll": 320,
+      "h1": 1,
+      "body": 320
+    },
+    {
+      "route": "work/reelsbuilder",
+      "width": 768,
+      "passed": true,
+      "client": 768,
+      "scroll": 768,
+      "h1": 1,
+      "body": 768
+    },
+    {
+      "route": "work/reelsbuilder",
+      "width": 1440,
+      "passed": true,
+      "client": 1440,
+      "scroll": 1440,
+      "h1": 1,
+      "body": 1440
+    },
+    {
+      "route": "work/lughaat",
+      "width": 320,
+      "passed": true,
+      "client": 320,
+      "scroll": 320,
+      "h1": 1,
+      "body": 320
+    },
+    {
+      "route": "work/lughaat",
+      "width": 768,
+      "passed": true,
+      "client": 768,
+      "scroll": 768,
+      "h1": 1,
+      "body": 768
+    },
+    {
+      "route": "work/lughaat",
+      "width": 1440,
+      "passed": true,
+      "client": 1440,
+      "scroll": 1440,
+      "h1": 1,
+      "body": 1440
+    },
+    {
+      "route": "404.html",
+      "width": 320,
+      "passed": true,
+      "client": 320,
+      "scroll": 320,
+      "h1": 1,
+      "body": 320
+    },
+    {
+      "route": "404.html",
+      "width": 768,
+      "passed": true,
+      "client": 768,
+      "scroll": 768,
+      "h1": 1,
+      "body": 768
+    },
+    {
+      "route": "404.html",
+      "width": 1440,
+      "passed": true,
+      "client": 1440,
+      "scroll": 1440,
+      "h1": 1,
+      "body": 1440
+    }
+  ],
+  "interactionChecks": [
+    {
+      "name": "WebGL unavailable keeps fallback poster visible",
+      "passed": true
+    },
+    {
+      "name": "Unavailable WebGL removes dead keyboard rotation target",
+      "passed": true
+    },
+    {
+      "name": "Fallback explains image-gallery interaction",
+      "passed": true
+    },
+    {
+      "name": "Flow changes artwork",
+      "passed": true
+    },
+    {
+      "name": "Flow announces pressed state",
+      "passed": true
+    },
+    {
+      "name": "Flow updates descriptive caption",
+      "passed": true
+    },
+    {
+      "name": "Reimagine changes artwork",
+      "passed": true
+    },
+    {
+      "name": "Connect returns to original art",
+      "passed": true
+    },
+    {
+      "name": "Global motion toggle pauses",
+      "passed": true
+    },
+    {
+      "name": "Paused motion button announces state",
+      "passed": true
+    },
+    {
+      "name": "Global motion toggle resumes",
+      "passed": true
+    },
+    {
+      "name": "Unavailable clipboard gives usable email feedback",
+      "passed": true
+    },
+    {
+      "name": "Resume has a real PDF download",
+      "passed": true
+    },
+    {
+      "name": "External new-tab links are protected",
+      "passed": true
+    },
+    {
+      "name": "Navigation has skip link",
+      "passed": true
+    },
+    {
+      "name": "Source includes structured identity data",
+      "passed": true
+    },
+    {
+      "name": "Repeated initialization does not double-toggle",
+      "passed": true
+    },
+    {
+      "name": "Mobile menu opens",
+      "passed": true
+    },
+    {
+      "name": "Escape closes menu",
+      "passed": true
+    },
+    {
+      "name": "Escape restores focus to summary",
+      "passed": true
+    },
+    {
+      "name": "Mobile selection closes menu",
+      "passed": true
+    },
+    {
+      "name": "OS reduced motion starts paused",
+      "passed": true
+    },
+    {
+      "name": "Reduced motion never hides content behind reveal classes",
+      "passed": true
+    },
+    {
+      "name": "No-JS has heading and project links",
+      "passed": true
+    },
+    {
+      "name": "No-JS has fallback sculpture",
+      "passed": true
+    },
+    {
+      "name": "No browser JavaScript errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "passed": true,
+  "counts": {
+    "layout": 31,
+    "interaction": 26,
+    "failed": 0
+  },
+  "browserErrors": []
+}

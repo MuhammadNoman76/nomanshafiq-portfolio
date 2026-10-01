@@ -1,143 +1,94 @@
-function resolveSiteUrl(rawUrl?: string): string {
-  const fallback = "https://www.nomanshafiq.com";
-  if (!rawUrl) return fallback;
-  let trimmed = rawUrl.trim();
-  if (!trimmed) return fallback;
-  if (!/^https?:\/\//i.test(trimmed)) {
-    trimmed = `https://${trimmed}`;
-  }
-  try {
-    return new URL(trimmed).origin;
-  } catch {
-    return fallback;
-  }
-}
-
 export const profile = {
-  name: "Muhammad Noman",
-  shortName: "Noman",
-  email: "muhammadnomanshafiq76@gmail.com",
-  location: "Karachi, Pakistan",
-  github: "https://github.com/MuhammadNoman76",
-  linkedin: "https://www.linkedin.com/in/muhammad-noman76/",
-  website: resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL),
-  resume: "/files/Muhammad-Noman-Resume.docx",
-  role: "AI Engineer and Full-Stack Developer",
-  company: "Bayseian",
-  currentRole: "Lead AI Engineer",
-  headline: "AI Engineer in Karachi building agentic AI systems, LLM products, and full-stack applications."
+  name: 'Muhammad Noman',
+  role: 'AI Engineer & Full-Stack Developer',
+  email: 'muhammadnomanshafiq76@gmail.com',
+  github: 'https://github.com/MuhammadNoman76',
+  linkedin: 'https://www.linkedin.com/in/muhammad-noman76/',
+  location: 'Karachi, Pakistan',
+  resume: '/files/muhammad-noman-resume.pdf',
 };
-
+export function resolveOrigin(value?: string): string {
+  try {
+    if (!value?.trim()) return 'https://www.nomanshafiq.com';
+    const trimmed = value.trim();
+    const url = new URL(/^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`);
+    if (!['https:', 'http:'].includes(url.protocol)) throw new Error('Invalid origin');
+    return url.origin;
+  } catch { return 'https://www.nomanshafiq.com'; }
+}
+export const siteUrl = resolveOrigin(process.env.NEXT_PUBLIC_SITE_URL);
 export type Project = {
-  id: string;
-  name: string;
-  strapline: string;
-  description: string;
-  seoDescription: string;
-  overview: string;
-  year: string;
-  tags: string[];
-  accent: string;
-  url?: string;
-  facts: string[];
+  slug: string; number: string; name: string; category: string; headline: string;
+  description: string; color: string; shape: number; link?: string; year: string;
+  role: string; stack: string[]; evidence: string; metrics: [string,string][];
+  sections: {title:string; text:string}[];
 };
-
 export const projects: Project[] = [
   {
-    id: "langvoice",
-    name: "LangVoice",
-    strapline: "Giving ideas a voice with AI.",
-    description: "A production text-to-speech platform with natural voices, SDKs, and agent integrations.",
-    seoDescription: "LangVoice is an AI text-to-speech platform built by Muhammad Noman with 28+ natural voices, 9 languages, SDKs, and integrations for AI agent frameworks.",
-    overview: "I built and launched LangVoice as a production AI text-to-speech product focused on natural voice generation, fast integration, and practical use inside modern AI applications.",
-    year: "2025 — Present",
-    tags: ["AI", "Voice", "LLMs", "Product"],
-    accent: "violet",
-    url: "https://langvoice.pro",
-    facts: ["28+ natural voices across 9 languages", "Python and JavaScript SDKs", "1,000+ active users", "1M+ minutes of generated audio"]
+    slug: 'langvoice', number:'01', name:'LangVoice', category:'VOICE INTELLIGENCE',
+    headline:'A voice for every idea.', description:'Natural speech. Nine languages. One human connection. An AI text-to-speech product built to give applications a voice.',
+    color:'blue', shape:1, link:'https://langvoice.pro', year:'2025 - Present', role:'Product builder & AI engineer',
+    stack:['Python', 'Text-to-speech', 'JavaScript SDK', 'AI agent integrations'],
+    evidence:'Usage and language figures are reported in my resume, not live analytics.',
+    metrics:[['28+','natural voices'],['9','languages'],['1,000+','users']],
+    sections:[
+      {title:'The idea', text:'Voice should feel like a natural part of an application, not an integration project. I built and launched LangVoice to bring natural text-to-speech into products and AI agent workflows.'},
+      {title:'The engineering', text:'The platform combines a text-to-speech service with Python and JavaScript SDKs. Integrations support LangChain, CrewAI, AutoGen, and OpenAI agents, with sub-second latency reported in my resume.'},
+      {title:'The result', text:'My resume records 28+ voices across nine languages, more than 1,000 active users, and over one million minutes of generated audio. These are reported project figures rather than a live usage feed.'}
+    ]
   },
   {
-    id: "resumeworld",
-    name: "ResumeWorld",
-    strapline: "A better next chapter.",
-    description: "An AI-powered resume screening and recruitment experience built around intelligent candidate matching.",
-    seoDescription: "ResumeWorld is an AI resume screening and recruitment platform by Muhammad Noman for analyzing large resume sets and matching candidates more intelligently.",
-    overview: "ResumeWorld turns a high-volume recruiting workflow into a focused AI-assisted experience, helping recruiters screen and compare candidates with a product designed for speed and clarity.",
-    year: "2025 — Present",
-    tags: ["AI", "Career Tech", "Web App"],
-    accent: "emerald",
-    url: "https://resumeworld.app",
-    facts: ["AI resume analysis and matching", "Built for 50,000+ resumes", "95% screening accuracy", "Designed to save 40+ hours per hire"]
+    slug:'resumeworld', number:'02', name:'ResumeWorld', category:'APPLIED AI / RECRUITMENT',
+    headline:'See the person. Not the pile.', description:'An AI recruitment platform that brings resume analysis and candidate matching into one focused workflow.',
+    color:'peach', shape:2, link:'https://resumeworld.app', year:'2025 - Present', role:'Product builder & full-stack engineer',
+    stack:['AI', 'NLP', 'React', 'SaaS'], evidence:'Capacity and time-saving figures are self-reported in my resume; they are not independently benchmarked.',
+    metrics:[['50k+','resume capacity'],['AI','candidate matching'],['NLP','resume analysis']],
+    sections:[
+      {title:'The idea', text:'Recruitment creates a large volume of documents, but the real task is understanding people. ResumeWorld is an AI-powered screening and recruitment platform I created to make candidate analysis more focused.'},
+      {title:'The engineering', text:'The application uses AI and natural-language processing to analyze resumes and support candidate matching, delivered through a React-based SaaS product.'},
+      {title:'The result', text:'My resume describes support for analyzing 50,000+ resumes and reports 95% screening accuracy and 40+ hours saved per hire. Those figures are self-reported project claims; a public evaluation methodology is not included in the supplied source.'}
+    ]
   },
   {
-    id: "metamod",
-    name: "Metamod",
-    strapline: "Less busywork. More possibility.",
-    description: "An agentic workflow platform where natural language becomes executable automation.",
-    seoDescription: "Metamod is an agentic AI workflow platform designed by Muhammad Noman for natural-language automation, multi-agent collaboration, and real-time task execution.",
-    overview: "Metamod explores a simple idea: describe the outcome you want, then let an orchestrated set of AI agents and tools turn that intent into an executable workflow.",
-    year: "2025 — Present",
-    tags: ["Automation", "AI Agents", "Productivity"],
-    accent: "coral",
-    facts: ["Natural-language workflow creation", "Multi-agent collaboration", "Intelligent orchestration", "Real-time task execution"]
+    slug:'metamod', number:'03', name:'Metamod', category:'AGENTIC SYSTEMS',
+    headline:'From a thought to a workflow.', description:'Natural-language automation, coordinated agents, and real-time execution. Built to move beyond the chat box.',
+    color:'lime', shape:0, year:'2025 - Present', role:'AI workflow platform engineer',
+    stack:['Python','React','Azure','Multi-agent orchestration'], evidence:'Architecture and role are described in my resume.',
+    metrics:[['Multi','agent workflows'],['Real-time','execution'],['Azure','infrastructure']],
+    sections:[
+      {title:'The idea', text:'Describe the outcome in natural language, then turn that intent into an executable workflow. I designed an agentic automation platform around that interaction.'},
+      {title:'The engineering', text:'The system combines multi-agent collaboration, intelligent orchestration, LLM integration, and real-time task execution. My work spans Python, React, DevOps, and Azure.'},
+      {title:'The focus', text:'The engineering challenge is the connection between intent, tools, and execution. This project brings those capabilities together in a single product rather than treating a chat response as the final outcome.'}
+    ]
   },
   {
-    id: "reelsbuilder",
-    name: "ReelsBuilder",
-    strapline: "Turn ideas into engaging short videos.",
-    description: "A full-stack AI video creation platform for TikTok, Reels, and YouTube Shorts.",
-    seoDescription: "ReelsBuilder is an AI video creation platform architected by Muhammad Noman with automated short-form generation, voiceover, viral moment detection, and publishing workflows.",
-    overview: "I architected the AI and full-stack systems behind a short-form video platform built to move from source content to edited, voiced, formatted, and publishable clips quickly.",
-    year: "2025 — 2026",
-    tags: ["AI Video", "Content Tools", "Creativity"],
-    accent: "peach",
-    facts: ["100,000+ clips", "20,000+ active creators", "Viral moment detection", "AI voiceover and publishing workflows"]
+    slug:'reelsbuilder', number:'04', name:'ReelsBuilder', category:'GENERATIVE VIDEO',
+    headline:'A shorter path to the story.', description:'AI video creation, voiceovers, and publishing workflows for short-form content.',
+    color:'rose', shape:1, year:'Jun 2025 - Jan 2026', role:'Senior AI Developer & Architect',
+    stack:['AI video','NLP','Voice synthesis','Full-stack architecture'], evidence:'Clip and creator figures are reported in my resume, not live analytics.',
+    metrics:[['100k+','clips'],['20k+','active creators'],['2 min','reported average']],
+    sections:[
+      {title:'The idea', text:'Help creators move from source content to short-form video. I architected an AI-powered video platform for TikTok, Instagram Reels, and YouTube Shorts.'},
+      {title:'The engineering', text:'The platform combines video generation, viral moment detection, professional AI voiceover, NLP-based transcription, and automated formatting for multi-platform publishing.'},
+      {title:'The result', text:'My resume reports more than 100,000 clips, 20,000 active creators, and an average creation time of two minutes. These describe the project at the time of the resume.'}
+    ]
   },
   {
-    id: "lughaat",
-    name: "LughaatNLP",
-    strapline: "Making room for Urdu in AI.",
-    description: "An open-source Urdu NLP library covering core language-processing tasks.",
-    seoDescription: "LughaatNLP is an open-source Urdu NLP library by Muhammad Noman covering tokenization, lemmatization, POS tagging, NER, and spell checking.",
-    overview: "LughaatNLP is an open-source Python library created to make common Urdu natural-language processing tasks easier to use in research, prototypes, and language-focused AI systems.",
-    year: "2023 — 2024",
-    tags: ["NLP", "Urdu", "LLMs", "Open Source"],
-    accent: "green",
-    url: "https://github.com/MuhammadNoman76/LughaatNLP",
-    facts: ["Tokenization and lemmatization", "POS tagging and NER", "Spell checking", "Open-source Python library"]
+    slug:'lughaat', number:'05', name:'LughaatNLP', category:'OPEN SOURCE / URDU NLP',
+    headline:'More language. More possibility.', description:'An open-source toolkit making Urdu language processing more accessible to developers.',
+    color:'ice', shape:2, link:'https://github.com/MuhammadNoman76/LughaatNLP', year:'Dec 2023 - Jan 2024', role:'Library creator',
+    stack:['Python','Urdu','NLP','Open source'], evidence:'Library scope is documented in my resume.',
+    metrics:[['Urdu','language first'],['Python','developer toolkit'],['Open','source']],
+    sections:[
+      {title:'The idea', text:'Language technology should make room for Urdu. I built LughaatNLP as a specialized open-source library for common Urdu NLP tasks.'},
+      {title:'The toolkit', text:'The library covers tokenization, lemmatization, part-of-speech tagging, named-entity recognition, and spell checking.'},
+      {title:'Explore the work', text:'The public repository is the place to inspect the implementation and contribution history. The portfolio links directly to the source rather than presenting an invented product demo.'}
+    ]
   }
 ];
-
-export const expertise = [
-  {
-    eyebrow: "01 / AGENTIC AI",
-    title: "AI agents & multi-agent systems",
-    copy: "Production agent workflows using LangChain, LangGraph, Google ADK, tool calling, orchestration, and human-in-the-loop patterns.",
-    tone: "coral"
-  },
-  {
-    eyebrow: "02 / LLM ENGINEERING",
-    title: "LLM apps, RAG & fine-tuning",
-    copy: "LLM product engineering across retrieval, evaluation, model adaptation, multimodal systems, and production LLMOps.",
-    tone: "violet"
-  },
-  {
-    eyebrow: "03 / FULL-STACK",
-    title: "AI products people can use",
-    copy: "Fast, responsive products with Next.js, React, TypeScript, Python, FastAPI, Node.js, APIs, and modern product UX.",
-    tone: "blue"
-  },
-  {
-    eyebrow: "04 / CLOUD",
-    title: "Cloud, DevOps & deployment",
-    copy: "Scalable delivery on Microsoft Azure and Google Cloud with Docker, CI/CD, production APIs, and distributed-system thinking.",
-    tone: "green"
-  }
-];
-
-export const journey = [
-  {year: "2026", company: "Bayseian", role: "Lead AI Engineer", copy: "Leading enterprise AI products, custom agents, and production full-stack systems."},
-  {year: "2025", company: "ReelsBuilder", role: "Senior AI Developer & Architect", copy: "Architected a large-scale AI video creation and publishing platform."},
-  {year: "2024", company: "Convsync.co", role: "Senior AI Developer & DevOps Engineer", copy: "Built web products, backend systems, LLM applications, and deployment pipelines."},
-  {year: "2023", company: "MedicalNao", role: "Mid-Level AI Developer", copy: "Shipped healthcare AI prototypes using NLP, computer vision, FastAPI, and Django."}
+export const experience = [
+  {company:'Bayseian', role:'Lead AI Engineer', dates:'Dec 2025 - Present', detail:'Leading 8-12 engineers. Custom AI agents, enterprise applications, and production architectures.'},
+  {company:'ReelsBuilder', role:'Senior AI Developer & Architect', dates:'Jun 2025 - Jan 2026', detail:'Full-stack architecture for AI video creation, voiceover, and publishing.'},
+  {company:'Convsync.co', role:'Senior AI Developer & DevOps Engineer', dates:'May 2024 - Present', detail:'Web products, fine-tuned models, APIs, and LLMOps.'},
+  {company:'MedicalNao', role:'Mid-Level AI Developer', dates:'May 2023 - Mar 2024', detail:'Healthcare AI prototypes with NLP, computer vision, FastAPI, and Django.'}
 ];

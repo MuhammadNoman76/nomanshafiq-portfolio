@@ -1,0 +1,34 @@
+{
+  "scope": "Downloadable visual preview only",
+  "checks": [
+    {
+      "name": "Offline LangVoice case navigation",
+      "passed": true
+    },
+    {
+      "name": "Offline case images embedded",
+      "passed": true
+    },
+    {
+      "name": "Offline next-project navigation",
+      "passed": true
+    },
+    {
+      "name": "Offline return to homepage",
+      "passed": true
+    },
+    {
+      "name": "Offline return scrolls to work",
+      "passed": true
+    },
+    {
+      "name": "Interactions reinitialize after route change",
+      "passed": true
+    },
+    {
+      "name": "Offline preview has no JS errors",
+      "passed": true,
+      "errors": []
+    }
+  ]
+}
