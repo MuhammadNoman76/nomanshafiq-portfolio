@@ -1,8 +1,8 @@
 import {readFile,stat} from 'node:fs/promises';
 import path from 'node:path';
 const root=path.resolve('out');
-const routes=['','work','work/langvoice','work/resumeworld','work/metamod','work/reelsbuilder','work/lughaat'];
-const assets=['404.html','robots.txt','sitemap.xml','manifest.webmanifest','favicon.svg','og.png','engine/experience.mjs','engine/sculpture.mjs','files/muhammad-noman-resume.pdf','art/hero.webp','art/hero-flow.webp','art/hero-reimagine.webp'];
+const routes=['','work','work/langvoice','work/resumeworld','work/metamod','work/reelsbuilder','work/lughaat','blog','blog/jev-urdu-benchmarks'];
+const assets=['404.html','robots.txt','sitemap.xml','manifest.webmanifest','favicon.svg','og.png','engine/experience.mjs','engine/sculpture.mjs','files/muhammad-noman-resume.pdf','art/hero.webp','art/hero-flow.webp','art/hero-reimagine.webp','art/jev-urdu-cover.webp','art/jev-urdu-social.jpg','benchmarks/jev-urdu-results.json','benchmarks/jev-urdu-metrics.csv','benchmarks/jev-urdu-deltas.csv'];
 const errors=[];
 for(const file of assets){try{const result=await stat(path.join(root,file));if(!result.isFile()||!result.size)errors.push(`Empty asset: ${file}`);}catch{errors.push(`Missing asset: ${file}`);}}
 for(const route of routes){

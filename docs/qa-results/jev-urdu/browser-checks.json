@@ -1,0 +1,30 @@
+{
+  "url": "http://127.0.0.1:3000",
+  "recordedAt": "2026-10-01T14:45:55.035Z",
+  "passed": 22,
+  "checks": [
+    "Layout / 320px: one H1, no document overflow",
+    "Layout / 375px: one H1, no document overflow",
+    "Layout / 390px: one H1, no document overflow",
+    "Layout / 768px: one H1, no document overflow",
+    "Layout / 1440px: one H1, no document overflow",
+    "Layout /blog/ 320px: one H1, no document overflow",
+    "Layout /blog/ 375px: one H1, no document overflow",
+    "Layout /blog/ 390px: one H1, no document overflow",
+    "Layout /blog/ 768px: one H1, no document overflow",
+    "Layout /blog/ 1440px: one H1, no document overflow",
+    "Layout /blog/jev-urdu-benchmarks/ 320px: one H1, no document overflow",
+    "Layout /blog/jev-urdu-benchmarks/ 375px: one H1, no document overflow",
+    "Layout /blog/jev-urdu-benchmarks/ 390px: one H1, no document overflow",
+    "Layout /blog/jev-urdu-benchmarks/ 768px: one H1, no document overflow",
+    "Layout /blog/jev-urdu-benchmarks/ 1440px: one H1, no document overflow",
+    "Full suite: prompt toggle, four metrics, lower-is-better labels, model visibility, empty state, accessible table",
+    "Matched API: language and suite selectors; full/API sample scores remain distinct; internal sample fixed to Urdu/232 decisions",
+    "Metadata and assets: canonical, OG, BlogPosting, three aggregate downloads, two local image assets",
+    "Mobile article: visible Blog navigation and Escape menu handling",
+    "No JavaScript: full article, initial benchmark graphics, measured results visible",
+    "Reduced motion preference supported",
+    "No browser JavaScript errors"
+  ],
+  "errors": []
+}

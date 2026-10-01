@@ -5,8 +5,8 @@ export function Header({home=false}:{home?:boolean}) {
  return <><a href="#main" className="skip-link">Skip to content</a><div className="reading-progress" data-progress="" aria-hidden="true"/>
  <header className="site-header shell">
   <a className="wordmark" href="/" aria-label="Muhammad Noman homepage">noman<span>.</span><small>INDEPENDENT MIND.<br/>CONNECTED THINKING.</small></a>
-  <nav aria-label="Main navigation" className="desktop-nav"><a href={`${path}#work`}>Selected work <sup>05</sup></a><a href={`${path}#about`}>The human</a><a href={`${path}#contact`} className="nav-contact">Let&apos;s talk <Arrow diagonal/></a></nav>
-  <details className="mobile-menu"><summary>Menu <span aria-hidden="true">+</span></summary><nav aria-label="Mobile navigation"><a href={`${path}#work`}>Selected work</a><a href={`${path}#about`}>The human</a><a href={`${path}#contact`}>Let&apos;s talk</a><a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub <Arrow diagonal/></a></nav></details>
+  <nav aria-label="Main navigation" className="desktop-nav"><a href={`${path}#work`}>Selected work <sup>05</sup></a><a href="/blog/">Blog</a><a href={`${path}#about`}>The human</a><a href={`${path}#contact`} className="nav-contact">Let&apos;s talk <Arrow diagonal/></a></nav>
+  <details className="mobile-menu"><summary>Menu <span aria-hidden="true">+</span></summary><nav aria-label="Mobile navigation"><a href={`${path}#work`}>Selected work</a><a href="/blog/">Blog</a><a href={`${path}#about`}>The human</a><a href={`${path}#contact`}>Let&apos;s talk</a><a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub <Arrow diagonal/></a></nav></details>
  </header></>;
 }
 export function Footer() {
