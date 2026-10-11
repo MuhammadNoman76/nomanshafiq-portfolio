@@ -1,0 +1,79 @@
+/* PawSip field note: cover, interactive cat, reminder rules and the download picker. */
+.pawsip-cover>img{object-position:62% 55%}
+.pawsip-cover .jev-cover-type>em{font-style:italic}
+
+.pawsip-cat-stage{margin:34px 0 30px;padding:0}
+.pawsip-cat-frame{display:grid;place-items:center;padding:44px 20px 26px;background:radial-gradient(circle at 72% 18%,#d9e8fd 0,transparent 55%),radial-gradient(circle at 14% 92%,#fbe3ee 0,transparent 50%),#eef3fb;border:1px solid var(--line);overflow:hidden}
+.pawsip-cat{display:block;width:min(270px,72%);border:0;padding:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .35s var(--ease)}
+.pawsip-cat:hover{transform:translateY(-4px)}
+.pawsip-cat:active{transform:scale(.97)}
+.pawsip-cat:focus-visible{outline:3px solid var(--blue);outline-offset:8px}
+.pawsip-cat svg{display:block;width:100%;height:auto;overflow:visible}
+.pawsip-cat-stage figcaption,.pawsip-shot figcaption{font:9px/1.7 ui-monospace,Consolas,monospace;color:var(--muted);margin-top:10px}
+
+.pc-tail,.pc-body,.pc-eyes,.pc-arm{transform-box:view-box}
+.pc-tail{transform-origin:146px 192px;animation:pc-tail 3.4s ease-in-out infinite}
+.pc-body{transform-origin:110px 206px;animation:pc-breathe 3.8s ease-in-out infinite}
+.pc-eyes{transform-origin:110px 90px;animation:pc-blink 5.2s infinite}
+.pc-arm,.pc-eyes-happy,.pc-mouth-open,.pc-hearts{opacity:0}
+.pc-arm{transform-origin:146px 156px}
+.pc-heart{transform-box:fill-box;transform-origin:50% 50%;opacity:0}
+.is-petting .pc-arm{opacity:1;animation:pc-wave .62s ease-in-out infinite}
+.is-petting .pc-paw-right,.is-petting .pc-eyes,.is-petting .pc-mouth{opacity:0}
+.is-petting .pc-eyes-happy,.is-petting .pc-mouth-open,.is-petting .pc-hearts{opacity:1}
+.is-petting .pc-heart{animation:pc-heart 1.3s ease-out infinite}
+.is-petting .pc-hearts g:nth-child(2) .pc-heart{animation-delay:.18s}
+.is-petting .pc-hearts g:nth-child(3) .pc-heart{animation-delay:.36s}
+@keyframes pc-tail{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(9deg)}}
+@keyframes pc-breathe{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.025)}}
+@keyframes pc-blink{0%,92%,97%,100%{transform:scaleY(1)}94.5%{transform:scaleY(.08)}}
+@keyframes pc-wave{0%,100%{transform:rotate(-16deg)}50%{transform:rotate(14deg)}}
+@keyframes pc-heart{0%{opacity:0;transform:translateY(6px) scale(.5)}20%{opacity:1}100%{opacity:0;transform:translateY(-34px) scale(1.15)}}
+
+.pawsip-shot{margin:30px 0}
+.pawsip-shot img{width:100%;height:auto;display:block;border:1px solid var(--line);background:#f6f7fc}
+
+.pawsip-rules{padding:25px 29px;background:#e0e5e9;margin-block:31px;border-left:3px solid var(--blue)}
+.pawsip-rules>span{font:9px/1.7 ui-monospace,Consolas,monospace;color:var(--muted)}
+.pawsip-rules>div{margin-top:20px}
+.pawsip-rules small{font:9px/1.6 ui-monospace,Consolas,monospace;color:var(--blue)}
+.jev-prose .pawsip-rules p{margin:4px 0 0;font-size:15px;line-height:1.75;color:var(--ink)}
+
+.pawsip-download{border:1px solid #bec8d0;background:#f2f4f6;padding:24px 28px 26px;margin-block:28px 30px}
+.pawsip-download-top{display:flex;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;font:9px/1.7 ui-monospace,Consolas,monospace;color:var(--muted);border-bottom:1px solid #ccd3d9;padding-bottom:15px}
+.pawsip-download-top>span:last-child{color:var(--ink)}
+.pawsip-download-main{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:18px;margin-top:20px;padding:18px 22px;background:var(--ink);color:#fff;min-height:72px;transition:background .2s}
+.pawsip-download-main:hover{background:var(--blue)}
+.pawsip-download-main:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+.pawsip-download-main>svg{width:18px}
+.pawsip-download-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.12)}
+.pawsip-download-label strong{display:block;font-size:17px;font-weight:500;letter-spacing:-.02em}
+.pawsip-download-label small{display:block;font:10px/1.6 ui-monospace,Consolas,monospace;color:rgba(255,255,255,.75);margin-top:4px}
+.jev-prose .pawsip-download-note{font-size:13px;line-height:1.75;color:var(--muted);margin:14px 0 0}
+
+.pawsip-resources td:last-child{white-space:normal}
+.pawsip-editions td a{display:inline-flex;align-items:center;gap:8px;color:var(--blue);min-height:36px}
+.pawsip-editions td a:hover{color:var(--ink)}
+.pawsip-editions td a svg{width:13px}
+.pawsip-editions details{border-top:1px solid #c6cfd7}
+.pawsip-editions summary{font-size:11px;line-height:1.7;min-height:48px;cursor:pointer;padding:14px 0;color:#384451}
+.pawsip-editions summary:hover{color:var(--blue)}
+.pawsip-checksums{list-style:none;padding:0 0 12px;margin:0}
+.pawsip-checksums li{display:grid;gap:3px;padding-block:9px;border-bottom:1px solid #d5dbe0}
+.pawsip-checksums span{font-size:12px}
+.pawsip-checksums code{font:11px/1.6 ui-monospace,Consolas,monospace;color:var(--muted);word-break:break-all}
+
+.blog-feature-art.pawsip-art{background:#eef3fb}
+.blog-feature-art.pawsip-art img{object-position:72% 55%}
+.blog-feature+.blog-feature{border-top:0}
+
+@media(max-width:600px){.pawsip-cat-frame{padding:30px 12px 18px}.pawsip-rules{padding:20px 19px}.jev-prose .pawsip-rules p{font-size:14px}.pawsip-download{padding:18px 16px 20px}.pawsip-download-main{padding:15px 16px;gap:13px}.pawsip-download-icon{width:36px;height:36px}.pawsip-download-label strong{font-size:15px}.pawsip-cover>img{object-position:46% 55%}.pawsip-cover .jev-cover-type>em{font-size:21px}
+  .pawsip-resources tbody th{min-width:120px}
+  .pawsip-editions table,.pawsip-editions tbody,.pawsip-editions caption{display:block}
+  .pawsip-editions thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .pawsip-editions tbody tr{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:16px;padding-block:15px 6px;border-bottom:1px solid #ccd3d9}
+  .pawsip-editions tbody th,.pawsip-editions tbody td{min-width:0;padding:0;border:0}
+  .pawsip-editions tbody td:nth-of-type(1){grid-column:1/-1;grid-row:2;color:var(--muted);margin-top:4px}
+  .pawsip-editions tbody td:nth-of-type(2){grid-column:2;grid-row:1;font-family:ui-monospace,Consolas,monospace;white-space:nowrap}
+  .pawsip-editions tbody td:nth-of-type(3){grid-column:1/-1;grid-row:3}}
+@media(prefers-reduced-motion:reduce){.pc-tail,.pc-body,.pc-eyes,.is-petting .pc-arm,.is-petting .pc-heart{animation:none}.pawsip-cat,.pawsip-download-main{transition:none}.is-petting .pc-hearts{opacity:0}}
