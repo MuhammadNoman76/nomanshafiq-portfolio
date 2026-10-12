@@ -1,0 +1,128 @@
+/* VibePlayer field note and download page: dark cover, recreated figures, the skip demo and the launch video.
+   The site's light palette everywhere; VibePlayer's own colours (red #FF0033, amber #FFC400, #0F0F0F chrome)
+   only inside the figures and the demo. */
+.vibe-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.vibe-credit a{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.vibe-credit a:hover{color:var(--blue)}
+
+/* Cover and blog card: the player sits on the right of a dark image, the title on the left. */
+/* The image's own left edge, so a phone layout can shift the picture right without a seam. */
+.vibe-cover>img,.blog-feature-art.vibe-art,.blog-feature-art.vibe-art img{background:linear-gradient(#0e060a,#190a0f 35%,#130b10 60%,#07060b)}
+.vibe-cover>img{object-position:50% 42%}
+.vibe-cover .jev-cover-type{color:#f1f1f1}
+.vibe-cover .jev-cover-type>span{color:rgba(241,241,241,.7)}
+.vibe-cover .jev-cover-type>em{color:#ff5a6e;font-style:italic;line-height:1.12}
+.blog-feature-art.vibe-art img{object-position:20% 50%}
+.blog-feature-art.vibe-art>span{color:#f1f1f1}
+.blog-feature-art.vibe-art>span>span{color:#ff5a6e;line-height:1.15}
+
+/* Recreated interface figures */
+.vibe-shot{margin:30px 0}
+.vibe-shot img{width:100%;height:auto;display:block;background:#0f0f0f;border:1px solid var(--line)}
+.vibe-shot figcaption,.vibe-demo-figure figcaption,.vibe-video figcaption,.vibe-dl-stage figcaption{font:9px/1.7 ui-monospace,Consolas,monospace;color:var(--muted);margin-top:10px}
+.vibe-ways{border-left-color:#e0a800}
+.jev-prose .vibe-ways small{color:#8a5a00}
+.jev-prose kbd,.vibe-keys kbd{display:inline-block;font:12px/1.3 ui-monospace,Consolas,monospace;padding:1px 6px;border:1px solid #b7c1ca;border-bottom-width:2px;border-radius:3px;background:#f2f4f6;color:var(--ink)}
+.vibe-keys td kbd+kbd{margin-left:6px}
+.vibe-keys tbody th{min-width:170px}
+
+/* Launch video */
+.vibe-video{margin:30px 0}
+.vibe-video video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#0f0f0f;border:1px solid var(--line)}
+
+/* "Try skip mode": a small player in VibePlayer's dark chrome. */
+.vibe-demo-figure{margin:30px 0 34px}
+.vibe-demo{display:block;border-radius:12px;outline:none}
+.vibe-demo:focus-visible{outline:3px solid var(--blue);outline-offset:5px}
+.vibe-demo-window{background:#0f0f0f;color:#f1f1f1;border-radius:10px;overflow:hidden;font-family:'Segoe UI',Arial,Helvetica,sans-serif;box-shadow:0 22px 44px -30px rgba(15,15,15,.7)}
+.vibe-demo-titlebar{display:flex;align-items:center;gap:10px;min-height:36px;padding:0 12px 0 14px;font-size:12px;color:#d6d6d6}
+.vibe-demo-titlebar>span:nth-child(2){min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vibe-demo-logo{position:relative;flex:none;width:15px;height:15px;border-radius:50%;background:linear-gradient(135deg,#ff2d46,#de1478)}
+.vibe-demo-logo::after{content:"";position:absolute;left:6px;top:4px;border-left:5px solid #fff;border-block:3.5px solid transparent}
+.vibe-demo-badge{flex:none;margin-left:auto;font:9px/1 ui-monospace,Consolas,monospace;letter-spacing:.06em;color:#0f0f0f;background:#ffc400;padding:4px 7px;border-radius:999px}
+.vibe-demo-screen{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden}
+.vibe-demo-screen video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.vibe-demo-bigplay{position:absolute;left:50%;top:44%;width:68px;height:68px;margin:-34px 0 0 -34px;border-radius:50%;background:rgba(0,0,0,.62);color:#fff;display:grid;place-items:center;transition:background .2s}
+.vibe-demo-bigplay svg{width:34px;height:34px;margin-left:3px}
+.vibe-demo-bigplay:hover{background:#ff0033}
+.vibe-demo-controls{position:absolute;left:0;right:0;bottom:0;padding:40px 12px 10px;background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.3) 50%,rgba(0,0,0,.72))}
+.vibe-demo-bar{position:relative;height:22px;margin:0 4px 4px}
+.vibe-demo-track{position:absolute;left:0;right:0;top:50%;height:4px;margin-top:-2px;background:rgba(255,255,255,.3);border-radius:2px}
+.vibe-demo-played{position:absolute;left:0;top:0;bottom:0;background:#ff0033;border-radius:2px}
+.vibe-demo-mark{position:absolute;top:0;bottom:0;min-width:2px;background:rgba(255,196,0,.92)}
+.vibe-demo-mark.is-off{background:rgba(255,196,0,.4)}
+.vibe-demo-pending{position:absolute;top:-6px;bottom:-6px;width:2px;margin-left:-1px;background:#ffc400}
+.vibe-demo-thumb{position:absolute;top:50%;width:13px;height:13px;margin:-6.5px 0 0 -6.5px;border-radius:50%;background:#ff0033}
+.vibe-demo-seek{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.vibe-demo-bar:focus-within .vibe-demo-track{box-shadow:0 0 0 2px #0f0f0f,0 0 0 4px #fff}
+.vibe-demo-row{display:flex;align-items:center;gap:8px}
+.vibe-demo-circle{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;display:grid;place-items:center}
+.vibe-demo-circle:hover,.vibe-demo-time:hover{background:rgba(255,255,255,.22)}
+.vibe-demo-time{min-height:40px;padding:0 15px;border-radius:20px;background:rgba(255,255,255,.12);font:600 13px/1 'Segoe UI',Arial,Helvetica,sans-serif;color:#fff;font-variant-numeric:tabular-nums}
+.vibe-demo button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.vibe-demo-chip{position:absolute;bottom:76px;display:flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;background:#ffc400;color:#0f0f0f;font:700 12px/1 'Segoe UI',Arial,Helvetica,sans-serif;white-space:nowrap;transform:translateX(-50%);animation:vibe-chip .22s ease-out;pointer-events:none}
+@keyframes vibe-chip{from{opacity:0;transform:translate(-50%,6px)}to{opacity:1;transform:translateX(-50%)}}
+.vibe-demo-menu{background:#1c1c1c;padding:14px 14px 16px;border-top:1px solid #2b2b2b}
+.vibe-demo-menu-title{display:block;font:9px/1.6 ui-monospace,Consolas,monospace;letter-spacing:.06em;color:#9a9a9a;margin:0 8px 4px}
+.vibe-demo-toggle{display:flex;justify-content:space-between;align-items:center;gap:16px;width:100%;min-height:44px;padding:6px 8px;border-radius:8px;text-align:left;font-size:14px;line-height:1.4;color:#f1f1f1}
+.vibe-demo-toggle:hover{background:rgba(255,255,255,.07)}
+.vibe-demo-toggle small{color:#9a9a9a;font-size:12px;white-space:nowrap}
+.vibe-demo-switch{position:relative;flex:none;width:36px;height:20px}
+.vibe-demo-switch::before{content:"";position:absolute;left:0;right:0;top:3px;height:14px;border-radius:7px;background:rgba(255,255,255,.4);transition:background .15s}
+.vibe-demo-switch::after{content:"";position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .15s}
+.vibe-demo-toggle[aria-pressed=true] .vibe-demo-switch::before{background:#ff0033}
+.vibe-demo-toggle[aria-pressed=true] .vibe-demo-switch::after{transform:translateX(16px)}
+.vibe-demo-ranges{margin:6px 0 0;border-top:1px solid rgba(255,255,255,.12)}
+.vibe-demo-ranges li{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:44px;padding:0 8px;font-size:14px;border-bottom:1px solid rgba(255,255,255,.08)}
+.vibe-demo-ranges li>span{display:inline-flex;align-items:center;gap:10px;font-variant-numeric:tabular-nums}
+.vibe-demo-ranges li>span svg{color:#ffc400}
+.vibe-demo-ranges button{min-height:36px;padding:0 10px;border-radius:6px;font-size:13px;color:#dddddd}
+.vibe-demo-ranges button:hover{background:rgba(255,255,255,.1);color:#fff}
+.vibe-demo-ranges .vibe-demo-empty{color:#9a9a9a;font-size:13px}
+.vibe-demo-actions{display:flex;flex-wrap:wrap;gap:8px;margin:14px 8px 0}
+.vibe-demo-actions button{display:inline-flex;align-items:center;gap:10px;min-height:40px;padding:0 16px;border-radius:20px;background:#f1f1f1;color:#0f0f0f;font-size:13px;font-weight:600}
+.vibe-demo-actions button:hover{background:#fff}
+.vibe-demo-actions kbd{font:12px/1 ui-monospace,Consolas,monospace;padding:3px 6px;border-radius:4px;background:#0f0f0f;color:#fff}
+.vibe-demo-actions .vibe-demo-reset{background:transparent;color:#d0d0d0;border:1px solid #474747;font-weight:400}
+.vibe-demo-actions .vibe-demo-reset:hover{background:rgba(255,255,255,.08);color:#fff}
+.vibe-demo .vibe-demo-status{min-height:20px;margin:12px 8px 0;font:12px/1.6 'Segoe UI',Arial,Helvetica,sans-serif;color:#cfcfcf}
+
+/* Download page (/vibeplayer/): the recreated skip dialog takes the place of PawSip's cat. */
+.vibe-dl-stage{grid-area:stage;align-self:start;margin:0;min-width:0}
+.vibe-dl-stage img{display:block;width:100%;height:auto;background:#0f0f0f;border:1px solid var(--line)}
+.jev-prose .vibe-dl-try{margin-top:8px}
+.jev-prose .vibe-dl-try a{display:inline-flex;align-items:center;gap:12px;min-height:44px;font-size:14px;color:var(--blue);text-decoration:none}
+.jev-prose .vibe-dl-try a:hover{color:var(--ink)}
+.vibe-dl-try svg{width:15px}
+
+@media(max-width:900px){.vibe-dl-stage{margin-top:36px}}
+@media(max-width:1100px){.blog-feature-art.vibe-art img{object-position:0% 50%}}
+@media(max-width:850px){.blog-feature-art.vibe-art>span>span{font-size:22px}}
+@media(max-width:600px){
+  .vibe-cover>img{object-position:36px 50%}
+  .vibe-cover .jev-cover-type>strong{font-size:28px}
+  .vibe-cover .jev-cover-type>em{font-size:19px}
+  .blog-feature-art.vibe-art img{object-position:40px 50%}
+  .blog-feature-art.vibe-art>span{font-size:30px}
+  .blog-feature-art.vibe-art>span>span{font-size:18px;margin-top:6px}
+  .vibe-dl-stage{margin-top:28px}
+  .vibe-dl-stage figcaption{font-size:8px}
+  .vibe-keys tbody th{min-width:0}
+  .vibe-demo-titlebar{font-size:11px}
+  .vibe-demo-controls{padding:28px 8px 6px}
+  .vibe-demo-bar{margin:0 4px 2px}
+  .vibe-demo-row{gap:6px}
+  .vibe-demo-circle{width:34px;height:34px}
+  .vibe-demo-circle svg{width:20px;height:20px}
+  .vibe-demo-time{min-height:34px;padding:0 12px;font-size:12px}
+  .vibe-demo-bigplay{width:56px;height:56px;margin:-28px 0 0 -28px}
+  .vibe-demo-bigplay svg{width:28px;height:28px}
+  .vibe-demo-chip{bottom:58px;font-size:11px;padding:5px 9px}
+  .vibe-demo-menu{padding:12px 8px 14px}
+  .vibe-demo-toggle{font-size:13px}
+  .vibe-demo-toggle small{display:block;white-space:normal}
+  .vibe-demo-ranges li{font-size:13px}
+  .vibe-demo-actions{margin-inline:6px}
+  .vibe-demo-actions button{font-size:12px;padding:0 13px}
+}
+@media(prefers-reduced-motion:reduce){.vibe-demo-chip{animation:none}.vibe-demo-switch::before,.vibe-demo-switch::after,.vibe-demo-bigplay{transition:none}}

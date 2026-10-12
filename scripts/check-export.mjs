@@ -1,9 +1,13 @@
-import {readFile,stat} from 'node:fs/promises';
+import {readFile,readdir,stat} from 'node:fs/promises';
 import path from 'node:path';
 const root=path.resolve('out');
-const routes=['','work','work/langvoice','work/resumeworld','work/metamod','work/reelsbuilder','work/lughaat','blog','blog/jev-urdu-benchmarks','blog/pawsip','pawsip'];
-const assets=['404.html','robots.txt','sitemap.xml','manifest.webmanifest','favicon.svg','og.png','engine/experience.mjs','engine/sculpture.mjs','files/muhammad-noman-resume.pdf','art/hero.webp','art/hero-flow.webp','art/hero-reimagine.webp','art/jev-urdu-cover.webp','art/jev-urdu-social.jpg','art/pawsip-cover.png','art/pawsip-social.jpg','benchmarks/jev-urdu-results.json','benchmarks/jev-urdu-metrics.csv','benchmarks/jev-urdu-deltas.csv'];
+const routes=['','work','work/langvoice','work/resumeworld','work/metamod','work/reelsbuilder','work/lughaat','blog','blog/jev-urdu-benchmarks','blog/pawsip','pawsip','blog/vibeplayer','vibeplayer'];
+const assets=['404.html','robots.txt','sitemap.xml','manifest.webmanifest','favicon.svg','og.png','engine/experience.mjs','engine/sculpture.mjs','files/muhammad-noman-resume.pdf','art/hero.webp','art/hero-flow.webp','art/hero-reimagine.webp','art/jev-urdu-cover.webp','art/jev-urdu-social.jpg','art/pawsip-cover.png','art/pawsip-social.jpg','art/vibeplayer-cover.jpg','art/vibeplayer-social.jpg','art/vibeplayer-dialog.jpg','art/vibeplayer-jump.jpg','art/vibeplayer-hold.jpg','art/vibeplayer-menu.jpg','media/vibeplayer-launch.mp4','media/vibeplayer-launch.en.vtt','media/vibeplayer-launch-poster.jpg','media/vibeplayer-skip-demo.mp4','media/vibeplayer-skip-demo-poster.jpg','benchmarks/jev-urdu-results.json','benchmarks/jev-urdu-metrics.csv','benchmarks/jev-urdu-deltas.csv'];
 const errors=[];
+// Cloudflare Pages serves single files up to 25 MiB.
+const maxFileBytes=25*1024*1024;
+const walk=async dir=>{for(const entry of await readdir(dir,{withFileTypes:true})){const full=path.join(dir,entry.name);if(entry.isDirectory())await walk(full);else if((await stat(full)).size>maxFileBytes)errors.push(`Over 25 MiB: ${path.relative(root,full)}`);}};
+try{await walk(root);}catch(error){errors.push(`Cannot scan out/: ${error.message}`);}
 for(const file of assets){try{const result=await stat(path.join(root,file));if(!result.isFile()||!result.size)errors.push(`Empty asset: ${file}`);}catch{errors.push(`Missing asset: ${file}`);}}
 for(const route of routes){
  try{
@@ -24,4 +28,4 @@ try{
  for(const route of routes.filter(Boolean))if(!new RegExp(`<loc>https?://[^/<]+/${route}/</loc>`).test(sitemap))errors.push(`Missing sitemap route: ${route}`);
 }catch(error){errors.push(error.message);}
 if(errors.length){console.error('Export verification failed:\n'+errors.map(e=>' - '+e).join('\n'));process.exitCode=1;}
-else console.log(`Export verified: ${routes.length} indexable pages, 404, static discovery routes, local engine, and assets.`);
+else console.log(`Export verified: ${routes.length} indexable pages, 404, static discovery routes, local engine, assets, and no file over 25 MiB.`);

@@ -1,3 +1,7 @@
+import type { Edition } from './windows';
+
+export { formatSize, type Edition, type EditionId } from './windows';
+
 export const pawsipArticle = {
   title: 'PawSip: a desktop cat that keeps you hydrated.',
   description: 'I built PawSip, a free Windows water reminder with an animated cat companion. It follows your activity, waits during fullscreen work, and keeps asking until you drink. Downloads for Windows 7, 8.1, 10 and 11.',
@@ -14,20 +18,6 @@ export const downloadPage = {
   description: 'Download PawSip 1.0.1, a free water reminder for Windows with an animated desktop cat. Installers for Windows 7 SP1, 8.1, 10 and 11 (x64, ARM64 and 32-bit). No account; your data stays on your PC.',
   path: '/pawsip/',
 };
-
-export type EditionId = 'x64' | 'arm64' | 'x86' | 'win7-8';
-
-export interface Edition {
-  id: EditionId;
-  name: string;
-  forWho: string;
-  windows: string;
-  cpu: string;
-  runtime: string;
-  file: string;
-  bytes: number;
-  sha256: string;
-}
 
 /** Installers published in the PawSip repository (release/), verified against the files on GitHub. */
 export const editions: Edition[] = [
@@ -56,5 +46,3 @@ export const editions: Edition[] = [
 export const downloadUrl = (edition: Edition) =>
   `https://github.com/MuhammadNoman76/PawSip/raw/refs/heads/main/release/${edition.file}`;
 
-/** Decimal megabytes, like the rest of the site. */
-export const formatSize = (bytes: number) => `${(bytes / 1_000_000).toFixed(1)} MB`;

@@ -5,6 +5,7 @@ import {siteUrl,profile} from '@/data/portfolio';
 import './globals.css';
 import './blog.css';
 import './pawsip.css';
+import './vibeplayer.css';
 export const metadata:Metadata={
  metadataBase:new URL(siteUrl),
  title:{default:'Muhammad Noman - AI Engineer & Product Builder',template:'%s | Muhammad Noman'},
