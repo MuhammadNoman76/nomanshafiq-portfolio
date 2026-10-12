@@ -8,6 +8,13 @@ export const pawsipArticle = {
   checksumsUrl: 'https://github.com/MuhammadNoman76/PawSip/blob/main/release/SHA256SUMS.txt',
 };
 
+/** The standalone download page. Its claims mirror the field note. */
+export const downloadPage = {
+  title: 'Download PawSip for Windows — free desktop cat water reminder',
+  description: 'Download PawSip 1.0.1, a free water reminder for Windows with an animated desktop cat. Installers for Windows 7 SP1, 8.1, 10 and 11 (x64, ARM64 and 32-bit). No account; your data stays on your PC.',
+  path: '/pawsip/',
+};
+
 export type EditionId = 'x64' | 'arm64' | 'x86' | 'win7-8';
 
 export interface Edition {

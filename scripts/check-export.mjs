@@ -1,8 +1,8 @@
 import {readFile,stat} from 'node:fs/promises';
 import path from 'node:path';
 const root=path.resolve('out');
-const routes=['','work','work/langvoice','work/resumeworld','work/metamod','work/reelsbuilder','work/lughaat','blog','blog/jev-urdu-benchmarks'];
-const assets=['404.html','robots.txt','sitemap.xml','manifest.webmanifest','favicon.svg','og.png','engine/experience.mjs','engine/sculpture.mjs','files/muhammad-noman-resume.pdf','art/hero.webp','art/hero-flow.webp','art/hero-reimagine.webp','art/jev-urdu-cover.webp','art/jev-urdu-social.jpg','benchmarks/jev-urdu-results.json','benchmarks/jev-urdu-metrics.csv','benchmarks/jev-urdu-deltas.csv'];
+const routes=['','work','work/langvoice','work/resumeworld','work/metamod','work/reelsbuilder','work/lughaat','blog','blog/jev-urdu-benchmarks','blog/pawsip','pawsip'];
+const assets=['404.html','robots.txt','sitemap.xml','manifest.webmanifest','favicon.svg','og.png','engine/experience.mjs','engine/sculpture.mjs','files/muhammad-noman-resume.pdf','art/hero.webp','art/hero-flow.webp','art/hero-reimagine.webp','art/jev-urdu-cover.webp','art/jev-urdu-social.jpg','art/pawsip-cover.png','art/pawsip-social.jpg','benchmarks/jev-urdu-results.json','benchmarks/jev-urdu-metrics.csv','benchmarks/jev-urdu-deltas.csv'];
 const errors=[];
 for(const file of assets){try{const result=await stat(path.join(root,file));if(!result.isFile()||!result.size)errors.push(`Empty asset: ${file}`);}catch{errors.push(`Missing asset: ${file}`);}}
 for(const route of routes){
@@ -21,7 +21,7 @@ for(const route of routes){
 try{
  const robots=await readFile(path.join(root,'robots.txt'),'utf8'),sitemap=await readFile(path.join(root,'sitemap.xml'),'utf8');
  if(!robots.includes('Sitemap:'))errors.push('robots.txt has no sitemap declaration');
- for(const route of routes.filter(Boolean))if(!sitemap.includes(`/${route}/`))errors.push(`Missing sitemap route: ${route}`);
+ for(const route of routes.filter(Boolean))if(!new RegExp(`<loc>https?://[^/<]+/${route}/</loc>`).test(sitemap))errors.push(`Missing sitemap route: ${route}`);
 }catch(error){errors.push(error.message);}
 if(errors.length){console.error('Export verification failed:\n'+errors.map(e=>' - '+e).join('\n'));process.exitCode=1;}
 else console.log(`Export verified: ${routes.length} indexable pages, 404, static discovery routes, local engine, and assets.`);

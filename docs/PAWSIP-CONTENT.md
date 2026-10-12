@@ -53,3 +53,13 @@ vector paths, animated with CSS and disabled for reduced motion.
 `src/components/PawSipDownload.tsx` runs only in the browser and sends nothing anywhere. It reads the user-agent string
 (Windows NT version) and, where available, User-Agent Client Hints (platform version for Windows 10 vs 11, architecture and
 bitness). Without JavaScript the static page recommends the x64 installer and lists every edition.
+
+## Download page
+
+`/pawsip/` (`src/app/pawsip/page.tsx`) is a standalone "Download PawSip for Windows" page for sharing. It reuses the
+article's data and components: the browser-side recommendation (`PawSipDownload`), the interactive cat (`PawSipCat`), the
+editions table built from `editions`, and the SHA-256 checksums. Its system requirements, feature list, installing notes
+and the note on what was not tested repeat claims already in the article and in this file; it adds no new facts. Its
+JSON-LD is a `SoftwareApplication` with `@id` `<site>/pawsip/#app`, and the article's `SoftwareApplication` node uses the
+same `@id`, so both pages describe one app. The page is linked from the article (download section and its links list),
+the PawSip feature on `/blog/`, `sitemap.ts`, `public/llms.txt`, and checked by `scripts/check-export.mjs`.

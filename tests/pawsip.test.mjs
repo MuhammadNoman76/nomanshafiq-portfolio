@@ -37,3 +37,24 @@ test('the PawSip field note is published, linked and has its artwork', () => {
   assert.match(read('src/app/sitemap.ts'), /\/blog\/pawsip\//);
   assert.match(read('public/llms.txt'), /\/blog\/pawsip\//);
 });
+
+test('the PawSip download page offers every edition and is linked across the site', () => {
+  const page = read('src/app/pawsip/page.tsx');
+  assert.match(data, /export const downloadPage = \{[\s\S]*?path: '\/pawsip\/'/);
+  assert.match(page, /<PawSipDownload\/>/);
+  assert.match(page, /<PawSipCat\/>/);
+  assert.match(page, /editions\.map\(edition => <tr/);
+  assert.match(page, /aria-label=\{`Download PawSip for \$\{edition\.name\}`\}/);
+  assert.match(page, /SHA-256 checksums/);
+  assert.match(page, /canonical: downloadPage\.path/);
+  assert.match(page, /'@type': 'SoftwareApplication'/);
+  assert.match(page, /downloadUrl: editions\.map\(downloadUrl\)/);
+  assert.match(page, /JSON\.stringify\(schema\)\.replace\(\/<\/g, '\\\\u003c'\)/, 'structured data is escaped');
+  assert.match(page, /href=\{pawsipArticle\.path\}/, 'links back to the field note');
+  assert.match(page, /haven&apos;t run it on ARM hardware/, 'says what was not tested');
+  assert.match(read('src/app/blog/pawsip/page.tsx'), /href=\{downloadPage\.path\}/);
+  assert.match(read('src/app/blog/page.tsx'), /href=\{downloadPage\.path\}/);
+  assert.match(read('src/app/sitemap.ts'), /\$\{siteUrl\}\/pawsip\/`,lastModified:'2026-10-12'/);
+  assert.match(read('public/llms.txt'), /^- PawSip download page: https:\/\/www\.nomanshafiq\.com\/pawsip\/\r?$/m);
+  assert.match(read('scripts/check-export.mjs'), /'blog\/pawsip','pawsip'/);
+});

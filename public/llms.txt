@@ -6,6 +6,7 @@ AI engineer and full-stack developer based in Karachi, Pakistan.
 - Projects: https://www.nomanshafiq.com/work/
 - Blog: https://www.nomanshafiq.com/blog/
 - PawSip, a desktop cat water reminder for Windows (article and downloads): https://www.nomanshafiq.com/blog/pawsip/
+- PawSip download page: https://www.nomanshafiq.com/pawsip/
 - PawSip source: https://github.com/MuhammadNoman76/PawSip
 - Jev-Urdu launch and interactive benchmarks: https://www.nomanshafiq.com/blog/jev-urdu-benchmarks/
 - Jev-Urdu model: https://huggingface.co/muhammadnoman76/jev-urdu
