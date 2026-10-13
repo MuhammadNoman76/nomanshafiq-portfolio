@@ -1,0 +1,55 @@
+/* Trove field note and download page: a light cover, real screenshots on a soft Fluent-style stage,
+   the safety rules and the right-click menu. Trove's own colours stay inside the screenshots. */
+
+/* Cover and blog card: the windows sit on the right of a light gradient; the title goes on the left. */
+.trove-cover>img,.blog-feature-art.trove-art,.blog-feature-art.trove-art img{background:linear-gradient(135deg,#f1f4f9,#e3eaf6 55%,#d3ddf3)}
+.trove-cover>img{object-position:50% 46%}
+.trove-cover .jev-cover-type>span{color:#4c5866}
+.trove-cover .jev-cover-type>strong{color:#16202e}
+.trove-cover .jev-cover-type>em{font-style:italic;line-height:1.12;color:#1f5bd1}
+.blog-feature-art.trove-art img{object-position:0% 50%}
+.blog-feature-art.trove-art>span{color:#16202e}
+.blog-feature-art.trove-art>span>span{color:#1f5bd1;font-family:Georgia,'Times New Roman',serif;font-style:italic;line-height:1.15}
+
+/* Real screenshots, shown no larger than their size on a 150% display, on a light stage. */
+.trove-shot{margin:30px 0}
+.trove-shot-stage{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:22px;padding:clamp(18px,4.2%,40px);background:radial-gradient(circle at 82% 20%,rgba(63,127,224,.22),transparent 55%),radial-gradient(circle at 96% 100%,rgba(139,111,232,.2),transparent 50%),linear-gradient(135deg,#f1f4f9,#e3eaf6 60%,#d8e1f4);border:1px solid var(--line)}
+.trove-shot-stage img{display:block;width:100%;height:auto;min-width:0;filter:drop-shadow(0 14px 22px rgba(11,26,58,.2)) drop-shadow(0 2px 4px rgba(11,26,58,.12))}
+.trove-shot-pair .trove-shot-stage img{flex:1 1 300px;width:auto}
+.trove-shot figcaption,.trove-dl-stage figcaption{font:9px/1.7 ui-monospace,Consolas,monospace;color:var(--muted);margin-top:10px}
+.trove-shot figcaption strong{font-weight:600;color:var(--ink)}
+
+/* The compression levels table and the two boxed lists. */
+.trove-levels{max-width:420px}
+.trove-levels tbody th{min-width:0}
+.trove-rules,.trove-menu{border-left-color:#1f5bd1}
+.jev-prose .trove-rules small,.jev-prose .trove-menu small{color:#1f5bd1}
+.trove-menu ul{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.trove-menu li{font-size:14px;line-height:1.4;padding:7px 12px;background:#f6f7f8;border:1px solid #c6cfd7;color:var(--ink)}
+
+/* Download page (/trove/): a real screenshot takes the place of PawSip's cat. */
+.trove-dl-stage{grid-area:stage;align-self:start;margin:0;min-width:0}
+.trove-dl-stage .trove-shot-stage{padding:clamp(16px,3vw,30px)}
+.jev-prose .trove-dl-more{margin-top:8px}
+.jev-prose .trove-dl-more a{display:inline-flex;align-items:center;gap:12px;min-height:44px;font-size:14px;color:var(--blue);text-decoration:none}
+.jev-prose .trove-dl-more a:hover{color:var(--ink)}
+.trove-dl-more svg{width:15px}
+
+@media(max-width:900px){.trove-dl-stage{margin-top:36px}}
+@media(max-width:850px){.blog-feature-art.trove-art>span>span{font-size:22px}}
+@media(max-width:600px){
+  /* Keep the image's left edge so the windows sit right of the overlay title. */
+  .trove-cover>img{object-position:0% 50%}
+  .trove-cover .jev-cover-type>strong{font-size:28px}
+  .trove-cover .jev-cover-type>em{font-size:16px}
+  .blog-feature-art.trove-art>span{font-size:30px}
+  .blog-feature-art.trove-art>span>span{font-size:16px;margin-top:6px}
+  .trove-shot-stage{padding:14px;gap:14px}
+  .trove-shot-pair .trove-shot-stage img{flex-basis:100%}
+  .trove-menu li{font-size:13px}
+  .trove-dl-stage{margin-top:28px}
+  .trove-dl-stage figcaption{font-size:8px}
+}
+
+/* 7-Zip, AES-256 and SHA-256 stay on one line (src/components/NoWrap.tsx). */
+.trove-nw{white-space:nowrap}

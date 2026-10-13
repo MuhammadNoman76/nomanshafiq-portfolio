@@ -1,0 +1,34 @@
+{
+  "app": "Trove",
+  "version": "1.0.0",
+  "released": "2026-10-13",
+  "notes": [
+    "The first release of Trove, a free archive manager for Windows built on the official 7-Zip 26.04 engine.",
+    "Opens ZIP, 7Z, RAR and RAR5, TAR, GZ, XZ, ISO, CAB and the other formats 7-Zip reads; creates ZIP, 7Z, TAR, TAR.GZ and TAR.XZ.",
+    "AES-256 passwords for ZIP and 7Z, split archives, safe extraction and a Trove menu in File Explorer.",
+    "Trove checks this feed shortly after it starts and at most once a day, and installs a newer version after checking its SHA-256 checksum."
+  ],
+  "page": "https://www.nomanshafiq.com/trove/",
+  "editions": {
+    "x64": {
+      "url": "https://github.com/MuhammadNoman76/Trove/raw/refs/heads/main/release/Trove-Setup-1.0.0-x64.exe",
+      "sha256": "d76bff1b3d29131cfce2b2586cc46ed8502c868fdd73cbfc55daf90577356482",
+      "size": 45423304
+    },
+    "arm64": {
+      "url": "https://github.com/MuhammadNoman76/Trove/raw/refs/heads/main/release/Trove-Setup-1.0.0-arm64.exe",
+      "sha256": "e6b8cccd880aae217ed2581a79c67c19b002ef59c53a7af004b56787652ac84c",
+      "size": 39885122
+    },
+    "x86": {
+      "url": "https://github.com/MuhammadNoman76/Trove/raw/refs/heads/main/release/Trove-Setup-1.0.0-x86.exe",
+      "sha256": "b2b7abae990cffb1e5508d5c94cd97354da2e05b999f11a6acf0dce68f9c8c3a",
+      "size": 41383656
+    },
+    "win7-8": {
+      "url": "https://github.com/MuhammadNoman76/Trove/raw/refs/heads/main/release/Trove-Setup-1.0.0-win7-8.exe",
+      "sha256": "d8e4126ae0fc46fa6c05b75e59b63333cbf36a19ab81ba6db7128c7cfac03ea0",
+      "size": 3804080
+    }
+  }
+}

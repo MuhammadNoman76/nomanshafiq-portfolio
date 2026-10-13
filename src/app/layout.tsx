@@ -6,6 +6,7 @@ import './globals.css';
 import './blog.css';
 import './pawsip.css';
 import './vibeplayer.css';
+import './trove.css';
 export const metadata:Metadata={
  metadataBase:new URL(siteUrl),
  title:{default:'Muhammad Noman - AI Engineer & Product Builder',template:'%s | Muhammad Noman'},

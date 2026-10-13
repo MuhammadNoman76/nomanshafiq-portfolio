@@ -63,7 +63,7 @@ export interface WindowsDownloadProps {
 
 /**
  * The "recommended for this PC" download box shared by the desktop app pages. It takes a function prop,
- * so render it from a small 'use client' wrapper (PawSipDownload, VibePlayerDownload), not from a page.
+ * so render it from a small 'use client' wrapper (PawSipDownload, VibePlayerDownload, TroveDownload), not from a page.
  * Styles: the .pawsip-download rules in src/app/pawsip.css.
  */
 export function WindowsDownload({ appName, version, editions, downloadUrl }: WindowsDownloadProps) {

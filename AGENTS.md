@@ -23,9 +23,11 @@ Muhammad Noman's portfolio and blog: Next.js static export (`output: 'export'`, 
   - `/blog/jev-urdu-benchmarks/`
   - `/blog/pawsip/`
   - `/blog/vibeplayer/`
-- Download pages: `/pawsip/` and `/vibeplayer/`.
-- App data: `src/data/pawsip.ts`, `src/data/vibeplayer.ts`, and the shared types in `src/data/windows.ts`. The Windows download picker is `src/components/WindowsDownload.tsx`, with a thin client wrapper per app.
-- VibePlayer's auto-update feed: `public/updates/vibeplayer.json`. It must match `src/data/vibeplayer.ts` (a test enforces this). The VibePlayer app reads it, so a release means: push the installers to the VibePlayer repo first, then update both files here and push.
+  - `/blog/trove/`
+- Download pages: `/pawsip/`, `/vibeplayer/` and `/trove/`.
+- App data: `src/data/pawsip.ts`, `src/data/vibeplayer.ts`, `src/data/trove.ts`, and the shared types in `src/data/windows.ts`. The Windows download picker is `src/components/WindowsDownload.tsx`, with a thin client wrapper per app.
+- VibePlayer's auto-update feed: `public/updates/vibeplayer.json`. It must match `src/data/vibeplayer.ts` (a test enforces this). The VibePlayer app reads it, so a release means: push the installers to the VibePlayer repo first, then update both files here and push. PawSip (`public/updates/pawsip.json`) and Trove (`public/updates/trove.json`, read by `src/Trove/Services/Updater.cs`) work the same way.
+- Trove's images are real screenshots (PrintWindow captures of Trove's own windows, with demo files); see `docs/TROVE-CONTENT.md`. Its article has a marked place for a launch video that isn't rendered yet.
 - When adding a page, also update `src/app/sitemap.ts`, `public/llms.txt`, `scripts/check-export.mjs` and the tests, and add an evidence doc in `docs/`.
 - Honesty rules:
   - Claims must match the app's source code.

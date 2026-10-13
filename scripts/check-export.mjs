@@ -1,8 +1,8 @@
 import {readFile,readdir,stat} from 'node:fs/promises';
 import path from 'node:path';
 const root=path.resolve('out');
-const routes=['','work','work/langvoice','work/resumeworld','work/metamod','work/reelsbuilder','work/lughaat','blog','blog/jev-urdu-benchmarks','blog/pawsip','pawsip','blog/vibeplayer','vibeplayer'];
-const assets=['404.html','robots.txt','sitemap.xml','manifest.webmanifest','favicon.svg','og.png','engine/experience.mjs','engine/sculpture.mjs','files/muhammad-noman-resume.pdf','art/hero.webp','art/hero-flow.webp','art/hero-reimagine.webp','art/jev-urdu-cover.webp','art/jev-urdu-social.jpg','art/pawsip-cover.png','art/pawsip-social.jpg','art/vibeplayer-cover.jpg','art/vibeplayer-social.jpg','art/vibeplayer-dialog.jpg','art/vibeplayer-jump.jpg','art/vibeplayer-hold.jpg','art/vibeplayer-menu.jpg','media/vibeplayer-launch.mp4','media/vibeplayer-launch.en.vtt','media/vibeplayer-launch-poster.jpg','media/vibeplayer-skip-demo.mp4','media/vibeplayer-skip-demo-poster.jpg','updates/vibeplayer.json','updates/pawsip.json','benchmarks/jev-urdu-results.json','benchmarks/jev-urdu-metrics.csv','benchmarks/jev-urdu-deltas.csv'];
+const routes=['','work','work/langvoice','work/resumeworld','work/metamod','work/reelsbuilder','work/lughaat','blog','blog/jev-urdu-benchmarks','blog/pawsip','pawsip','blog/vibeplayer','vibeplayer','blog/trove','trove'];
+const assets=['404.html','robots.txt','sitemap.xml','manifest.webmanifest','favicon.svg','og.png','engine/experience.mjs','engine/sculpture.mjs','files/muhammad-noman-resume.pdf','art/hero.webp','art/hero-flow.webp','art/hero-reimagine.webp','art/jev-urdu-cover.webp','art/jev-urdu-social.jpg','art/pawsip-cover.png','art/pawsip-social.jpg','art/vibeplayer-cover.jpg','art/vibeplayer-social.jpg','art/vibeplayer-dialog.jpg','art/vibeplayer-jump.jpg','art/vibeplayer-hold.jpg','art/vibeplayer-menu.jpg','media/vibeplayer-launch.mp4','media/vibeplayer-launch.en.vtt','media/vibeplayer-launch-poster.jpg','media/vibeplayer-skip-demo.mp4','media/vibeplayer-skip-demo-poster.jpg','art/trove-cover.jpg','art/trove-social.jpg','art/trove-home.png','art/trove-archive.png','art/trove-archive-dark.png','art/trove-create.png','art/trove-password.png','art/trove-progress.png','art/trove-blocked.png','art/trove-blocked-details.png','art/trove-settings.png','updates/vibeplayer.json','updates/pawsip.json','updates/trove.json','benchmarks/jev-urdu-results.json','benchmarks/jev-urdu-metrics.csv','benchmarks/jev-urdu-deltas.csv'];
 const errors=[];
 // Cloudflare Pages serves single files up to 25 MiB.
 const maxFileBytes=25*1024*1024;
@@ -27,8 +27,8 @@ try{
  if(!robots.includes('Sitemap:'))errors.push('robots.txt has no sitemap declaration');
  for(const route of routes.filter(Boolean))if(!new RegExp(`<loc>https?://[^/<]+/${route}/</loc>`).test(sitemap))errors.push(`Missing sitemap route: ${route}`);
 }catch(error){errors.push(error.message);}
-// VibePlayer and PawSip read these feeds to update themselves: each must stay valid JSON with every edition, an HTTPS link, size and SHA-256.
-for(const [file,app] of [['vibeplayer.json','VibePlayer'],['pawsip.json','PawSip']]){
+// VibePlayer, PawSip and Trove read these feeds to update themselves: each must stay valid JSON with every edition, an HTTPS link, size and SHA-256.
+for(const [file,app] of [['vibeplayer.json','VibePlayer'],['pawsip.json','PawSip'],['trove.json','Trove']]){
  try{
   const feed=JSON.parse(await readFile(path.join(root,'updates',file),'utf8'));
   if(feed.app!==app||!/^\d+\.\d+\.\d+$/.test(feed.version??''))errors.push(`updates/${file}: missing app or version`);
@@ -36,4 +36,4 @@ for(const [file,app] of [['vibeplayer.json','VibePlayer'],['pawsip.json','PawSip
  }catch(error){errors.push(`Cannot parse updates/${file}: ${error.message}`);}
 }
 if(errors.length){console.error('Export verification failed:\n'+errors.map(e=>' - '+e).join('\n'));process.exitCode=1;}
-else console.log(`Export verified: ${routes.length} indexable pages, 404, static discovery routes, local engine, assets, the VibePlayer and PawSip update feeds, and no file over 25 MiB.`);
+else console.log(`Export verified: ${routes.length} indexable pages, 404, static discovery routes, local engine, assets, the VibePlayer, PawSip and Trove update feeds, and no file over 25 MiB.`);

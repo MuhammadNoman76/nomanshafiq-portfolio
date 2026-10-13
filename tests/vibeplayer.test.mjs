@@ -62,8 +62,8 @@ test('the VibePlayer field note is published, linked and has its media', () => {
   assert.match(article, /JSON\.stringify\(schema\)\.replace\(\/<\/g, '\\\\u003c'\)/, 'structured data is escaped');
   const blog = read('src/app/blog/page.tsx');
   assert.match(blog, /vibeplayerArticle\.path/);
-  assert.ok(blog.indexOf('vibeplayer-cover.jpg') < blog.indexOf('pawsip-cover.png'), 'VibePlayer is the first feature');
-  assert.match(blog, /hasPart: \[\{ '@type': 'BlogPosting', headline: vibeplayerArticle\.title/);
+  assert.ok(blog.indexOf('vibeplayer-cover.jpg') < blog.indexOf('pawsip-cover.png'), 'VibePlayer comes before PawSip (Trove, the newest, is first)');
+  assert.match(blog, /\{ '@type': 'BlogPosting', headline: vibeplayerArticle\.title/);
   assert.match(read('src/app/sitemap.ts'), /\$\{siteUrl\}\/blog\/vibeplayer\/`,lastModified:'2026-10-13'/);
   assert.match(read('public/llms.txt'), /\/blog\/vibeplayer\//);
   assert.match(read('src/app/layout.tsx'), /import '\.\/vibeplayer\.css';/);
