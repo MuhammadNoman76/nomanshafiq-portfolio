@@ -72,6 +72,20 @@ export const levels = [
   ['Smallest', 9],
 ] as const;
 
+/**
+ * The 74-second launch video (no burned-in captions; English WebVTT track alongside).
+ * Unlike the screenshots, its app shots recreate Trove's interface from its source, with demo files.
+ */
+export const launchVideo = {
+  src: '/media/trove-launch.mp4',
+  captions: '/media/trove-launch.en.vtt',
+  poster: '/media/trove-launch-poster.jpg',
+  width: 1280,
+  height: 720,
+  duration: 'PT1M14S',
+  uploadDate: '2026-10-13',
+};
+
 /** The real screenshots (PrintWindow captures of Trove 1.0.0 x64 on Windows 11, with demo files). */
 export const screenshots = {
   home: { src: '/art/trove-home.png', width: 1632, height: 1116 },

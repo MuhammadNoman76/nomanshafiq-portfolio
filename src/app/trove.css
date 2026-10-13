@@ -16,8 +16,12 @@
 .trove-shot-stage{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:22px;padding:clamp(18px,4.2%,40px);background:radial-gradient(circle at 82% 20%,rgba(63,127,224,.22),transparent 55%),radial-gradient(circle at 96% 100%,rgba(139,111,232,.2),transparent 50%),linear-gradient(135deg,#f1f4f9,#e3eaf6 60%,#d8e1f4);border:1px solid var(--line)}
 .trove-shot-stage img{display:block;width:100%;height:auto;min-width:0;filter:drop-shadow(0 14px 22px rgba(11,26,58,.2)) drop-shadow(0 2px 4px rgba(11,26,58,.12))}
 .trove-shot-pair .trove-shot-stage img{flex:1 1 300px;width:auto}
-.trove-shot figcaption,.trove-dl-stage figcaption{font:9px/1.7 ui-monospace,Consolas,monospace;color:var(--muted);margin-top:10px}
+.trove-shot figcaption,.trove-dl-stage figcaption,.trove-video figcaption{font:9px/1.7 ui-monospace,Consolas,monospace;color:var(--muted);margin-top:10px}
 .trove-shot figcaption strong{font-weight:600;color:var(--ink)}
+
+/* Launch video (the VibePlayer pattern). Its light poster sits on the stage colour while it loads. */
+.trove-video{margin:30px 0}
+.trove-video video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#e3eaf6;border:1px solid var(--line)}
 
 /* The compression levels table and the two boxed lists. */
 .trove-levels{max-width:420px}

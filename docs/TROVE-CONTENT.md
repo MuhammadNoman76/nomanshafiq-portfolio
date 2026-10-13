@@ -94,8 +94,8 @@ All paths in `D:\Trove`.
 
 ## Screenshots
 
-Every image of Trove is a **real screenshot** of Trove 1.0.0 x64 (`D:\Trove\publish\x64`) on Windows 11 at 150 % scaling,
-and every caption says so. How they were made:
+Every still image of Trove is a **real screenshot** of Trove 1.0.0 x64 (`D:\Trove\publish\x64`) on Windows 11 at 150 %
+scaling, and every caption says so (the launch video is the exception; see below). How they were made:
 
 - Demo files only, in `C:\Users\Public\Documents\Trove demo` (made with Node and FFmpeg: generated images, random-content
   Office files, plain text). Archives were made with Trove itself: `Trove.exe a …` (Aurora Project.zip, Website
@@ -113,13 +113,28 @@ and every caption says so. How they were made:
   their size at 150 %, on a light gradient "stage".
 
 `trove-cover.jpg` (1672×940) and `trove-social.jpg` (1200×630) place the same screenshots on a gradient background with
-`sharp`; the social card adds the logo (`docs/icon.png`) and the title. The cover caption says how it was made. A launch
-video with its own cover and social art is being made separately; it can replace these two files under the same names.
+`sharp`; the social card adds the logo (`docs/icon.png`) and the title. The cover caption says how it was made. The
+launch video came with its own cover and social art; the pages keep these real-screenshot versions.
 
 ## Launch video
 
-The article has a marked JSX comment between "Built on 7-Zip" and "Download" where the launch video section goes. It
-isn't rendered until the video exists; the tests check that no empty video section ships.
+`/blog/trove/#video` ("08 / The launch video", between "Built on 7-Zip" and "Download", in the contents) plays
+`public/media/trove-launch.mp4`: 1280×720, 74.2 s, H.264 High + AAC, fast-start (`moov` before `mdat`), 14.6 MB, made
+with Remotion, no burned-in captions. `trove-launch.en.vtt` (27 cues, last one ending at 1:11.8) is the default English
+captions track. `trove-launch-poster.jpg` is the supplied 1920×1080 poster downscaled to 1280×720 (58 KB). All three are
+well under Cloudflare Pages' 25 MiB limit and listed in `scripts/check-export.mjs`.
+
+The markup follows VibePlayer's: `<video controls preload="metadata" playsInline poster>` with a `<source>` and a
+`<track kind="captions" srcLang="en" label="English" default>`, and a `VideoObject` (`#launch-video`, with thumbnail,
+content URL, upload date, ISO duration `PT1M14S` and the caption file) that the `BlogPosting` points to.
+
+**The video's app shots recreate Trove's interface from its source, with demo files** (the poster shows, for example, a
+"Save in" path of `C:\Users\You\Pictures\Holiday photos`). They are not screenshots, so the figure's caption, the
+`VideoObject` description, the closing note of the article and `public/llms.txt` say so. A test checks that every other
+mention of a recreation on the page refers to the launch video, and that every still figure says "real screenshot".
+
+The narration says Trove runs on "every version of Windows from 7 to 11"; the pages are more precise (Windows 7 SP1,
+8.1, 10 and 11; Windows 8 needs 8.1 first) and keep the untested-hardware notes.
 
 ## Download page
 

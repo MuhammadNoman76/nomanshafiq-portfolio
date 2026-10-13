@@ -63,12 +63,14 @@ test('Trove uses the shared Windows download picker', () => {
 test('the Trove field note is published, linked and has its sections', () => {
   assert.match(article, /<TroveDownload\/>/);
   assert.match(article, /editions\.map/);
-  for (const id of ['idea', 'open', 'make', 'passwords', 'safety', 'explorer', 'engine', 'download', 'next']) {
-    assert.match(article, new RegExp(`id="${id}"`), id);
-    assert.match(article, new RegExp(`href="#${id}"`), `${id} is in the contents`);
-  }
-  assert.match(article, /\{\/\* LAUNCH VIDEO \(to be added\)/, 'the launch video has a marked place');
-  assert.doesNotMatch(articleBody, /id="video"|<video|href="#video"/, 'no empty video section is rendered');
+  const ids = ['idea', 'open', 'make', 'passwords', 'safety', 'explorer', 'engine', 'video', 'download', 'next'];
+  ids.forEach((id, index) => {
+    const number = String(index + 1).padStart(2, '0');
+    assert.match(articleBody, new RegExp(`<section id="${id}"[^>]*>(?:<span className="jev-section-number">${number} / [^<]+</span>)?`), id);
+    assert.match(articleBody, new RegExp(`href="#${id}">${number} / `), `${id} is number ${number} in the contents`);
+    if (index > 0) assert.match(articleBody, new RegExp(`<section id="${id}"[^>]*><span className="jev-section-number">${number} / `), `${id} section is numbered ${number}`);
+  });
+  assert.doesNotMatch(article, /LAUNCH VIDEO \(to be added\)/, 'the placeholder is gone');
   assert.match(article, /JSON\.stringify\(schema\)\.replace\(\/<\/g, '\\\\u003c'\)/, 'structured data is escaped');
   assert.match(article, /'@type': 'BlogPosting'/);
   assert.match(article, /'@type': 'SoftwareApplication', '@id': appId/);
@@ -102,10 +104,44 @@ test('the images are real screenshots with their true sizes', () => {
     assert.match(article + downloadPage, new RegExp(`screenshots\\.${key}\\b`), `${key} is used`);
   }
   const figures = articleBody.match(/<Shot shot=[\s\S]*?<\/Shot>|<figure[\s\S]*?<\/figure>/g) ?? [];
-  assert.ok(figures.length >= 9, 'cover, screenshots and the safety pair');
-  for (const figure of figures) assert.match(figure, /[Rr]eal screenshot/, 'every figure says it is a real screenshot');
+  const stills = figures.filter(figure => !figure.includes('<video'));
+  assert.ok(stills.length >= 9, 'cover, screenshots and the safety pair');
+  for (const figure of stills) assert.match(figure, /[Rr]eal screenshot/, 'every still figure says it is a real screenshot');
   assert.match(downloadPage, /A real screenshot of Trove/);
-  assert.doesNotMatch(article + downloadPage, /recreat/i, 'nothing here is a recreation');
+  assert.doesNotMatch(downloadPage, /recreat/i, 'the download page shows only the real screenshot');
+  // Only the launch video recreates the interface, and every mention of that says it is the video.
+  const videoSection = /<section id="video"[\s\S]*?<\/section>/.exec(articleBody)?.[0] ?? '';
+  for (const sentence of articleBody.replace(videoSection, '').split(/(?<=[.!?])\s+|<[^>]+>/)) {
+    if (/recreat/i.test(sentence)) assert.match(sentence, /launch video|The launch video/i, `only the launch video is a recreation: ${sentence}`);
+  }
+});
+
+test('the launch video is in the field note with captions, like VibePlayer’s', () => {
+  assert.match(data, /export const launchVideo = \{\s*src: '\/media\/trove-launch\.mp4',\s*captions: '\/media\/trove-launch\.en\.vtt',\s*poster: '\/media\/trove-launch-poster\.jpg',\s*width: 1280,\s*height: 720,\s*duration: 'PT1M14S',\s*uploadDate: '2026-10-13',\s*\};/);
+  for (const media of ['trove-launch.mp4', 'trove-launch.en.vtt', 'trove-launch-poster.jpg']) {
+    assert.ok(exists(`public/media/${media}`), `public/media/${media}`);
+    assert.ok(statSync(new URL(`../public/media/${media}`, import.meta.url)).size < 25 * 1024 * 1024, `${media} fits Cloudflare Pages' 25 MiB limit`);
+    assert.match(read('scripts/check-export.mjs'), new RegExp(`'media/${media.replace(/\./g, '\\.')}'`), `${media} is checked in the export`);
+  }
+  const vtt = read('public/media/trove-launch.en.vtt');
+  assert.match(vtt, /^WEBVTT/);
+  assert.ok((vtt.match(/-->/g) ?? []).length >= 20, 'captions cover the whole video');
+  const ends = [...vtt.matchAll(/--> (\d\d):(\d\d):(\d\d\.\d{3})/g)].map(([, h, m, s]) => Number(h) * 3600 + Number(m) * 60 + Number(s));
+  assert.ok(Math.max(...ends) > 60 && Math.max(...ends) <= 74.2, 'the cues run to the end of the 74-second video and no further');
+  assert.deepEqual(imageSize('public/media/trove-launch-poster.jpg'), {width: 1280, height: 720}, 'the poster is downscaled to the video size');
+  const mp4 = readFileSync(new URL('../public/media/trove-launch.mp4', import.meta.url));
+  assert.ok(mp4.indexOf('moov') > 0 && mp4.indexOf('moov') < mp4.indexOf('mdat'), 'the MP4 is fast-start');
+  const section = /<section id="video"[\s\S]*?<\/section>/.exec(articleBody)?.[0] ?? '';
+  assert.match(section, /08 \/ THE LAUNCH VIDEO/);
+  assert.match(section, /<video controls preload="metadata" playsInline poster=\{launchVideo\.poster\} width=\{launchVideo\.width\} height=\{launchVideo\.height\}><source src=\{launchVideo\.src\} type="video\/mp4"\/>/);
+  assert.match(section, /<track kind="captions" srcLang="en" label="English" src=\{launchVideo\.captions\} default\/>/);
+  assert.match(section, /The Trove launch video \(1:14\)\. Its app shots recreate Trove&apos;s interface from its source, with demo files\./, 'the caption says the app shots are recreations');
+  assert.ok(articleBody.indexOf('<section id="engine"') < articleBody.indexOf('<section id="video"') && articleBody.indexOf('<section id="video"') < articleBody.indexOf('<section id="download"'), 'between Built on 7-Zip and Download');
+  assert.match(article, /const videoId = `\$\{siteUrl\}\$\{troveArticle\.path\}#launch-video`/);
+  assert.match(article, /video: \{ '@id': videoId \}/, 'the article points at its video');
+  assert.match(article, /'@type': 'VideoObject', '@id': videoId[\s\S]*?thumbnailUrl: `\$\{siteUrl\}\$\{launchVideo\.poster\}`[\s\S]*?contentUrl: `\$\{siteUrl\}\$\{launchVideo\.src\}`[\s\S]*?uploadDate: launchVideo\.uploadDate, duration: launchVideo\.duration[\s\S]*?encodingFormat: 'text\/vtt'/);
+  assert.match(read('src/app/trove.css'), /\.trove-video video\{[^}]*aspect-ratio:16\/9/);
+  assert.match(read('public/llms.txt'), /launch video on the article \(English captions\) recreates Trove/);
 });
 
 test('the copy stays honest about RAR, licensing and testing', () => {
