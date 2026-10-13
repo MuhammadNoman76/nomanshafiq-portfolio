@@ -2,7 +2,7 @@
 
 Published article: `/blog/trove/`. Download page: `/trove/`. Date: 13 October 2026. App version 1.0.0.
 Source: the Trove repository at `D:\Trove`, commit `66fb783` ("Trove 1.0.0: Windows 11 style app, installers for every
-edition"). Its GitHub repository (https://github.com/MuhammadNoman76/Trove) **didn't exist yet** when these pages were
+edition"). Its GitHub repository (https://github.com/MuhammadNoman76/trove) **didn't exist yet** when these pages were
 written, so the download, checksum, notices and repository links only work once the owner creates it and pushes
 `release/`. The repository has no LICENSE file, so the pages never call Trove open source; they credit the 7-Zip engine
 (LGPL, unRAR restriction) and the Fluent UI System Icons (MIT) and link `THIRD-PARTY-NOTICES.txt`.
@@ -10,7 +10,7 @@ written, so the download, checksum, notices and repository links only work once 
 ## Downloads
 
 The four installers are in the Trove repository under `release/` and linked through
-`https://github.com/MuhammadNoman76/Trove/raw/refs/heads/main/release/<file>`. Cloudflare Pages limits single files to
+`https://github.com/MuhammadNoman76/trove/raw/refs/heads/main/release/<file>`. Cloudflare Pages limits single files to
 25 MiB, so the installers are not copied into this site. Sizes and SHA-256 values were checked against the local files
 and `release/SHA256SUMS.txt` (they match `dist/` too):
 

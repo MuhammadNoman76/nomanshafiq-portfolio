@@ -10,9 +10,9 @@ export const troveArticle = {
   version: '1.0.0',
   /** When this version was released (the article itself was published on `date`). */
   released: '2026-10-13',
-  repoUrl: 'https://github.com/MuhammadNoman76/Trove',
-  checksumsUrl: 'https://github.com/MuhammadNoman76/Trove/blob/main/release/SHA256SUMS.txt',
-  noticesUrl: 'https://github.com/MuhammadNoman76/Trove/blob/main/THIRD-PARTY-NOTICES.txt',
+  repoUrl: 'https://github.com/MuhammadNoman76/trove',
+  checksumsUrl: 'https://github.com/MuhammadNoman76/trove/blob/main/release/SHA256SUMS.txt',
+  noticesUrl: 'https://github.com/MuhammadNoman76/trove/blob/main/THIRD-PARTY-NOTICES.txt',
 };
 
 /** The standalone download page. Its claims mirror the field note. */
@@ -50,7 +50,7 @@ export const editions: Edition[] = [
 export const updateFeed = 'https://www.nomanshafiq.com/updates/trove.json';
 
 export const downloadUrl = (edition: Edition) =>
-  `https://github.com/MuhammadNoman76/Trove/raw/refs/heads/main/release/${edition.file}`;
+  `https://github.com/MuhammadNoman76/trove/raw/refs/heads/main/release/${edition.file}`;
 
 /** The 7-Zip release whose unmodified 7z.dll Trove ships (vendor/7-Zip/SOURCE.txt). */
 export const engine = { name: '7-Zip', version: '26.04' } as const;

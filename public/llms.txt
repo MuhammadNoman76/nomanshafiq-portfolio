@@ -7,7 +7,7 @@ AI engineer and full-stack developer based in Karachi, Pakistan.
 - Blog: https://www.nomanshafiq.com/blog/
 - Trove, a free Windows archive manager on the 7-Zip engine (article and downloads): https://www.nomanshafiq.com/blog/trove/
 - Trove download page: https://www.nomanshafiq.com/trove/
-- Trove source: https://github.com/MuhammadNoman76/Trove
+- Trove source: https://github.com/MuhammadNoman76/trove
 - VibePlayer, a free Windows media player that skips the scenes you mark (article, demo and downloads): https://www.nomanshafiq.com/blog/vibeplayer/
 - VibePlayer download page: https://www.nomanshafiq.com/vibeplayer/
 - VibePlayer source: https://github.com/MuhammadNoman76/VibePlayer

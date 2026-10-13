@@ -191,7 +191,7 @@ test('the Trove update feed offers the same installers as the download pages', (
   for (const edition of editions) {
     const entry = feed.editions[edition.id];
     assert.deepEqual(Object.keys(entry).sort(), ['sha256', 'size', 'url'], edition.id);
-    assert.equal(entry.url, `https://github.com/MuhammadNoman76/Trove/raw/refs/heads/main/release/${edition.file}`, `${edition.id} url`);
+    assert.equal(entry.url, `https://github.com/MuhammadNoman76/trove/raw/refs/heads/main/release/${edition.file}`, `${edition.id} url`);
     assert.equal(entry.sha256, edition.sha256, `${edition.id} sha256`);
     assert.equal(entry.size, edition.bytes, `${edition.id} size`);
   }
