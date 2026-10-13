@@ -46,9 +46,9 @@ test('Trove downloads cover every supported Windows edition', () => {
 });
 
 test('downloads point at the Trove repository over HTTPS', () => {
-  assert.match(data, /https:\/\/github\.com\/MuhammadNoman76\/Trove\/raw\/refs\/heads\/main\/release\/\$\{edition\.file\}/);
-  assert.match(data, /checksumsUrl: 'https:\/\/github\.com\/MuhammadNoman76\/Trove\/blob\/main\/release\/SHA256SUMS\.txt'/);
-  assert.match(data, /noticesUrl: 'https:\/\/github\.com\/MuhammadNoman76\/Trove\/blob\/main\/THIRD-PARTY-NOTICES\.txt'/);
+  assert.match(data, /https:\/\/github\.com\/MuhammadNoman76\/trove\/raw\/refs\/heads\/main\/release\/\$\{edition\.file\}/);
+  assert.match(data, /checksumsUrl: 'https:\/\/github\.com\/MuhammadNoman76\/trove\/blob\/main\/release\/SHA256SUMS\.txt'/);
+  assert.match(data, /noticesUrl: 'https:\/\/github\.com\/MuhammadNoman76\/trove\/blob\/main\/THIRD-PARTY-NOTICES\.txt'/);
   assert.doesNotMatch(data, /http:\/\//);
 });
 
