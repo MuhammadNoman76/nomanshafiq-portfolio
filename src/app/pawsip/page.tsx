@@ -3,7 +3,7 @@ import { Header, Footer } from '@/components/Chrome';
 import { Arrow } from '@/components/Icons';
 import { PawSipCat } from '@/components/PawSipCat';
 import { PawSipDownload } from '@/components/PawSipDownload';
-import { downloadPage, downloadUrl, editions, formatSize, pawsipArticle } from '@/data/pawsip';
+import { downloadPage, downloadUrl, editions, formatSize, pawsipArticle, updateFeed } from '@/data/pawsip';
 import { siteUrl } from '@/data/portfolio';
 
 export const metadata: Metadata = {
@@ -28,7 +28,8 @@ const features = [
   ['It keeps asking', 'Dismiss or ignore the cat without drinking and it comes back after 15 minutes, until you have some water. Busy? Remind me later in 5, 10, 15 or 30 minutes, or an hour.'],
   ['A daily goal', 'Set it in glasses or milliliters, log a drink in one click, undo a mistake, and watch the water ring fill. The goal resets at midnight.'],
   ['Your history', 'Every day is kept, with weekly and monthly statistics and a hydration calendar.'],
-  ['Light and private', 'Under 1% CPU with the desktop cat on screen, measured on my PC. No account, no network access, no tracking: everything stays on the PC.'],
+  ['Light and private', 'Under 1% CPU with the desktop cat on screen, measured on my PC. No account and no tracking: your water log and settings stay on the PC. The only thing it fetches is the daily update check, which you can switch off.'],
+  ['Keeps itself up to date', 'From version 1.0.2, PawSip checks this site for a new version about 30 seconds after it starts, then at most once a day. A new version is offered on the dashboard, or with a tray notification that never appears over a fullscreen app. Update now downloads the installer for your edition, checks its SHA-256 checksum, installs it and puts the cat back in the tray. Switch it off in Settings › Updates.'],
 ] as const;
 
 export default function PawSipDownloadPage() {
@@ -44,6 +45,7 @@ export default function PawSipDownloadPage() {
     operatingSystem: 'Windows 7 SP1, 8.1, 10, 11',
     softwareVersion: pawsipArticle.version,
     datePublished: pawsipArticle.date,
+    dateModified: pawsipArticle.released,
     softwareRequirements: 'Windows 10 and 11: none (self-contained). Windows 7 SP1 and 8.1: Microsoft .NET Framework 4.8.',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     downloadUrl: editions.map(downloadUrl),
@@ -62,7 +64,7 @@ export default function PawSipDownloadPage() {
         <figure className="pawsip-dl-stage"><div className="pawsip-cat-frame"><PawSipCat/></div><figcaption>CLICK THE CAT TO PET IT</figcaption></figure>
         <div className="pawsip-dl-get">
           <PawSipDownload/>
-          <p className="pawsip-dl-release"><span>VERSION {pawsipArticle.version}</span><span>RELEASED <time dateTime={pawsipArticle.date}>12 OCTOBER 2026</time></span><span>FREE</span></p>
+          <p className="pawsip-dl-release"><span>VERSION {pawsipArticle.version}</span><span>RELEASED <time dateTime={pawsipArticle.released}>13 OCTOBER 2026</time></span><span>FREE</span></p>
           <a className="pawsip-dl-jump" href="#all-downloads">Other Windows versions and checksums <span aria-hidden="true">↓</span></a>
         </div>
       </div>
@@ -82,7 +84,7 @@ export default function PawSipDownloadPage() {
       <div className="section-eyebrow"><span>02 / SYSTEM REQUIREMENTS</span><span>WINDOWS 7 SP1 TO 11</span></div>
       <div className="pawsip-dl-cols"><h2 id="requirements-heading">What it<br/><em>runs on.</em></h2><div className="pawsip-dl-body jev-prose">
         <dl className="pawsip-dl-reqs">{requirements.map(([label, detail]) => <div key={label}><dt>{label}</dt><dd>{detail}</dd></div>)}</dl>
-        <p className="jev-small-note">I tested the 64-bit, 32-bit and Windows 7/8.1 editions on my Windows 11 PC, including installing and uninstalling. The ARM64 edition is built natively for ARM, but I haven&apos;t run it on ARM hardware yet, and I haven&apos;t tested the Windows 7/8.1 edition on an actual Windows 7 or 8.1 machine.</p>
+        <p className="jev-small-note">I tested the 64-bit, 32-bit and Windows 7/8.1 editions on my Windows 11 PC, including installing and uninstalling. The ARM64 edition is built natively for ARM, but I haven&apos;t run it on ARM hardware yet, and I haven&apos;t tested the Windows 7/8.1 edition on an actual Windows 7 or 8.1 machine. I tested the 1.0.2 update path with the 64-bit edition against a local test feed: download, checksum check, silent install over a test copy, and the relaunch.</p>
       </div></div>
     </section>
 
@@ -101,6 +103,7 @@ export default function PawSipDownloadPage() {
           <li><div><strong>Open it.</strong> The installers aren&apos;t code-signed yet, so Windows SmartScreen may show <em>“Windows protected your PC”</em>. Choose <strong>More info</strong>, then <strong>Run anyway</strong>. Compare the SHA-256 checksum first if you&apos;d like to be sure the file is the one I published.</div></li>
           <li><div><strong>Follow setup.</strong> It installs for your account only, with no administrator prompt. Keep <strong>Start PawSip with Windows</strong> ticked so the cat is there every day.</div></li>
         </ol>
+        <p>Installing a newer version, or another edition, replaces the one you have and keeps your history and settings. From version 1.0.2 you won&apos;t need to do that by hand: PawSip keeps itself up to date. Shortly after it starts, and at most once a day, it looks for a new version, and <strong>Update now</strong> installs it over the one you have, for your account only with no administrator prompt, then puts the cat back in the tray. The check only downloads a small file from this site, <code>{updateFeed}</code>, with an ordinary web request; nothing about you or your water log is sent. You can turn it off, or check yourself, in <strong>Settings › Updates</strong>. Versions 1.0.0 and 1.0.1 don&apos;t have the updater, so install 1.0.2 over them once.</p>
         <p>To remove PawSip, uninstall it from <strong>Settings › Apps</strong>. Your history stays in <code>%APPDATA%\PawSip</code> in case you come back.</p>
       </div></div>
     </section>

@@ -1,0 +1,34 @@
+{
+  "app": "PawSip",
+  "version": "1.0.2",
+  "released": "2026-10-13",
+  "notes": [
+    "PawSip now keeps itself up to date: it checks for a new version shortly after it starts and at most once a day.",
+    "Update now downloads the installer for your edition, checks its SHA-256 checksum, installs it and puts PawSip back in the tray.",
+    "New in Settings: Updates, with Check for updates and Check automatically. The tray menu has Check for updates too.",
+    "Updating now also removes files the previous version no longer needs, and only closes the copy of PawSip being updated."
+  ],
+  "page": "https://www.nomanshafiq.com/pawsip/",
+  "editions": {
+    "x64": {
+      "url": "https://github.com/MuhammadNoman76/PawSip/raw/refs/heads/main/release/PawSip-Setup-1.0.2-x64.exe",
+      "sha256": "e1c19dbc46b2d7d1daf834ef02809fddba9db734765c8734e881a6045bf2a7ab",
+      "size": 50865639
+    },
+    "arm64": {
+      "url": "https://github.com/MuhammadNoman76/PawSip/raw/refs/heads/main/release/PawSip-Setup-1.0.2-arm64.exe",
+      "sha256": "be9f71f81089f409730cc2181a777b4992fa3704bb6c1b7acd6d7d60c597a09f",
+      "size": 44706867
+    },
+    "x86": {
+      "url": "https://github.com/MuhammadNoman76/PawSip/raw/refs/heads/main/release/PawSip-Setup-1.0.2-x86.exe",
+      "sha256": "cad7716239c96e3c2216a6f80aab747d360a48bca17d15fdddc7f3188e9e397c",
+      "size": 46277685
+    },
+    "win7-8": {
+      "url": "https://github.com/MuhammadNoman76/PawSip/raw/refs/heads/main/release/PawSip-Setup-1.0.2-win7-8.exe",
+      "sha256": "46b406b2142442ba47a0c247b401a720d1870b14c97800b86fc0dd3f56212c52",
+      "size": 2605368
+    }
+  }
+}

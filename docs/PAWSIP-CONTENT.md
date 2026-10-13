@@ -63,3 +63,26 @@ and the note on what was not tested repeat claims already in the article and in 
 JSON-LD is a `SoftwareApplication` with `@id` `<site>/pawsip/#app`, and the article's `SoftwareApplication` node uses the
 same `@id`, so both pages describe one app. The page is linked from the article (download section and its links list),
 the PawSip feature on `/blog/`, `sitemap.ts`, `public/llms.txt`, and checked by `scripts/check-export.mjs`.
+
+## Version 1.0.2 and the update feed
+
+Released 13 October 2026 (PawSip commit `e0c2f1f`). The pages and `public/updates/pawsip.json` now offer these installers:
+
+| Edition | File | Bytes | SHA-256 |
+|---|---|---|---|
+| Windows 10/11 x64 | PawSip-Setup-1.0.2-x64.exe | 50,865,639 | e1c19dbc46b2d7d1daf834ef02809fddba9db734765c8734e881a6045bf2a7ab |
+| Windows 10/11 ARM64 | PawSip-Setup-1.0.2-arm64.exe | 44,706,867 | be9f71f81089f409730cc2181a777b4992fa3704bb6c1b7acd6d7d60c597a09f |
+| Windows 10 32-bit | PawSip-Setup-1.0.2-x86.exe | 46,277,685 | cad7716239c96e3c2216a6f80aab747d360a48bca17d15fdddc7f3188e9e397c |
+| Windows 7 SP1 / 8.1 | PawSip-Setup-1.0.2-win7-8.exe | 2,605,368 | 46b406b2142442ba47a0c247b401a720d1870b14c97800b86fc0dd3f56212c52 |
+
+The update claims ("about 30 seconds after it starts, then at most once a day", dashboard card or tray notification that
+waits during fullscreen, size and SHA-256 check, silent per-user install, back in the tray, Settings › Updates) match
+`src/PawSip/Core/Updater.cs`, `src/PawSip/App.Updates.cs` and `installer/PawSip.iss` at that commit. `PawSip/<version>` is
+the request's user agent; nothing else is sent. `tests/pawsip.test.mjs` keeps the feed's version, links, sizes and
+SHA-256 equal to `src/data/pawsip.ts`, and `scripts/check-export.mjs` checks the exported feed.
+
+Tested on the author's PC: the updater code (version comparison, feed parsing, size and hash mismatches refused and
+deleted, HTTPS-only links) under .NET 10 and .NET Framework 4.8, and an end-to-end update of a side-by-side test copy of
+the x64 edition from a local feed (download, verification, silent install, removal of an obsolete file, relaunch). Not
+tested: an update through the live feed (the first one will be 1.0.2 to a later version), and the in-app card on a
+running copy, because the author's own PawSip was running.
