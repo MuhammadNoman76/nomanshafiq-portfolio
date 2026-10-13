@@ -13,7 +13,7 @@ const downloadPage = read('src/app/vibeplayer/page.tsx');
 const demo = read('src/components/VibeSkipDemo.tsx');
 
 test('VibePlayer downloads cover every supported Windows edition', () => {
-  assert.equal(version, '1.0.1');
+  assert.equal(version, '1.0.2');
   assert.deepEqual(editions.map(e => e.id), ['x64', 'arm64', 'x86', 'win7-8']);
   for (const edition of editions) {
     assert.equal(edition.file, `VibePlayer-Setup-${version}-${edition.id}.exe`, edition.id);
@@ -21,7 +21,7 @@ test('VibePlayer downloads cover every supported Windows edition', () => {
     assert.ok(edition.bytes > 1_000_000 && edition.bytes < 100_000_000, `${edition.id} size`);
   }
   assert.equal(new Set(editions.map(e => e.sha256)).size, editions.length, 'checksums are distinct');
-  assert.deepEqual(editions.map(e => e.bytes), [67079033, 58233813, 62178964, 45422166], 'sizes match the published installers');
+  assert.deepEqual(editions.map(e => e.bytes), [67086880, 58238617, 62186392, 45430512], 'sizes match the published installers');
   assert.match(data, /title: "VibePlayer: skip the scenes you don't want to see\."/);
 });
 
@@ -64,7 +64,7 @@ test('the VibePlayer field note is published, linked and has its media', () => {
   assert.match(blog, /vibeplayerArticle\.path/);
   assert.ok(blog.indexOf('vibeplayer-cover.jpg') < blog.indexOf('pawsip-cover.png'), 'VibePlayer is the first feature');
   assert.match(blog, /hasPart: \[\{ '@type': 'BlogPosting', headline: vibeplayerArticle\.title/);
-  assert.match(read('src/app/sitemap.ts'), /\$\{siteUrl\}\/blog\/vibeplayer\/`,lastModified:'2026-10-12'/);
+  assert.match(read('src/app/sitemap.ts'), /\$\{siteUrl\}\/blog\/vibeplayer\/`,lastModified:'2026-10-13'/);
   assert.match(read('public/llms.txt'), /\/blog\/vibeplayer\//);
   assert.match(read('src/app/layout.tsx'), /import '\.\/vibeplayer\.css';/);
 });
@@ -117,9 +117,33 @@ test('the VibePlayer download page offers every edition and is linked across the
   assert.match(downloadPage, /haven&apos;t run it on ARM hardware/, 'says what was not tested');
   assert.match(article, /href=\{downloadPage\.path\}/);
   assert.match(read('src/app/blog/page.tsx'), /href=\{vibeplayerDownloadPage\.path\}/);
-  assert.match(read('src/app/sitemap.ts'), /\$\{siteUrl\}\/vibeplayer\/`,lastModified:'2026-10-12'/);
+  assert.match(read('src/app/sitemap.ts'), /\$\{siteUrl\}\/vibeplayer\/`,lastModified:'2026-10-13'/);
   assert.match(read('public/llms.txt'), /^- VibePlayer download page: https:\/\/www\.nomanshafiq\.com\/vibeplayer\/\r?$/m);
   assert.match(read('scripts/check-export.mjs'), /'blog\/vibeplayer','vibeplayer'/);
+});
+
+test('the update feed offers the same installers as the download pages', () => {
+  const feed = JSON.parse(read('public/updates/vibeplayer.json'));
+  const released = /released: '(\d{4}-\d{2}-\d{2})'/.exec(data)?.[1];
+  assert.equal(feed.app, 'VibePlayer');
+  assert.equal(feed.version, version, 'the app is offered the version the pages offer');
+  assert.equal(feed.released, released);
+  assert.equal(feed.page, 'https://www.nomanshafiq.com/vibeplayer/');
+  assert.ok(Array.isArray(feed.notes) && feed.notes.length > 0 && feed.notes.every(note => typeof note === 'string' && note.trim()), 'release notes');
+  assert.deepEqual(Object.keys(feed.editions), editions.map(e => e.id), 'one entry per edition, keyed like the app (x64, arm64, x86, win7-8)');
+  for (const edition of editions) {
+    const entry = feed.editions[edition.id];
+    assert.deepEqual(Object.keys(entry).sort(), ['sha256', 'size', 'url'], edition.id);
+    assert.equal(entry.url, `https://github.com/MuhammadNoman76/VibePlayer/raw/refs/heads/main/release/${edition.file}`, `${edition.id} url`);
+    assert.equal(entry.sha256, edition.sha256, `${edition.id} sha256`);
+    assert.equal(entry.size, edition.bytes, `${edition.id} size`);
+  }
+  assert.match(data, /export const updateFeed = 'https:\/\/www\.nomanshafiq\.com\/updates\/vibeplayer\.json';/);
+  assert.match(read('public/_headers'), /^\/updates\/\*\n {2}Cache-Control: no-cache\n {2}Content-Type: application\/json$/m, 'the feed is never served stale');
+  assert.match(read('scripts/check-export.mjs'), /'updates\/vibeplayer\.json'/);
+  assert.match(article, /<code>\{updateFeed\}<\/code>/, 'the article says what the update check reads');
+  assert.match(downloadPage, /<code>\{updateFeed\}<\/code>/, 'the download page says what the update check reads');
+  assert.match(downloadPage, /Settings › Updates/);
 });
 
 test('the file-type count matches the app source list', () => {

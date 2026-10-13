@@ -1,0 +1,34 @@
+{
+  "app": "VibePlayer",
+  "version": "1.0.2",
+  "released": "2026-10-13",
+  "notes": [
+    "VibePlayer now keeps itself up to date: it checks for a new version shortly after it starts and at most once a day.",
+    "Update now downloads the installer for your edition, checks its SHA-256 checksum, installs it and restarts the player.",
+    "New in the settings menu: Updates, with Check for updates and Check automatically.",
+    "Updating now also removes files the previous version no longer needs."
+  ],
+  "page": "https://www.nomanshafiq.com/vibeplayer/",
+  "editions": {
+    "x64": {
+      "url": "https://github.com/MuhammadNoman76/VibePlayer/raw/refs/heads/main/release/VibePlayer-Setup-1.0.2-x64.exe",
+      "sha256": "5b11d72ea2957148c85a424f680ba6822da3fd2287512ce9a15b185532a5b1a4",
+      "size": 67086880
+    },
+    "arm64": {
+      "url": "https://github.com/MuhammadNoman76/VibePlayer/raw/refs/heads/main/release/VibePlayer-Setup-1.0.2-arm64.exe",
+      "sha256": "c28b2d8bc4846030a94470633041467df1a2207473a9970d6b1396829305d414",
+      "size": 58238617
+    },
+    "x86": {
+      "url": "https://github.com/MuhammadNoman76/VibePlayer/raw/refs/heads/main/release/VibePlayer-Setup-1.0.2-x86.exe",
+      "sha256": "ad5963c240599f407c62a63cfb09a7bec35d1211b9552c611ca3326bffb2744a",
+      "size": 62186392
+    },
+    "win7-8": {
+      "url": "https://github.com/MuhammadNoman76/VibePlayer/raw/refs/heads/main/release/VibePlayer-Setup-1.0.2-win7-8.exe",
+      "sha256": "9dbab58062fbb6f0a75670719696eb1c3f9c2b960a60c4b75df0b97efd73648a",
+      "size": 45430512
+    }
+  }
+}

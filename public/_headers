@@ -15,3 +15,8 @@
 
 /media/*
   Cache-Control: public, max-age=0, must-revalidate
+
+# App update feeds (VibePlayer reads /updates/vibeplayer.json): always revalidated, so a release reaches everyone at once.
+/updates/*
+  Cache-Control: no-cache
+  Content-Type: application/json

@@ -7,7 +7,9 @@ export const vibeplayerArticle = {
   description: 'I built VibePlayer, a free Windows media player with a YouTube-style interface on the VLC engine. Mark the parts of a video you would rather not see and it jumps over them every time, without editing the file. Downloads for Windows 7, 8.1, 10 and 11.',
   path: '/blog/vibeplayer/',
   date: '2026-10-12',
-  version: '1.0.1',
+  version: '1.0.2',
+  /** When this version was released (the article itself was published on `date`). */
+  released: '2026-10-13',
   repoUrl: 'https://github.com/MuhammadNoman76/VibePlayer',
   checksumsUrl: 'https://github.com/MuhammadNoman76/VibePlayer/blob/main/release/SHA256SUMS.txt',
 };
@@ -15,7 +17,7 @@ export const vibeplayerArticle = {
 /** The standalone download page. Its claims mirror the field note. */
 export const downloadPage = {
   title: 'Download VibePlayer for Windows — free media player that skips scenes',
-  description: 'Download VibePlayer 1.0.1, a free media player for Windows built on the VLC engine. Mark the parts of a video you want to skip and it jumps over them every time. Installers for Windows 7 SP1, 8.1, 10 and 11 (x64, ARM64 and 32-bit).',
+  description: 'Download VibePlayer 1.0.2, a free media player for Windows built on the VLC engine. Mark the parts of a video you want to skip and it jumps over them every time. Installers for Windows 7 SP1, 8.1, 10 and 11 (x64, ARM64 and 32-bit).',
   path: '/vibeplayer/',
 };
 
@@ -24,24 +26,27 @@ export const editions: Edition[] = [
   {
     id: 'x64', name: 'Windows 10 & 11 · 64-bit', forWho: 'Intel or AMD processor. Most PCs.',
     windows: 'Windows 10, Windows 11', cpu: '64-bit (x64)', runtime: 'Self-contained. Nothing else to install.',
-    file: 'VibePlayer-Setup-1.0.1-x64.exe', bytes: 67079033, sha256: '48f4a864927f84ab533c3b1ddc6dfb39cf37d44c5114099d2b62ae203ab48961',
+    file: 'VibePlayer-Setup-1.0.2-x64.exe', bytes: 67086880, sha256: '5b11d72ea2957148c85a424f680ba6822da3fd2287512ce9a15b185532a5b1a4',
   },
   {
     id: 'arm64', name: 'Windows 11 & 10 on ARM', forWho: 'Snapdragon laptops, Surface Pro X and other ARM PCs.',
     windows: 'Windows 10, Windows 11', cpu: 'ARM64', runtime: 'Self-contained. Nothing else to install.',
-    file: 'VibePlayer-Setup-1.0.1-arm64.exe', bytes: 58233813, sha256: 'cf024120a0a28c3d4349882d69c80528c140c000ce8507df7a731a94ac315f6c',
+    file: 'VibePlayer-Setup-1.0.2-arm64.exe', bytes: 58238617, sha256: 'c28b2d8bc4846030a94470633041467df1a2207473a9970d6b1396829305d414',
   },
   {
     id: 'x86', name: 'Windows 10 · 32-bit', forWho: 'Older PCs running a 32-bit installation of Windows 10.',
     windows: 'Windows 10', cpu: '32-bit (x86)', runtime: 'Self-contained. Nothing else to install.',
-    file: 'VibePlayer-Setup-1.0.1-x86.exe', bytes: 62178964, sha256: 'be65130e24a448c154caea61f97bca1eca3a173e5bf1773810eadb123f63b705',
+    file: 'VibePlayer-Setup-1.0.2-x86.exe', bytes: 62186392, sha256: 'ad5963c240599f407c62a63cfb09a7bec35d1211b9552c611ca3326bffb2744a',
   },
   {
     id: 'win7-8', name: 'Windows 7 SP1 & 8.1', forWho: 'Older PCs, 32- or 64-bit.',
     windows: 'Windows 7 SP1, Windows 8.1', cpu: '32- or 64-bit', runtime: 'Uses Microsoft .NET Framework 4.8 (setup tells you if it is missing). Installs the 32- or 64-bit VLC engine that matches Windows.',
-    file: 'VibePlayer-Setup-1.0.1-win7-8.exe', bytes: 45422166, sha256: 'a06c47831dd20c52c8047eacf351eb1e5e4ebed4f0e0cd6278121d62a5f7a26a',
+    file: 'VibePlayer-Setup-1.0.2-win7-8.exe', bytes: 45430512, sha256: '9dbab58062fbb6f0a75670719696eb1c3f9c2b960a60c4b75df0b97efd73648a',
   },
 ];
+
+/** The feed VibePlayer (1.0.2 and later) checks for updates: public/updates/vibeplayer.json, kept in step with `editions`. */
+export const updateFeed = 'https://www.nomanshafiq.com/updates/vibeplayer.json';
 
 export const downloadUrl = (edition: Edition) =>
   `https://github.com/MuhammadNoman76/VibePlayer/raw/refs/heads/main/release/${edition.file}`;

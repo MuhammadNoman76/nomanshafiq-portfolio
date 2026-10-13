@@ -3,7 +3,7 @@ import { Header, Footer } from '@/components/Chrome';
 import { FootageCredit } from '@/components/FootageCredit';
 import { Arrow } from '@/components/Icons';
 import { VibePlayerDownload } from '@/components/VibePlayerDownload';
-import { downloadPage, downloadUrl, editions, fileTypes, formatSize, vibeplayerArticle } from '@/data/vibeplayer';
+import { downloadPage, downloadUrl, editions, fileTypes, formatSize, updateFeed, vibeplayerArticle } from '@/data/vibeplayer';
 import { siteUrl } from '@/data/portfolio';
 
 export const metadata: Metadata = {
@@ -26,9 +26,10 @@ const features = [
   ['Skip mode', 'Mark the parts you don’t want to see, by typing the times or pressing [ and ] while you watch. They show in amber on the progress bar and are skipped every time that file plays. The file itself is never changed.'],
   ['Hold for 2x', 'Press and hold the right side of the video, or hold the right mouse button, to play at double speed. Let go to return to your speed.'],
   ['A familiar player', 'A YouTube-style interface: red progress bar with hover time, pill buttons, autoplay, captions, miniplayer and full screen, and the keyboard shortcuts you already know.'],
-  ['One tidy menu', 'Loop, playback speed, subtitles, audio track, aspect ratio, brightness, skip scenes and snapshots, all in the settings menu.'],
+  ['One tidy menu', 'Loop, playback speed, subtitles, audio track, aspect ratio, brightness, skip scenes, snapshots and updates, all in the settings menu.'],
   ['Plays almost anything', `${fileTypes.video} video and ${fileTypes.audio} audio file types through LibVLC, the engine inside VLC. Drop a subtitle file on a video to add it, or open a network stream.`],
   ['Picks up where you left off', 'Long videos resume where you stopped. Recent files wait on the start screen, and the rest of the folder plays next.'],
+  ['Keeps itself up to date', 'From version 1.0.2, VibePlayer checks this site for a new version about 10 seconds after it starts, then at most once a day. If there is one, a small card offers it, never over a full-screen video that is playing. Update now downloads the installer for your edition, checks its SHA-256 checksum, installs it and starts the player again. Switch it off in Settings › Updates.'],
 ] as const;
 
 export default function VibePlayerDownloadPage() {
@@ -44,6 +45,7 @@ export default function VibePlayerDownloadPage() {
     operatingSystem: 'Windows 7 SP1, 8.1, 10, 11',
     softwareVersion: vibeplayerArticle.version,
     datePublished: vibeplayerArticle.date,
+    dateModified: vibeplayerArticle.released,
     softwareRequirements: 'Windows 10 and 11: none (self-contained). Windows 7 SP1 and 8.1: Microsoft .NET Framework 4.8.',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     downloadUrl: editions.map(downloadUrl),
@@ -61,7 +63,7 @@ export default function VibePlayerDownloadPage() {
         <figure className="vibe-dl-stage"><img src="/art/vibeplayer-dialog.jpg" width="1600" height="958" alt="VibePlayer’s “Skip a part of this video” dialog over Big Buck Bunny, set to skip from 2:31 to 3:48" fetchPriority="high"/><figcaption>The skip dialog, recreated from VibePlayer&apos;s interface code. <FootageCredit/></figcaption></figure>
         <div className="pawsip-dl-get">
           <VibePlayerDownload/>
-          <p className="pawsip-dl-release"><span>VERSION {vibeplayerArticle.version}</span><span>RELEASED <time dateTime={vibeplayerArticle.date}>12 OCTOBER 2026</time></span><span>FREE</span></p>
+          <p className="pawsip-dl-release"><span>VERSION {vibeplayerArticle.version}</span><span>RELEASED <time dateTime={vibeplayerArticle.released}>13 OCTOBER 2026</time></span><span>FREE</span></p>
           <a className="pawsip-dl-jump" href="#all-downloads">Other Windows versions and checksums <span aria-hidden="true">↓</span></a>
         </div>
       </div>
@@ -102,7 +104,9 @@ export default function VibePlayerDownloadPage() {
           <li><div><strong>Choose who it&apos;s for.</strong> All users is the default and needs administrator permission; only for you needs no administrator rights.</div></li>
           <li><div><strong>Pick the extras.</strong> A desktop icon, VibePlayer in <strong>Open with</strong> for video and audio files, and <strong>Play with VibePlayer</strong> on the folder right-click menu.</div></li>
         </ol>
-        <p>To make VibePlayer your default player, right-click a video, choose <strong>Open with › Choose another app › VibePlayer</strong> and tick <strong>Always</strong>. Installing a newer version, or another edition, replaces the one you have and keeps your settings. To remove VibePlayer, uninstall it from <strong>Settings › Apps</strong>. Your settings, resume positions and skips stay in <code>%APPDATA%\VibePlayer</code> in case you come back.</p>
+        <p>To make VibePlayer your default player, right-click a video, choose <strong>Open with › Choose another app › VibePlayer</strong> and tick <strong>Always</strong>. Installing a newer version, or another edition, replaces the one you have and keeps your settings.</p>
+        <p>From version 1.0.2 you won&apos;t need to do that by hand. VibePlayer looks for a new version shortly after it starts and at most once a day, and <strong>Update now</strong> installs it over the one you have, then starts the player again. If it&apos;s installed for all users, Windows asks for permission first. The check only downloads a small file from this site, <code>{updateFeed}</code>, with an ordinary web request; nothing about you or your videos is sent. You can turn it off, or check yourself, in <strong>Settings › Updates</strong>. Versions 1.0.0 and 1.0.1 don&apos;t have the updater, so install 1.0.2 over them once.</p>
+        <p>To remove VibePlayer, uninstall it from <strong>Settings › Apps</strong>. Your settings, resume positions and skips stay in <code>%APPDATA%\VibePlayer</code> in case you come back.</p>
       </div></div>
     </section>
 
