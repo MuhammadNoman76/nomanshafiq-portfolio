@@ -70,7 +70,7 @@ test('Stagecraft uses the shared Windows download picker', () => {
 test('the Stagecraft field note is published, linked and has its sections', () => {
   assert.match(article, /<StagecraftDownload\/>/);
   assert.match(article, /editions\.map/);
-  const ids = ['idea', 'design', 'editing', 'motion', 'animations', 'links', 'media', 'presenter', 'files', 'engine', 'download', 'next'];
+  const ids = ['idea', 'design', 'editing', 'motion', 'animations', 'links', 'media', 'presenter', 'files', 'engine', 'video', 'download', 'next'];
   ids.forEach((id, index) => {
     const number = String(index + 1).padStart(2, '0');
     assert.match(articleBody, new RegExp(`href="#${id}">${number} / `), `${id} is number ${number} in the contents`);
@@ -78,9 +78,7 @@ test('the Stagecraft field note is published, linked and has its sections', () =
     else assert.match(articleBody, /<section id="idea"/);
   });
   assert.equal((articleBody.match(/<section id="/g) ?? []).length, ids.length, 'no section without a contents entry');
-  assert.match(article, /\{\/\* LAUNCH VIDEO \(to be added\)/, 'the launch video has a marked place');
-  assert.ok(article.indexOf('<section id="engine"') < article.indexOf('LAUNCH VIDEO (to be added)') && article.indexOf('LAUNCH VIDEO (to be added)') < article.indexOf('<section id="download"'), 'the placeholder sits between Under the hood and Download');
-  assert.doesNotMatch(articleBody, /id="video"|<video|href="#video"/, 'no empty video section is rendered');
+  assert.doesNotMatch(article, /LAUNCH VIDEO \(to be added\)/, 'the placeholder is gone now that the video is in');
   assert.match(article, /JSON\.stringify\(schema\)\.replace\(\/<\/g, '\\\\u003c'\)/, 'structured data is escaped');
   assert.match(article, /'@type': 'BlogPosting'/);
   assert.match(article, /'@type': 'SoftwareApplication', '@id': appId/);
@@ -147,12 +145,52 @@ test('the images are real screenshots with their true sizes', () => {
   }
   assert.match(article, /src=\{`\/art\/stagecraft-theme-\$\{theme\.id\}\.jpg`\} width=\{640\} height=\{360\}/, 'the gallery uses the theme tiles');
   const figures = articleBody.match(/<Shot shot=[\s\S]*?<\/Shot>|<figure[\s\S]*?<\/figure>/g) ?? [];
-  assert.ok(figures.length >= 24, 'cover, gallery and screenshots');
-  for (const figure of figures) assert.match(figure, /[Rr]eal screenshot/, 'every figure says it is (made from) a real screenshot');
-  for (const figure of figures.filter(f => f.startsWith('<Shot'))) assert.match(figure, /Stagecraft \{s\.\w+\.version\}/, 'every screenshot caption names its version');
+  const stills = figures.filter(figure => !figure.includes('<video'));
+  assert.equal(figures.length - stills.length, 1, 'one video figure');
+  assert.ok(stills.length >= 24, 'cover, gallery and screenshots');
+  for (const figure of stills) assert.match(figure, /[Rr]eal screenshot/, 'every still figure says it is (made from) a real screenshot');
+  for (const figure of stills.filter(f => f.startsWith('<Shot'))) assert.match(figure, /Stagecraft \{s\.\w+\.version\}/, 'every screenshot caption names its version');
   assert.match(downloadPage, /A real screenshot of Stagecraft \{screenshots\.editor\.version\}/);
-  assert.doesNotMatch(article + downloadPage, /recreat/i, 'no recreated interface on these pages');
+  assert.doesNotMatch(downloadPage, /recreat/i, 'the download page shows only real screenshots');
+  // Only the launch video recreates the interface, and every mention of that says it is the video.
+  const videoSection = /<section id="video"[\s\S]*?<\/section>/.exec(articleBody)?.[0] ?? '';
+  for (const sentence of articleBody.replace(videoSection, '').split(/(?<=[.!?])\s+|<[^>]+>/)) {
+    if (/recreat/i.test(sentence)) assert.match(sentence, /launch video/i, `only the launch video is a recreation: ${sentence}`);
+  }
   assert.match(articleBody, /test window|windowed test mode/, 'the presenter view and show shots say they are the windowed test mode');
+});
+
+test('the launch video is in the field note with captions, like Trove’s', () => {
+  assert.match(data, /export const launchVideo = \{\s*src: '\/media\/stagecraft-launch\.mp4',\s*captions: '\/media\/stagecraft-launch\.en\.vtt',\s*poster: '\/media\/stagecraft-launch-poster\.jpg',\s*width: 1280,\s*height: 720,\s*duration: 'PT1M41S',\s*uploadDate: '2026-10-14',\s*\};/);
+  for (const media of ['stagecraft-launch.mp4', 'stagecraft-launch.en.vtt', 'stagecraft-launch-poster.jpg']) {
+    assert.ok(exists('public/media/' + media), 'public/media/' + media);
+    assert.ok(statSync(new URL('../public/media/' + media, import.meta.url)).size < 25 * 1024 * 1024, media + ' fits the 25 MiB limit of Cloudflare Pages');
+    assert.match(exportCheck, new RegExp("'media/" + media.replace(/\./g, '\\.') + "'"), media + ' is checked in the export');
+  }
+  assert.equal(statSync(new URL('../public/media/stagecraft-launch.mp4', import.meta.url)).size, 14_750_254, 'the MP4 is the supplied file');
+  const vtt = read('public/media/stagecraft-launch.en.vtt');
+  assert.match(vtt, /^WEBVTT/);
+  assert.ok((vtt.match(/-->/g) ?? []).length >= 30, 'captions cover the whole video');
+  const ends = [...vtt.matchAll(/--> (\d\d):(\d\d):(\d\d\.\d{3})/g)].map(([, h, m, s]) => Number(h) * 3600 + Number(m) * 60 + Number(s));
+  assert.ok(Math.max(...ends) > 90 && Math.max(...ends) <= 101, 'the cues run to the end of the 101-second video and no further');
+  assert.deepEqual(imageSize('public/media/stagecraft-launch-poster.jpg'), {width: 1280, height: 720}, 'the poster matches the video size');
+  const mp4 = readFileSync(new URL('../public/media/stagecraft-launch.mp4', import.meta.url));
+  assert.equal(mp4.toString('latin1', 4, 8), 'ftyp', 'an MP4 file');
+  assert.ok(mp4.indexOf('moov') > 0 && mp4.indexOf('moov') < mp4.indexOf('mdat'), 'the MP4 is fast-start');
+  const section = /<section id="video"[\s\S]*?<\/section>/.exec(articleBody)?.[0] ?? '';
+  assert.match(section, /11 \/ THE LAUNCH VIDEO/);
+  assert.match(section, /In 101 seconds\./, 'the title matches the real length');
+  assert.match(section, /<video controls preload="metadata" playsInline poster=\{launchVideo\.poster\} width=\{launchVideo\.width\} height=\{launchVideo\.height\}><source src=\{launchVideo\.src\} type="video\/mp4"\/>/);
+  assert.match(section, /<track kind="captions" srcLang="en" label="English" src=\{launchVideo\.captions\} default\/>/);
+  assert.match(section, /The Stagecraft launch video \(1:41\)\. Its app shots recreate Stagecraft&apos;s interface from its source; the slides are rendered by Stagecraft&apos;s own engine\./, 'the caption says the app shots are recreations');
+  assert.match(section, /demo edits \(some extra effects, two slides and a link\) were added for the video and aren&apos;t in the shipped sample decks/, 'the caption owns up to the demo edits');
+  assert.ok(articleBody.indexOf('<section id="engine"') < articleBody.indexOf('<section id="video"') && articleBody.indexOf('<section id="video"') < articleBody.indexOf('<section id="download"'), 'between Under the hood and Download');
+  assert.match(article, /const videoId = `\$\{siteUrl\}\$\{stagecraftArticle\.path\}#launch-video`/);
+  assert.match(article, /video: \{ '@id': videoId \}/, 'the article points at its video');
+  assert.match(article, /'@type': 'VideoObject', '@id': videoId[\s\S]*?recreate Stagecraft’s interface[\s\S]*?thumbnailUrl: `\$\{siteUrl\}\$\{launchVideo\.poster\}`[\s\S]*?contentUrl: `\$\{siteUrl\}\$\{launchVideo\.src\}`[\s\S]*?uploadDate: launchVideo\.uploadDate, duration: launchVideo\.duration[\s\S]*?encodingFormat: 'text\/vtt'/);
+  assert.match(read('src/app/stagecraft.css'), /\.stagecraft-video video\{[^}]*aspect-ratio:16\/9/);
+  assert.match(read('public/llms.txt'), /launch video on the article \(English captions\) recreates Stagecraft/);
+  assert.match(read('docs/STAGECRAFT-CONTENT.md'), /^## Launch video\r?\n\r?\n`\/blog\/stagecraft\/#video`/m, 'the evidence doc describes the video');
 });
 
 test('the copy stays honest about export limits, licences and testing', () => {

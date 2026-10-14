@@ -22,6 +22,20 @@ export const stagecraftArticle = {
   noticesUrl: 'https://github.com/MuhammadNoman76/stagecraft/blob/main/THIRD-PARTY-NOTICES.txt',
 };
 
+/**
+ * The launch video on the field note (public/media): 1280×720, 100.9 s, H.264 + AAC, fast-start, with English captions.
+ * Its app shots recreate Stagecraft's interface from its source; the slides in it are rendered by Stagecraft's own engine.
+ */
+export const launchVideo = {
+  src: '/media/stagecraft-launch.mp4',
+  captions: '/media/stagecraft-launch.en.vtt',
+  poster: '/media/stagecraft-launch-poster.jpg',
+  width: 1280,
+  height: 720,
+  duration: 'PT1M41S',
+  uploadDate: '2026-10-14',
+};
+
 /** The standalone download page. Its claims mirror the field note. */
 export const downloadPage = {
   title: 'Download Stagecraft for Windows — free presentation app',

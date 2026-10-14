@@ -15,8 +15,12 @@
 .stagecraft-shot{margin:30px 0}
 .stagecraft-shot-stage{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:22px;padding:clamp(18px,4.2%,40px);background:radial-gradient(circle at 84% 18%,rgba(124,92,230,.2),transparent 55%),radial-gradient(circle at 96% 100%,rgba(236,95,157,.16),transparent 50%),linear-gradient(135deg,#f5f3fb,#ebe6f8 60%,#e1d9f5);border:1px solid var(--line)}
 .stagecraft-shot-stage img{display:block;width:100%;height:auto;min-width:0;filter:drop-shadow(0 14px 22px rgba(27,18,64,.2)) drop-shadow(0 2px 4px rgba(27,18,64,.12))}
-.stagecraft-shot figcaption,.stagecraft-dl-stage figcaption,.stagecraft-themes figcaption{font:9px/1.7 ui-monospace,Consolas,monospace;color:var(--muted);margin-top:10px}
+.stagecraft-shot figcaption,.stagecraft-dl-stage figcaption,.stagecraft-themes figcaption,.stagecraft-video figcaption{font:9px/1.7 ui-monospace,Consolas,monospace;color:var(--muted);margin-top:10px}
 .stagecraft-shot figcaption strong{font-weight:600;color:var(--ink)}
+
+/* The launch video: 16:9, with a light frame while the poster loads. */
+.stagecraft-video{margin:30px 0}
+.stagecraft-video video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#ece6fa;border:1px solid var(--line)}
 
 /* The ten themes: the same title slide in each, with the name and description the app shows. */
 .stagecraft-themes{margin:30px 0}

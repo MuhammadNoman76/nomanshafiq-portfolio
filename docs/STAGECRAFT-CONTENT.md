@@ -272,11 +272,30 @@ transparency.
 
 ## Launch video
 
-Not added yet. The article has a marked JSX comment (`LAUNCH VIDEO (to be added)`) between "Under the hood" and
-"Download"; no empty section is rendered, and `tests/stagecraft.test.mjs` expects the placeholder until the video arrives.
-When it does, follow the Trove pattern (`docs/TROVE-CONTENT.md`): `public/media/stagecraft-launch.*`, a `launchVideo`
-entry in `src/data/stagecraft.ts`, a `VideoObject`, a contents entry and renumbered sections. If its app shots are
-recreations, its caption must say so.
+`/blog/stagecraft/#video` ("11 / The launch video", between "Under the hood" and "Download", in the contents; Download
+and What comes next became 12 and 13) plays `public/media/stagecraft-launch.mp4`: 1280×720, 100.9 s, H.264 High (30 fps)
++ AAC LC (48 kHz stereo), fast-start (`moov` before `mdat`), 14,750,254 bytes, no burned-in captions (checked with
+`ffprobe`). `stagecraft-launch.en.vtt` (33 cues, the last ending at 1:38.6) is the default English captions track, and
+`stagecraft-launch-poster.jpg` is the supplied 1280×720 poster. All three are well under Cloudflare Pages' 25 MiB limit
+and listed in `scripts/check-export.mjs`. The supplied `stagecraft-cover.jpg` / `stagecraft-social.jpg` from the video
+work were not used: the site keeps its real-screenshot cover and social images.
+
+The markup follows Trove's: `<video controls preload="metadata" playsInline poster>` with a `<source>` and a
+`<track kind="captions" srcLang="en" label="English" default>`, in a 16:9 `.stagecraft-video` figure, and a
+`VideoObject` (`#launch-video`, with thumbnail, content URL, upload date 2026-10-14, ISO duration `PT1M41S` and the
+caption file) that the `BlogPosting` points to. The data is `launchVideo` in `src/data/stagecraft.ts`.
+
+**The video's app shots recreate Stagecraft's interface from its source; the slides in it are rendered by Stagecraft's
+own engine** (as supplied with the video). A few demo edits were added for the video and aren't in the shipped sample
+decks: some extra effects, two slides (for example "Four steps to launch") and a link. The figure's caption, the
+`VideoObject` description, the closing note of the article and `public/llms.txt` say so. A test checks that every other
+mention of a recreation on the page refers to the launch video, that every still figure says "real screenshot", and
+the video's data, files, size, poster size, fast-start layout and captions track.
+
+The narration matches the 1.1 pages, with two simplifications the pages make precise: "it runs on Windows 7 to 11" (the
+pages say Windows 7 SP1, 8.1, 10 and 11, and that Windows 8 needs 8.1 first) and "saves your work automatically" (the
+pages say Save automatically works once a presentation has a file, with recovery copies for unsaved work). "Over a
+thousand icons" is 1,112.
 
 ## Download page
 
