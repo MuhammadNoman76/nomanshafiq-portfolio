@@ -1,8 +1,11 @@
 import { Fragment } from 'react';
 
-const terms = /(7-Zip|AES-256|SHA-256)/;
+const terms = /(7-Zip|AES-256|SHA-256|Ctrl\+(?:Alt\+|Shift\+)?\w|(?:Alt|Shift)\+F5)/;
 
-/** Keeps hyphenated names such as 7-Zip, AES-256 and SHA-256 on one line (browsers otherwise break after the hyphen). */
-export function noWrap(text: string) {
-  return text.split(terms).map((part, index) => index % 2 ? <span key={index} className="trove-nw">{part}</span> : <Fragment key={index}>{part}</Fragment>);
+/**
+ * Keeps hyphenated names such as 7-Zip, AES-256 and SHA-256, and shortcuts such as Ctrl+Alt+T, on one line
+ * (browsers otherwise break after the hyphen or the plus). Each app's pages pass their own class (trove-nw, stagecraft-nw).
+ */
+export function noWrap(text: string, className = 'trove-nw') {
+  return text.split(terms).map((part, index) => index % 2 ? <span key={index} className={className}>{part}</span> : <Fragment key={index}>{part}</Fragment>);
 }

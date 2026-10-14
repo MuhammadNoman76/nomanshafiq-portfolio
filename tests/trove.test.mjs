@@ -78,10 +78,11 @@ test('the Trove field note is published, linked and has its sections', () => {
   assert.match(article, /href=\{downloadPage\.path\}/);
   assert.match(blog, /troveArticle\.path/);
   assert.match(blog, /href=\{troveDownloadPage\.path\}/);
-  assert.ok(blog.indexOf('trove-cover.jpg') < blog.indexOf('vibeplayer-cover.jpg'), 'Trove is the first feature');
+  assert.ok(blog.indexOf('trove-cover.jpg') < blog.indexOf('vibeplayer-cover.jpg'), 'Trove comes before VibePlayer (Stagecraft, the newest, is first)');
   assert.ok(blog.indexOf('vibeplayer-cover.jpg') < blog.indexOf('pawsip-cover.png') && blog.indexOf('pawsip-cover.png') < blog.indexOf('jev-urdu-cover.webp'), 'then VibePlayer, PawSip and Jev-Urdu');
-  assert.match(blog, /hasPart: \[\{ '@type': 'BlogPosting', headline: troveArticle\.title/);
+  assert.match(blog, /\{ '@type': 'BlogPosting', headline: troveArticle\.title/);
   assert.equal((blog.match(/fetchPriority="high"/g) ?? []).length, 1, 'only the first card image is high priority');
+  assert.match(blog, /src="\/art\/trove-cover\.jpg" width="1672" height="940" alt="[^"]+" loading="lazy"/, 'Trove is no longer the first card, so its image loads lazily');
   assert.match(read('src/app/sitemap.ts'), /\$\{siteUrl\}\/blog\/trove\/`,lastModified:'2026-10-13'/);
   assert.match(read('src/app/sitemap.ts'), /\$\{siteUrl\}\/trove\/`,lastModified:'2026-10-13'/);
   assert.match(read('public/llms.txt'), /^- Trove, a free Windows archive manager .*https:\/\/www\.nomanshafiq\.com\/blog\/trove\/\r?$/m);

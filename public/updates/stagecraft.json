@@ -1,0 +1,34 @@
+{
+  "app": "Stagecraft",
+  "version": "1.0.0",
+  "released": "2026-10-14",
+  "notes": [
+    "The first release of Stagecraft, a free presentation app for Windows: 10 themes with 3 colour variants each, 16 smart layouts, Morph transitions and a presenter view.",
+    "Charts, tables, 1,111 icons, shapes and connectors, a command palette (Ctrl+K), a slide sorter and an outline view.",
+    "Exports PDF (vector, with selectable text), PNG and JPG, and PowerPoint (.pptx); opens PowerPoint files as a copy.",
+    "Stagecraft checks this feed shortly after it starts and at most once a day, and installs a newer version after checking its SHA-256 checksum."
+  ],
+  "page": "https://www.nomanshafiq.com/stagecraft/",
+  "editions": {
+    "x64": {
+      "url": "https://github.com/MuhammadNoman76/stagecraft/raw/refs/heads/main/release/Stagecraft-Setup-1.0.0-x64.exe",
+      "sha256": "99463272d8f2203a804db59e142cb9d723c5217fd203ed2a971dfbb0c52b4533",
+      "size": 48060306
+    },
+    "arm64": {
+      "url": "https://github.com/MuhammadNoman76/stagecraft/raw/refs/heads/main/release/Stagecraft-Setup-1.0.0-arm64.exe",
+      "sha256": "2dbd3bc688829895103047784f638647b98e0651efbea753acf7f96f44c5dce2",
+      "size": 42603902
+    },
+    "x86": {
+      "url": "https://github.com/MuhammadNoman76/stagecraft/raw/refs/heads/main/release/Stagecraft-Setup-1.0.0-x86.exe",
+      "sha256": "1f05bea27d28d2a1c7d281274a851d78542ce7cce163cb8340e129d0bf5f0e32",
+      "size": 44102700
+    },
+    "win7-8": {
+      "url": "https://github.com/MuhammadNoman76/stagecraft/raw/refs/heads/main/release/Stagecraft-Setup-1.0.0-win7-8.exe",
+      "sha256": "671209ae3069761bd73d1379a3764cdca97eab8d11c24a9d005cd21093171607",
+      "size": 5921961
+    }
+  }
+}

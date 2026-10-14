@@ -1,0 +1,69 @@
+/* Stagecraft field note and download page: a soft violet cover, real screenshots on a light stage,
+   and the gallery of the ten themes. Stagecraft's own colours stay inside the screenshots. */
+
+/* Cover and blog card: the windows sit on the right of a light violet gradient; the title goes on the left. */
+.stagecraft-cover>img,.blog-feature-art.stagecraft-art,.blog-feature-art.stagecraft-art img{background:linear-gradient(135deg,#f6f4fc,#ece6fa 55%,#ddd2f6)}
+.stagecraft-cover>img{object-position:50% 42%}
+.stagecraft-cover .jev-cover-type>span{color:#4b4460}
+.stagecraft-cover .jev-cover-type>strong{color:#1b1530}
+.stagecraft-cover .jev-cover-type>em{font-style:italic;line-height:1.12;color:#5b3fd6}
+.blog-feature-art.stagecraft-art img{object-position:0% 50%}
+.blog-feature-art.stagecraft-art>span{color:#1b1530}
+.blog-feature-art.stagecraft-art>span>span{color:#5b3fd6;font-family:Georgia,'Times New Roman',serif;font-style:italic;line-height:1.15}
+
+/* Real screenshots, shown no larger than their size on a 150% display, on a light stage. */
+.stagecraft-shot{margin:30px 0}
+.stagecraft-shot-stage{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:22px;padding:clamp(18px,4.2%,40px);background:radial-gradient(circle at 84% 18%,rgba(124,92,230,.2),transparent 55%),radial-gradient(circle at 96% 100%,rgba(236,95,157,.16),transparent 50%),linear-gradient(135deg,#f5f3fb,#ebe6f8 60%,#e1d9f5);border:1px solid var(--line)}
+.stagecraft-shot-stage img{display:block;width:100%;height:auto;min-width:0;filter:drop-shadow(0 14px 22px rgba(27,18,64,.2)) drop-shadow(0 2px 4px rgba(27,18,64,.12))}
+.stagecraft-shot figcaption,.stagecraft-dl-stage figcaption,.stagecraft-themes figcaption{font:9px/1.7 ui-monospace,Consolas,monospace;color:var(--muted);margin-top:10px}
+.stagecraft-shot figcaption strong{font-weight:600;color:var(--ink)}
+
+/* The ten themes: the same title slide in each, with the name and description the app shows. */
+.stagecraft-themes{margin:30px 0}
+.stagecraft-themes ul{list-style:none;margin:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px 14px;padding:clamp(16px,3.4%,30px);background:linear-gradient(135deg,#f5f3fb,#ebe6f8 60%,#e1d9f5);border:1px solid var(--line)}
+.stagecraft-themes li{min-width:0}
+.stagecraft-themes img{display:block;width:100%;height:auto;aspect-ratio:16/9;box-shadow:0 6px 14px rgba(27,18,64,.16),0 1px 2px rgba(27,18,64,.12)}
+.stagecraft-themes strong{display:block;font-size:13px;font-weight:600;line-height:1.3;margin-top:9px;color:var(--ink)}
+.stagecraft-themes li>span{display:block;font-size:11px;line-height:1.45;color:#5a6168;margin-top:2px}
+
+/* Boxed lists (the PawSip pattern) and the export table. */
+.stagecraft-rules{border-left-color:#5b3fd6}
+.jev-prose .stagecraft-rules small{color:#5b3fd6}
+.stagecraft-tags{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.stagecraft-tags li{font-size:14px;line-height:1.4;padding:7px 12px;background:#f6f7f8;border:1px solid #c6cfd7;color:var(--ink)}
+.jev-prose .stagecraft-formats p.stagecraft-limits{color:#464e55;font-size:14px}
+.jev-prose .stagecraft-formats p.stagecraft-limits strong{color:var(--ink)}
+
+/* Long commands, paths and the feed address wrap on narrow screens instead of widening the page. */
+.stagecraft-article .jev-prose p code,.stagecraft-dl .jev-prose p code{overflow-wrap:anywhere}
+
+/* Download page (/stagecraft/): a real screenshot takes the place of PawSip's cat. */
+.stagecraft-dl-stage{grid-area:stage;align-self:start;margin:0;min-width:0}
+.stagecraft-dl-stage .stagecraft-shot-stage{padding:clamp(16px,3vw,30px)}
+.jev-prose .stagecraft-dl-more{margin-top:8px}
+.jev-prose .stagecraft-dl-more a{display:inline-flex;align-items:center;gap:12px;min-height:44px;font-size:14px;color:var(--blue);text-decoration:none}
+.jev-prose .stagecraft-dl-more a:hover{color:var(--ink)}
+.stagecraft-dl-more svg{width:15px}
+
+@media(max-width:900px){.stagecraft-dl-stage{margin-top:36px}}
+@media(max-width:850px){.blog-feature-art.stagecraft-art>span>span{font-size:22px}}
+@media(max-width:700px){.stagecraft-themes ul{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){
+  /* Keep the image's left edge so the windows sit right of the overlay title. */
+  .stagecraft-cover>img{object-position:0% 50%}
+  .stagecraft-cover .jev-cover-type>strong{font-size:28px}
+  .stagecraft-cover .jev-cover-type>em{font-size:16px}
+  /* The name is longer than Trove's: keep it and the tagline left of the windows on phones. */
+  .blog-feature-art.stagecraft-art>span{font-size:min(30px,7vw)}
+  .blog-feature-art.stagecraft-art>span>span{font-size:min(16px,4vw);margin-top:6px}
+  .stagecraft-shot-stage{padding:14px;gap:14px}
+  .stagecraft-themes ul{gap:16px 12px;padding:14px}
+  .stagecraft-themes strong{font-size:12px}
+  .stagecraft-themes li>span{font-size:10px}
+  .stagecraft-tags li{font-size:13px}
+  .stagecraft-dl-stage{margin-top:28px}
+  .stagecraft-dl-stage figcaption{font-size:8px}
+}
+
+/* Ctrl+K, SHA-256 and other short terms stay on one line (src/components/NoWrap.tsx). */
+.stagecraft-nw{white-space:nowrap}

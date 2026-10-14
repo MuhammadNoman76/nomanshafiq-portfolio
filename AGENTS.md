@@ -24,10 +24,12 @@ Muhammad Noman's portfolio and blog: Next.js static export (`output: 'export'`, 
   - `/blog/pawsip/`
   - `/blog/vibeplayer/`
   - `/blog/trove/`
-- Download pages: `/pawsip/`, `/vibeplayer/` and `/trove/`.
-- App data: `src/data/pawsip.ts`, `src/data/vibeplayer.ts`, `src/data/trove.ts`, and the shared types in `src/data/windows.ts`. The Windows download picker is `src/components/WindowsDownload.tsx`, with a thin client wrapper per app.
-- VibePlayer's auto-update feed: `public/updates/vibeplayer.json`. It must match `src/data/vibeplayer.ts` (a test enforces this). The VibePlayer app reads it, so a release means: push the installers to the VibePlayer repo first, then update both files here and push. PawSip (`public/updates/pawsip.json`) and Trove (`public/updates/trove.json`, read by `src/Trove/Services/Updater.cs`) work the same way.
+  - `/blog/stagecraft/` (first on the blog index)
+- Download pages: `/pawsip/`, `/vibeplayer/`, `/trove/` and `/stagecraft/`.
+- App data: `src/data/pawsip.ts`, `src/data/vibeplayer.ts`, `src/data/trove.ts`, `src/data/stagecraft.ts`, and the shared types in `src/data/windows.ts`. The Windows download picker is `src/components/WindowsDownload.tsx`, with a thin client wrapper per app.
+- VibePlayer's auto-update feed: `public/updates/vibeplayer.json`. It must match `src/data/vibeplayer.ts` (a test enforces this). The VibePlayer app reads it, so a release means: push the installers to the VibePlayer repo first, then update both files here and push. PawSip (`public/updates/pawsip.json`), Trove (`public/updates/trove.json`, read by `src/Trove/Services/Updater.cs`) and Stagecraft (`public/updates/stagecraft.json`, read by `src/Stagecraft/Services/Updater.cs`) work the same way.
 - Trove's images are real screenshots (PrintWindow captures of Trove's own windows, with demo files); see `docs/TROVE-CONTENT.md`. Its launch video (`public/media/trove-launch.*`) recreates the app's interface, and its caption says so.
+- Stagecraft's images are real screenshots too (its own off-screen capture mode, with the sample decks); see `docs/STAGECRAFT-CONTENT.md`. Its version, installers, feature lists and test figures all live in `src/data/stagecraft.ts`. The article has a marked place for a launch video that isn't rendered yet.
 - When adding a page, also update `src/app/sitemap.ts`, `public/llms.txt`, `scripts/check-export.mjs` and the tests, and add an evidence doc in `docs/`.
 - Honesty rules:
   - Claims must match the app's source code.
