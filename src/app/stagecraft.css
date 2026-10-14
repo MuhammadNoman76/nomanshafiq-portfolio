@@ -34,6 +34,23 @@
 .jev-prose .stagecraft-formats p.stagecraft-limits{color:#464e55;font-size:14px}
 .jev-prose .stagecraft-formats p.stagecraft-limits strong{color:var(--ink)}
 
+/* How animations travel to and from PowerPoint: three columns of prose, so no monospace last column. */
+.stagecraft-anim-table{margin-block:22px 8px}
+.stagecraft-anim-table th,.stagecraft-anim-table td{font-size:13px;line-height:1.6}
+.stagecraft-anim-table tbody th{min-width:150px;width:40%}
+.stagecraft-anim-table td{min-width:120px}
+.benchmark-data-table.stagecraft-anim-table td:last-child{font-family:inherit;white-space:normal}
+/* On phones each row becomes a small card: the effect, then "Exported as" and "Imported as", with no sideways scrolling. */
+@media(max-width:600px){
+  .stagecraft-anim-table table,.stagecraft-anim-table tbody,.stagecraft-anim-table tr,.stagecraft-anim-table th,.stagecraft-anim-table td{display:block;width:auto;min-width:0}
+  .stagecraft-anim-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  .stagecraft-anim-table tr{border-bottom:1px solid #ccd3d9;padding-block:12px}
+  .stagecraft-anim-table th,.stagecraft-anim-table td{border:0;padding:0}
+  .stagecraft-anim-table caption{display:block}
+  .stagecraft-anim-table tbody th{font-weight:600;margin-bottom:4px;width:auto;min-width:0}
+  .stagecraft-anim-table td::before{content:attr(data-label) ": ";color:var(--muted)}
+}
+
 /* Long commands, paths and the feed address wrap on narrow screens instead of widening the page. */
 .stagecraft-article .jev-prose p code,.stagecraft-dl .jev-prose p code{overflow-wrap:anywhere}
 

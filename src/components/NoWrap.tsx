@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-const terms = /(7-Zip|AES-256|SHA-256|Ctrl\+(?:Alt\+|Shift\+)?\w|(?:Alt|Shift)\+F5)/;
+const terms = /(7-Zip|AES-256|SHA-256|Ctrl\+(?:Alt\+|Shift\+)?\w|Alt\+Shift\+\w|(?:Alt|Shift)\+F\d+)/;
 
 /**
  * Keeps hyphenated names such as 7-Zip, AES-256 and SHA-256, and shortcuts such as Ctrl+Alt+T, on one line

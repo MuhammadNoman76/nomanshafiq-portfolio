@@ -15,6 +15,9 @@ const blog = read('src/app/blog/page.tsx');
 const exportCheck = read('scripts/check-export.mjs');
 /** The rendered JSX of the article, without comments or the helpers' own templates. */
 const articleBody = article.slice(article.indexOf('export default function')).replace(/\{\/\*[\s\S]*?\*\/\}/g, '');
+/** The data file's `testing.untested` list. */
+const untested = /untested: \[([\s\S]*?)\]/.exec(data)?.[1] ?? '';
+const nextUp = /export const nextUp = \[([\s\S]*?)\] as const/.exec(data)?.[1] ?? '';
 
 /** PNG and JPEG pixel sizes, read from the file headers. */
 const imageSize = path => {
@@ -29,7 +32,7 @@ const imageSize = path => {
 };
 
 test('Stagecraft downloads cover every supported Windows edition', () => {
-  assert.equal(version, '1.0.0');
+  assert.equal(version, '1.1.0');
   assert.equal(released, '2026-10-14');
   assert.deepEqual(editions.map(e => e.id), ['x64', 'arm64', 'x86', 'win7-8']);
   for (const edition of editions) {
@@ -38,13 +41,14 @@ test('Stagecraft downloads cover every supported Windows edition', () => {
     assert.ok(edition.bytes > 1_000_000 && edition.bytes < 100_000_000, `${edition.id} size`);
   }
   assert.equal(new Set(editions.map(e => e.sha256)).size, editions.length, 'checksums are distinct');
-  assert.deepEqual(editions.map(e => e.bytes), [48060306, 42603902, 44102700, 5921961], 'sizes match the installers in the Stagecraft repository');
+  assert.deepEqual(editions.map(e => e.bytes), [48593808, 43134464, 44630557, 6563166], 'sizes match the installers in the Stagecraft repository');
   assert.deepEqual(editions.map(e => e.sha256), [
-    '99463272d8f2203a804db59e142cb9d723c5217fd203ed2a971dfbb0c52b4533',
-    '2dbd3bc688829895103047784f638647b98e0651efbea753acf7f96f44c5dce2',
-    '1f05bea27d28d2a1c7d281274a851d78542ce7cce163cb8340e129d0bf5f0e32',
-    '671209ae3069761bd73d1379a3764cdca97eab8d11c24a9d005cd21093171607',
+    'd2de9ca98c92bb56574c990d06d19eea25e47dbaba57c2b06db39ca2f6840f68',
+    '4031591a4543569c94b1f1ca4bfc8f6b76f3de0a6c43b6483d820782470a66d7',
+    '96dbe45e4da0fd153b439e27d097bb924e43cf4d068c5148f0d11a4707f9d986',
+    '340d65a3f8a0af6d20ff90503648ab4168c65cc9974c42ef9d7e040f8805aff3',
   ], 'checksums match release/SHA256SUMS.txt');
+  assert.doesNotMatch(data, /Stagecraft-Setup-1\.0\.0|1\.0\.0-x64/, 'no 1.0.0 installers are left');
 });
 
 test('downloads point at the Stagecraft repository over HTTPS', () => {
@@ -66,29 +70,36 @@ test('Stagecraft uses the shared Windows download picker', () => {
 test('the Stagecraft field note is published, linked and has its sections', () => {
   assert.match(article, /<StagecraftDownload\/>/);
   assert.match(article, /editions\.map/);
-  const ids = ['idea', 'design', 'editing', 'motion', 'presenter', 'files', 'engine', 'download', 'next'];
+  const ids = ['idea', 'design', 'editing', 'motion', 'animations', 'links', 'media', 'presenter', 'files', 'engine', 'download', 'next'];
   ids.forEach((id, index) => {
     const number = String(index + 1).padStart(2, '0');
     assert.match(articleBody, new RegExp(`href="#${id}">${number} / `), `${id} is number ${number} in the contents`);
     if (index > 0) assert.match(articleBody, new RegExp(`<section id="${id}"[^>]*><span className="jev-section-number">${number} / `), `${id} section is numbered ${number}`);
     else assert.match(articleBody, /<section id="idea"/);
   });
+  assert.equal((articleBody.match(/<section id="/g) ?? []).length, ids.length, 'no section without a contents entry');
   assert.match(article, /\{\/\* LAUNCH VIDEO \(to be added\)/, 'the launch video has a marked place');
   assert.ok(article.indexOf('<section id="engine"') < article.indexOf('LAUNCH VIDEO (to be added)') && article.indexOf('LAUNCH VIDEO (to be added)') < article.indexOf('<section id="download"'), 'the placeholder sits between Under the hood and Download');
   assert.doesNotMatch(articleBody, /id="video"|<video|href="#video"/, 'no empty video section is rendered');
   assert.match(article, /JSON\.stringify\(schema\)\.replace\(\/<\/g, '\\\\u003c'\)/, 'structured data is escaped');
   assert.match(article, /'@type': 'BlogPosting'/);
   assert.match(article, /'@type': 'SoftwareApplication', '@id': appId/);
+  assert.match(article, /softwareVersion: stagecraftArticle\.version/, 'the structured data follows the release');
+  assert.match(article, /dateModified: stagecraftArticle\.released/);
   assert.match(article, /const appId = `\$\{siteUrl\}\$\{downloadPage\.path\}#app`/, 'the app id is shared with the download page');
   assert.match(article, /href=\{downloadPage\.path\}/);
-  assert.match(read('src/app/sitemap.ts'), /\$\{siteUrl\}\/blog\/stagecraft\/`,lastModified:'2026-10-14'/);
-  assert.match(read('src/app/sitemap.ts'), /\$\{siteUrl\}\/stagecraft\/`,lastModified:'2026-10-14'/);
-  assert.match(read('public/llms.txt'), /^- Stagecraft, a free Windows presentation app .*https:\/\/www\.nomanshafiq\.com\/blog\/stagecraft\/\r?$/m);
-  assert.match(read('public/llms.txt'), /^- Stagecraft download page: https:\/\/www\.nomanshafiq\.com\/stagecraft\/\r?$/m);
-  assert.match(read('public/llms.txt'), /^- Stagecraft source: https:\/\/github\.com\/MuhammadNoman76\/stagecraft\r?$/m);
+  assert.match(read('src/app/sitemap.ts'), new RegExp(`\\$\\{siteUrl\\}/blog/stagecraft/\`,lastModified:'${released}'`));
+  assert.match(read('src/app/sitemap.ts'), new RegExp(`\\$\\{siteUrl\\}/stagecraft/\`,lastModified:'${released}'`));
+  const llms = read('public/llms.txt');
+  assert.match(llms, /^- Stagecraft, a free Windows presentation app .*https:\/\/www\.nomanshafiq\.com\/blog\/stagecraft\/\r?$/m);
+  assert.match(llms, /^- Stagecraft download page: https:\/\/www\.nomanshafiq\.com\/stagecraft\/\r?$/m);
+  assert.match(llms, /^- Stagecraft source: https:\/\/github\.com\/MuhammadNoman76\/stagecraft\r?$/m);
+  assert.match(llms, /Version 1\.1\.0 has four installers/, 'llms.txt names the current version');
+  assert.doesNotMatch(llms, /Stagecraft[^\n]*Version 1\.0\.0/, 'llms.txt has no stale Stagecraft version');
   assert.match(read('src/app/layout.tsx'), /import '\.\/stagecraft\.css';/);
   assert.match(exportCheck, /'blog\/stagecraft','stagecraft'/);
   assert.ok(exists('docs/STAGECRAFT-CONTENT.md'), 'evidence doc');
+  assert.match(read('docs/STAGECRAFT-CONTENT.md'), /^## Stagecraft 1\.1/m, 'the evidence doc covers 1.1');
   assert.match(read('AGENTS.md'), /`\/blog\/stagecraft\/`/);
 });
 
@@ -103,6 +114,9 @@ test('Stagecraft is the first card on the blog index', () => {
   assert.ok(blog.indexOf('fetchPriority="high"') > blog.indexOf('stagecraft-cover.jpg') && blog.indexOf('fetchPriority="high"') < blog.indexOf('trove-cover.jpg'), 'the high-priority image is Stagecraft’s');
   assert.match(blog, /images: \[\{ url: '\/art\/stagecraft-social\.jpg', width: 1200, height: 630 \}\]/, 'the blog index shares the Stagecraft card');
   assert.match(blog, /images: \['\/art\/stagecraft-social\.jpg'\]/);
+  const readTime = /(\d+) MIN READ/.exec(article)?.[1];
+  assert.ok(readTime, 'the article states its reading time');
+  assert.match(blog, new RegExp(`<span className="blog-read-time">${readTime} MIN</span>`), 'the blog card shows the same reading time');
 });
 
 test('the images are real screenshots with their true sizes', () => {
@@ -110,14 +124,19 @@ test('the images are real screenshots with their true sizes', () => {
     assert.deepEqual(Object.values(imageSize(`public/art/${file}`)), size, file);
     assert.match(exportCheck, new RegExp(`'art/${file.replace('.', '\\.')}'`), `${file} is checked in the export`);
   }
-  const shots = [...data.matchAll(/(\w+): \{ src: '\/art\/(stagecraft-[\w-]+\.png)', width: (\d+), height: (\d+) \}/g)];
-  assert.equal(shots.length, 13, 'thirteen screenshots');
-  for (const [, key, file, width, height] of shots) {
+  const shots = [...data.matchAll(/(\w+): \{ src: '\/art\/(stagecraft-[\w-]+\.png)', width: (\d+), height: (\d+), version: '([\d.]+)' \}/g)];
+  assert.equal(shots.length, 24, 'twenty-four screenshots');
+  for (const [, key, file, width, height, shotVersion] of shots) {
     assert.deepEqual(imageSize(`public/art/${file}`), {width: Number(width), height: Number(height)}, `${file} dimensions`);
     assert.ok(statSync(new URL(`../public/art/${file}`, import.meta.url)).size < 400_000, `${file} stays small`);
     assert.match(exportCheck, new RegExp(`'art/${file}'`), `${file} is checked in the export`);
-    assert.match(article + downloadPage, new RegExp(`screenshots\\.${key}\\b`), `${key} is used`);
+    assert.match(article + downloadPage, new RegExp(`screenshots\\.${key}\\b|\\bs\\.${key}\\b`), `${key} is used`);
+    assert.ok(['1.0.0', '1.1.0'].includes(shotVersion), `${key} shows a released version`);
   }
+  const v11 = shots.filter(shot => shot[5] === '1.1.0').map(shot => shot[1]);
+  for (const key of ['editor', 'editorDark', 'start', 'animationGallery', 'animationPane', 'motionPath', 'linkDialog', 'showLink', 'video', 'trim', 'headerFooter', 'find', 'crop', 'viewAids'])
+    assert.ok(v11.includes(key), `${key} is a 1.1 capture`);
+  assert.doesNotMatch(article + downloadPage + data, /shotsVersion/, 'every caption names the version its screenshot shows');
   const themes = [...data.matchAll(/\{ id: '([a-z]+)', name: '([A-Z][a-z]+)', description: '[^']+' \}/g)].map(([, id]) => id);
   assert.deepEqual(themes, ['aurora', 'editorial', 'midnight', 'pastel', 'corporate', 'mono', 'gradient', 'swiss', 'botanical', 'slate'], 'the ten themes, in the app’s order');
   for (const id of themes) {
@@ -128,39 +147,59 @@ test('the images are real screenshots with their true sizes', () => {
   }
   assert.match(article, /src=\{`\/art\/stagecraft-theme-\$\{theme\.id\}\.jpg`\} width=\{640\} height=\{360\}/, 'the gallery uses the theme tiles');
   const figures = articleBody.match(/<Shot shot=[\s\S]*?<\/Shot>|<figure[\s\S]*?<\/figure>/g) ?? [];
-  assert.ok(figures.length >= 12, 'cover, gallery and screenshots');
+  assert.ok(figures.length >= 24, 'cover, gallery and screenshots');
   for (const figure of figures) assert.match(figure, /[Rr]eal screenshot/, 'every figure says it is (made from) a real screenshot');
-  assert.match(downloadPage, /A real screenshot of Stagecraft/);
+  for (const figure of figures.filter(f => f.startsWith('<Shot'))) assert.match(figure, /Stagecraft \{s\.\w+\.version\}/, 'every screenshot caption names its version');
+  assert.match(downloadPage, /A real screenshot of Stagecraft \{screenshots\.editor\.version\}/);
   assert.doesNotMatch(article + downloadPage, /recreat/i, 'no recreated interface on these pages');
-  assert.match(articleBody, /test window|windowed test mode/, 'the presenter view shot says it is the windowed test mode');
+  assert.match(articleBody, /test window|windowed test mode/, 'the presenter view and show shots say they are the windowed test mode');
 });
 
 test('the copy stays honest about export limits, licences and testing', () => {
   const both = article + downloadPage + data;
-  assert.match(both, /Charts, icons and the theme’s background artwork become pictures/);
+  assert.match(both, /Charts, icons, action buttons, online video cards and the theme’s background artwork become pictures/);
   assert.match(both, /Morph becomes a fade/);
-  assert.match(both, /[Bb]uilds aren’t exported/);
-  assert.match(both, /SmartArt, other chart types, video and sound, ink, embedded objects and animations are left out/);
+  assert.match(both, /SmartArt, other chart types, ink and embedded objects are left out/);
+  assert.match(both, /SmartArt isn&apos;t imported/);
   assert.match(both, /only followed for positions, text styles and backgrounds/);
+  assert.match(both, /“Last slide viewed” links have no PDF equivalent/);
   assert.match(article, /approximate/, 'the PDF text layer is described as approximate');
+  assert.match(article, /pptxAnimations\.map/, 'the article shows how animations map to PowerPoint');
+  assert.match(data, /\['Float in, Rise up, Swivel', 'Fade',/, 'approximated effects are named');
+  assert.match(data, /\['Bounce', 'Fly in from the top',/);
+  assert.match(data, /\['Grow & turn', 'Zoom',/);
+  assert.match(data, /\['Teeter, Wave, Colour pulse, Bold flash', 'Pulse',/);
   assert.doesNotMatch(both, /open[- ]source (?:presentation|app)|Stagecraft is open[- ]source|MIT licen[sc]e for Stagecraft/i, 'no licence is chosen for Stagecraft');
+  assert.doesNotMatch(both, /[Bb]uilds aren’t exported|doesn&apos;t save your file behind your back|has no crop tool/, 'no 1.0 wording that 1.1 made untrue');
   assert.match(article, /href=\{stagecraftArticle\.noticesUrl\}/, 'links the third-party notices');
-  assert.match(data, /engineTests: 60,/);
-  assert.match(data, /smokeCommands: 83,/);
-  assert.match(data, /bigDeck: \{ slides: 200, loadMs: 73, thumbnailsMs: 452 \}/);
+  assert.match(data, /engineTests: 135,/);
+  assert.match(data, /smokeCommands: 133,/);
+  assert.match(data, /smokeUndoSteps: 110,/);
+  assert.match(data, /iconCount = 1112;/);
+  assert.match(data, /bigDeck: \{ slides: 200, loadMs: 73, thumbnailsMs: 452, version: '1\.0\.0' \}/, 'the timing is labelled as a 1.0 measurement');
+  assert.match(article, /with version \{testing\.bigDeck\.version\}/);
   for (const page of [article, downloadPage]) {
     assert.match(page, /SmartScreen/);
     assert.match(page, /\{untested\}|untested\.map|testing\.untested/, 'says what was not tested');
   }
-  assert.match(data, /a slide show in real full screen or on a real second display/);
-  assert.match(data, /ARM64 hardware/);
-  assert.match(data, /real Windows 7 or 8\.1 PCs/);
-  assert.match(data, /screen readers/);
+  assert.match(untested, /a slide show in real full screen or on a real second display/);
+  assert.match(untested, /ARM64 hardware/);
+  assert.match(untested, /real Windows 7 or 8\.1 PCs/);
+  assert.match(untested, /MOV, WMV and WMA files, and video and sound on Windows N editions/);
+  assert.match(untested, /the 1\.1 installers themselves/);
+  assert.match(untested, /screen readers/);
+  assert.match(both, /Media Feature Pack/);
+  assert.match(nextUp, /exporting a presentation as a video/);
+  assert.match(nextUp, /real second display/);
+  assert.match(nextUp, /code-signing/);
+  assert.doesNotMatch(nextUp, /video and audio|spell checker|crop/i, 'nothing that 1.1 already does is "next"');
+  assert.match(article, /only goes online when you add an online video/, 'the network note covers online video cards');
   assert.doesNotMatch(both, /never crash|bug[- ]free|fastest|better than PowerPoint/i, 'no unmeasured superlatives');
 });
 
-test('the Stagecraft download page offers every edition', () => {
+test('the Stagecraft download page offers every edition and says what is new', () => {
   assert.match(data, /export const downloadPage = \{[\s\S]*?path: '\/stagecraft\/'/);
+  assert.match(data, /description: 'Download Stagecraft 1\.1\.0,/);
   assert.match(downloadPage, /<StagecraftDownload\/>/);
   assert.match(downloadPage, /editions\.map\(edition => <tr/);
   assert.match(downloadPage, /aria-label=\{`Download Stagecraft for \$\{edition\.name\}`\}/);
@@ -169,9 +208,16 @@ test('the Stagecraft download page offers every edition', () => {
   assert.match(downloadPage, /canonical: downloadPage\.path/);
   assert.match(downloadPage, /'@type': 'SoftwareApplication'/);
   assert.match(downloadPage, /'@id': `\$\{pageUrl\}#app`/);
+  assert.match(downloadPage, /softwareVersion: stagecraftArticle\.version/);
   assert.match(downloadPage, /downloadUrl: editions\.map\(downloadUrl\)/);
   assert.match(downloadPage, /JSON\.stringify\(schema\)\.replace\(\/<\/g, '\\\\u003c'\)/, 'structured data is escaped');
   assert.match(downloadPage, /href=\{stagecraftArticle\.path\}/, 'links back to the field note');
+  assert.match(downloadPage, /<section id="whats-new"/, 'a What’s new in 1.1 block');
+  assert.match(downloadPage, /whatsNew\.map/);
+  for (const title of ['Animations', 'Links', 'Video and sound', 'More editing', 'Save automatically', 'PowerPoint, both ways', 'Fixed'])
+    assert.match(data, new RegExp(`\\['${title}', `), `what's new: ${title}`);
+  const numbers = [...downloadPage.matchAll(/<span>(\d\d) \/ /g)].map(([, n]) => n);
+  assert.deepEqual(numbers, ['01', '02', '03', '04', '05', '06'], 'the download page sections are numbered in order');
 });
 
 test('the Stagecraft update feed offers the same installers as the download pages', () => {
@@ -181,6 +227,7 @@ test('the Stagecraft update feed offers the same installers as the download page
   assert.equal(feed.released, released);
   assert.equal(feed.page, 'https://www.nomanshafiq.com/stagecraft/');
   assert.ok(Array.isArray(feed.notes) && feed.notes.length > 0 && feed.notes.every(note => typeof note === 'string' && note.trim()), 'release notes');
+  assert.match(feed.notes.join(' '), /Animations/, 'the notes summarise 1.1');
   assert.deepEqual(Object.keys(feed.editions), editions.map(e => e.id), 'one entry per edition, keyed like Updater.Edition (x64, arm64, x86, win7-8)');
   for (const edition of editions) {
     const entry = feed.editions[edition.id];

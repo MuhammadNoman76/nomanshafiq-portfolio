@@ -1,34 +1,37 @@
 {
   "app": "Stagecraft",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "released": "2026-10-14",
   "notes": [
-    "The first release of Stagecraft, a free presentation app for Windows: 10 themes with 3 colour variants each, 16 smart layouts, Morph transitions and a presenter view.",
-    "Charts, tables, 1,111 icons, shapes and connectors, a command palette (Ctrl+K), a slide sorter and an outline view.",
-    "Exports PDF (vector, with selectable text), PNG and JPG, and PowerPoint (.pptx); opens PowerPoint files as a copy.",
-    "Stagecraft checks this feed shortly after it starts and at most once a day, and installs a newer version after checking its SHA-256 checksum."
+    "Animations: 12 entrance, 8 emphasis and 12 exit effects and motion paths, with timing, triggers and text by paragraph, word or letter; an animation pane with a timeline, and a gallery that previews each effect on the slide.",
+    "Links on text, shapes, pictures, icons and action buttons, to web pages, e-mail, slides and files (Ctrl+Shift+K).",
+    "Video and sound on slides: poster frame, trim, fades, loop, full screen and sound across slides; online video cards.",
+    "Header and footer, find and replace, spell check, picture crop, custom gradients, shadows, rulers, gridlines and guides.",
+    "Presentations that have a file now save automatically a few seconds after you stop editing (Settings can switch it off).",
+    "PowerPoint export and import now carry animations, links, video and sound and the footer. Presentations from 1.0 open with their builds turned into animations.",
+    "Fixed: at high display scaling, the first window no longer opens taller than the screen."
   ],
   "page": "https://www.nomanshafiq.com/stagecraft/",
   "editions": {
     "x64": {
-      "url": "https://github.com/MuhammadNoman76/stagecraft/raw/refs/heads/main/release/Stagecraft-Setup-1.0.0-x64.exe",
-      "sha256": "99463272d8f2203a804db59e142cb9d723c5217fd203ed2a971dfbb0c52b4533",
-      "size": 48060306
+      "url": "https://github.com/MuhammadNoman76/stagecraft/raw/refs/heads/main/release/Stagecraft-Setup-1.1.0-x64.exe",
+      "sha256": "d2de9ca98c92bb56574c990d06d19eea25e47dbaba57c2b06db39ca2f6840f68",
+      "size": 48593808
     },
     "arm64": {
-      "url": "https://github.com/MuhammadNoman76/stagecraft/raw/refs/heads/main/release/Stagecraft-Setup-1.0.0-arm64.exe",
-      "sha256": "2dbd3bc688829895103047784f638647b98e0651efbea753acf7f96f44c5dce2",
-      "size": 42603902
+      "url": "https://github.com/MuhammadNoman76/stagecraft/raw/refs/heads/main/release/Stagecraft-Setup-1.1.0-arm64.exe",
+      "sha256": "4031591a4543569c94b1f1ca4bfc8f6b76f3de0a6c43b6483d820782470a66d7",
+      "size": 43134464
     },
     "x86": {
-      "url": "https://github.com/MuhammadNoman76/stagecraft/raw/refs/heads/main/release/Stagecraft-Setup-1.0.0-x86.exe",
-      "sha256": "1f05bea27d28d2a1c7d281274a851d78542ce7cce163cb8340e129d0bf5f0e32",
-      "size": 44102700
+      "url": "https://github.com/MuhammadNoman76/stagecraft/raw/refs/heads/main/release/Stagecraft-Setup-1.1.0-x86.exe",
+      "sha256": "96dbe45e4da0fd153b439e27d097bb924e43cf4d068c5148f0d11a4707f9d986",
+      "size": 44630557
     },
     "win7-8": {
-      "url": "https://github.com/MuhammadNoman76/stagecraft/raw/refs/heads/main/release/Stagecraft-Setup-1.0.0-win7-8.exe",
-      "sha256": "671209ae3069761bd73d1379a3764cdca97eab8d11c24a9d005cd21093171607",
-      "size": 5921961
+      "url": "https://github.com/MuhammadNoman76/stagecraft/raw/refs/heads/main/release/Stagecraft-Setup-1.1.0-win7-8.exe",
+      "sha256": "340d65a3f8a0af6d20ff90503648ab4168c65cc9974c42ef9d7e040f8805aff3",
+      "size": 6563166
     }
   }
 }
