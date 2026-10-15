@@ -13,7 +13,7 @@ export const inkwellArticle = {
   description: 'I built Inkwell, a free word processor for Windows with a Windows 11 look and no ribbon. It opens and saves Word documents (.docx) and keeps what it doesn’t edit, fixes the things that make word processors frustrating, writes Urdu and Arabic right to left, and exports PDF. Downloads for Windows 7, 8.1, 10 and 11.',
   path: '/blog/inkwell/',
   date: '2026-10-15',
-  version: '1.0.0',
+  version: '1.0.1',
   /** When this version was released (the article itself was published on `date`). */
   released: '2026-10-15',
   releasedLabel: '15 OCTOBER 2026',
@@ -25,31 +25,54 @@ export const inkwellArticle = {
 /** The standalone download page. Its claims mirror the field note. */
 export const downloadPage = {
   title: 'Download Inkwell for Windows — free word processor for .docx',
-  description: 'Download Inkwell 1.0.0, a free word processor for Windows with a Windows 11 look and no ribbon. It opens and saves Word documents (.docx), keeps what it doesn’t edit, writes Urdu and Arabic right to left, and exports PDF. Installers for Windows 7 SP1, 8.1, 10 and 11 (x64, ARM64 and 32-bit).',
+  description: 'Download Inkwell 1.0.1, a free word processor for Windows with a Windows 11 look and no ribbon. It opens and saves Word documents (.docx), keeps what it doesn’t edit, writes Urdu and Arabic right to left, and exports PDF. Installers for Windows 7 SP1, 8.1, 10 and 11 (x64, ARM64 and 32-bit).',
   path: '/inkwell/',
 };
+
+/**
+ * The launch video on the field note (public/media): 1280×720, 105.1 s, H.264 + AAC, fast-start, with English captions.
+ * Its app shots recreate Inkwell's interface from its source; every page in it is laid out and rendered by Inkwell's own engine.
+ */
+export const launchVideo = {
+  src: '/media/inkwell-launch.mp4',
+  captions: '/media/inkwell-launch.en.vtt',
+  poster: '/media/inkwell-launch-poster.jpg',
+  width: 1280,
+  height: 720,
+  duration: 'PT1M45S',
+  uploadDate: '2026-10-15',
+};
+
+/** What's new in 1.0.1, as the download page lists it (each item checked against the Inkwell repository's commit cbc166b; see docs/INKWELL-CONTENT.md). */
+export const whatsNew = [
+  ['Updates in any folder', 'The updater now recognises Inkwell wherever its installer put it, so an installation in a folder of your own updates in place too.'],
+  ['One key per command', 'Ctrl+Shift+E turns track changes on and off, as in Word; Export moves to Ctrl+Shift+X, and Alt+F opens the menu. Menus, tooltips and the palette show the keys as your keyboard layout names them.'],
+  ['Every autocorrect rule in Settings', 'Settings › Autocorrect lists every rule, the Markdown shortcuts too, so a rule you stopped from the chip can be turned back on. A correction made as you press Enter now shows its chip and is undone by one Ctrl+Z.'],
+  ['A command bar that fits', 'On narrower windows the command bar shortens in whole steps (the search box becomes Search, then its icon) instead of cutting labels off.'],
+  ['Smaller fixes', '“Start at…” on the right-click menu and in the palette; .docm documents save automatically too; version history follows a new size limit straight away; messages close when you change view.'],
+] as const;
 
 /** Installers in the Inkwell repository (release/), checked against release/SHA256SUMS.txt and the files' sizes. */
 export const editions: Edition[] = [
   {
     id: 'x64', name: 'Windows 10 & 11 · 64-bit', forWho: 'Intel or AMD processor. Most PCs.',
     windows: 'Windows 10, Windows 11', cpu: '64-bit (x64)', runtime: 'Self-contained. Nothing else to install.',
-    file: 'Inkwell-Setup-1.0.0-x64.exe', bytes: 49025506, sha256: 'fdb6930b94206e7c24d7755d7c872c4858a6b7ae0cd2d6e242a3427567b00c88',
+    file: 'Inkwell-Setup-1.0.1-x64.exe', bytes: 49038301, sha256: '19c10a70fe126e056504829e31eb1f1570410e872ee830514970cda96e62a46d',
   },
   {
     id: 'arm64', name: 'Windows 11 & 10 on ARM', forWho: 'Snapdragon laptops, Surface Pro X and other ARM PCs.',
     windows: 'Windows 10, Windows 11', cpu: 'ARM64', runtime: 'Self-contained. Nothing else to install.',
-    file: 'Inkwell-Setup-1.0.0-arm64.exe', bytes: 43569277, sha256: 'e0cb318b7c1d14fee5a4742706f2e8a296aa5e9722a6081f06fe737ed28bd74b',
+    file: 'Inkwell-Setup-1.0.1-arm64.exe', bytes: 43571909, sha256: '930722d616be18d1a73d0f1bb68023503109a84164ff848dfb022297df9f601d',
   },
   {
     id: 'x86', name: 'Windows 10 · 32-bit', forWho: 'Older PCs running a 32-bit installation of Windows 10.',
     windows: 'Windows 10', cpu: '32-bit (x86)', runtime: 'Self-contained. Nothing else to install.',
-    file: 'Inkwell-Setup-1.0.0-x86.exe', bytes: 45073988, sha256: '77ef488ea90313b48ae462f3872d7c9c75e490abc981ea4b91ee2cc5e6699d97',
+    file: 'Inkwell-Setup-1.0.1-x86.exe', bytes: 45084054, sha256: 'df33bac61ac3a5f25985f5c886ed5ccee9bc08e9adc8222a626b3de6b118999e',
   },
   {
     id: 'win7-8', name: 'Windows 7 SP1 & 8.1', forWho: 'Older PCs, 32- or 64-bit.',
     windows: 'Windows 7 SP1, Windows 8.1', cpu: '32- or 64-bit', runtime: 'Uses Microsoft .NET Framework 4.8 (setup tells you if it is missing).',
-    file: 'Inkwell-Setup-1.0.0-win7-8.exe', bytes: 7014508, sha256: '9f46c0c3c54dab81f1223c1eda11ca461c889b141f70fc6aa269dea4c8448d4b',
+    file: 'Inkwell-Setup-1.0.1-win7-8.exe', bytes: 7020082, sha256: 'a866027a5b26f49841c7f88e2212dd00d28eba8528e7b162b17603c39cc31288',
   },
 ];
 
@@ -107,8 +130,8 @@ export const markdownShortcuts = [
   ['~~strike~~', 'strikethrough'],
 ] as const;
 
-/** The autocorrect rules, each with its own switch in Settings › Autocorrect (Editing/AutoCorrect.cs). */
-export const autocorrectRules = ['Smart quotes', 'Capitalize sentences', 'Capital I', 'Symbols', 'Ellipsis', 'Dashes', 'Arrows', 'Fractions', 'Superscript ordinals', 'Fix TWo INitial CApitals'] as const;
+/** The autocorrect rules, each with its own switch in Settings › Autocorrect (Editing/AutoCorrect.cs); 1.0.1 lists the two Markdown rules there too. */
+export const autocorrectRules = ['Smart quotes', 'Capitalize sentences', 'Capital I', 'Symbols', 'Ellipsis', 'Dashes', 'Arrows', 'Fractions', 'Superscript ordinals', 'Fix TWo INitial CApitals', 'Markdown paragraphs', 'Markdown formatting'] as const;
 
 /** The start screen's tour, "What Inkwell fixes" (Views/StartView.xaml.cs), word for word. */
 export const fixes = [
@@ -119,7 +142,7 @@ export const fixes = [
   ['No mystery blank pages', 'Page, section and column breaks are visible, labelled and selectable. The empty paragraph after a final table never makes an extra page, and neither does a page break at the very end.'],
   ['Tables that cooperate', 'Drag column borders, repeat header rows on every page, keep rows from splitting, add rows and columns with one click; Tab in the last cell adds a row.'],
   ['Autocorrect you can trust', 'Every automatic change shows a small chip and goes away with one Ctrl+Z. No capital letters after i.e., e.g. or etc., and every rule can be turned off.'],
-  ['Never lose work', 'Documents with a file save themselves as you write, safely. Recovery copies cover new documents, and version history keeps earlier versions you can browse and restore.'],
+  ['Never lose work', 'Documents with a file save themselves, safely, a few seconds after you stop typing. Recovery copies cover new documents, and version history keeps earlier versions you can browse and restore.'],
   ['One landscape page, one click', '"Make this page landscape" adds the section breaks around the page for you, and "Make this page portrait" undoes it the same way.'],
   ['Headers and footers without fiddling', 'Click a header to edit it. First-page and odd/even options are obvious switches, and page numbers are one click.'],
   ['Styles that make sense', 'A small, clear set of styles that follow the document\'s design, and "Update style to match selection" when you like what you made.'],
@@ -168,16 +191,18 @@ export const wordCompatibility = [
   ['Word 97–2003 .doc files', 'Not supported: open them in Word and save as .docx', 'unsupported'],
 ] as const;
 
-/** The check against Microsoft Word (README, AGENTS.md; tools/word-fidelity.ps1 repeats it). As reported by the author. */
+/** The check against Microsoft Word with 1.0.0 (README, AGENTS.md; tools/word-fidelity.ps1 repeats it). As reported by the author; 1.0.1 didn't change the .docx reader or writer. */
 export const wordCheck = {
+  version: '1.0.0',
   word: 'Microsoft Word (Microsoft 365, version 16)',
   documents: 9,
   values: 117,
   matched: 116,
 };
 
-/** The 300-page performance test (tests/Inkwell.Tests/PerformanceTests.cs), as measured on the author's PC with 1.0.0. */
+/** The 300-page performance test (tests/Inkwell.Tests/PerformanceTests.cs), as measured on the author's PC with 1.0.0; 1.0.1 didn't change the engine's layout. */
 export const performance = {
+  version: '1.0.0',
   pages: 301,
   words: 112_562,
   rows: [
@@ -189,13 +214,14 @@ export const performance = {
 
 /** What was tested, and what wasn't (as reported by the author's build; see docs/INKWELL-CONTENT.md). */
 export const testing = {
-  /** Test cases in tests/Inkwell.Tests (267 [Fact] tests, 51 [InlineData] cases and 5 [MemberData] cases), each run on net10.0-windows and net48. */
-  engineTests: 323,
-  /** The capture mode's end-to-end checks (smoke.txt): open a .docx, type, save, read back, contents kept, automatic save, undo, open Markdown and text. */
-  smokeChecks: 9,
+  /** Test cases in tests/Inkwell.Tests at 1.0.1 (288 [Fact] tests, 51 [InlineData] cases and 5 [MemberData] cases), each run on net10.0-windows and net48: the engine, plus checks of the app (shortcuts, the updater's AppId, the autocorrect settings). 1.0.0 had 323. */
+  tests: 344,
+  /** The capture mode's end-to-end checks in 1.0.1 (smoke.txt), run on the 1.0.1 release builds. */
+  smokeChecks: 20,
   smokeBuilds: '64-bit, 32-bit and Windows 7/8.1 (.NET Framework 4.8)',
-  /** The per-user installer test (install, check, uninstall in a scratch folder). */
+  /** The per-user installer test (install, check, uninstall in a scratch folder), run with the 1.0.0 installer. */
   installerChecks: 23,
+  installerVersion: '1.0.0',
   untested: [
     'printing on a real printer',
     'screen readers (Narrator, NVDA)',
@@ -204,6 +230,7 @@ export const testing = {
     'the ARM64 edition on ARM64 hardware',
     'any build on real Windows 7 or 8.1 PCs, or on 32-bit Windows 10 (those editions ran on 64-bit Windows 11)',
     'how exported PDFs look in other PDF viewers',
+    'the 1.0.1 installers themselves (the 1.0.0 installer passed the install test, and the 1.0.1 setup script differs only in its version number)',
   ],
 } as const;
 
@@ -226,32 +253,32 @@ export const nextUp = [
 
 /**
  * The real screenshots: PrintWindow captures of Inkwell's own windows (x64, Windows 11 at 150%), made by Inkwell's
- * capture mode with its demo documents. `crop` marks the ones cropped from a larger capture.
+ * capture mode with its demo documents, in the capture run of the 1.0.1 code. Some are cropped from a larger capture.
  */
 export const screenshots = {
-  editor: { src: '/art/inkwell-editor.png', width: 1946, height: 1226, version: '1.0.0' },
-  editorDark: { src: '/art/inkwell-editor-dark.png', width: 1946, height: 1226, version: '1.0.0' },
-  start: { src: '/art/inkwell-start.png', width: 1946, height: 1226, version: '1.0.0' },
-  tour: { src: '/art/inkwell-tour.png', width: 1810, height: 900, version: '1.0.0' },
-  palette: { src: '/art/inkwell-palette.png', width: 1946, height: 1226, version: '1.0.0' },
-  slash: { src: '/art/inkwell-slash.png', width: 1072, height: 420, version: '1.0.0' },
-  autocorrect: { src: '/art/inkwell-autocorrect.png', width: 1072, height: 230, version: '1.0.0' },
-  paste: { src: '/art/inkwell-paste.png', width: 1072, height: 230, version: '1.0.0' },
-  pictureWrap: { src: '/art/inkwell-picture-wrap.png', width: 1946, height: 1226, version: '1.0.0' },
-  pictureGuides: { src: '/art/inkwell-picture-guides.png', width: 1072, height: 824, version: '1.0.0' },
-  lists: { src: '/art/inkwell-lists.png', width: 1581, height: 660, version: '1.0.0' },
-  reveal: { src: '/art/inkwell-reveal.png', width: 1946, height: 1226, version: '1.0.0' },
-  breaks: { src: '/art/inkwell-breaks.png', width: 700, height: 680, version: '1.0.0' },
-  table: { src: '/art/inkwell-table.png', width: 1946, height: 1226, version: '1.0.0' },
-  history: { src: '/art/inkwell-history.png', width: 1350, height: 960, version: '1.0.0' },
-  review: { src: '/art/inkwell-review.png', width: 1946, height: 1226, version: '1.0.0' },
-  toc: { src: '/art/inkwell-toc.png', width: 1946, height: 1226, version: '1.0.0' },
-  citations: { src: '/art/inkwell-citations.png', width: 1290, height: 960, version: '1.0.0' },
-  focus: { src: '/art/inkwell-focus.png', width: 1946, height: 1226, version: '1.0.0' },
-  urdu: { src: '/art/inkwell-urdu.png', width: 1072, height: 1114, version: '1.0.0' },
-  spelling: { src: '/art/inkwell-spelling.png', width: 1072, height: 200, version: '1.0.0' },
-  export: { src: '/art/inkwell-export.png', width: 840, height: 976, version: '1.0.0' },
-  settings: { src: '/art/inkwell-settings.png', width: 1140, height: 1226, version: '1.0.0' },
+  editor: { src: '/art/inkwell-editor.png', width: 1946, height: 1226, version: '1.0.1' },
+  editorDark: { src: '/art/inkwell-editor-dark.png', width: 1946, height: 1226, version: '1.0.1' },
+  start: { src: '/art/inkwell-start.png', width: 1946, height: 1226, version: '1.0.1' },
+  tour: { src: '/art/inkwell-tour.png', width: 1810, height: 900, version: '1.0.1' },
+  palette: { src: '/art/inkwell-palette.png', width: 1946, height: 1226, version: '1.0.1' },
+  slash: { src: '/art/inkwell-slash.png', width: 1072, height: 420, version: '1.0.1' },
+  autocorrect: { src: '/art/inkwell-autocorrect.png', width: 1072, height: 230, version: '1.0.1' },
+  paste: { src: '/art/inkwell-paste.png', width: 1072, height: 230, version: '1.0.1' },
+  pictureWrap: { src: '/art/inkwell-picture-wrap.png', width: 1946, height: 1226, version: '1.0.1' },
+  pictureGuides: { src: '/art/inkwell-picture-guides.png', width: 1072, height: 824, version: '1.0.1' },
+  lists: { src: '/art/inkwell-lists.png', width: 1581, height: 660, version: '1.0.1' },
+  reveal: { src: '/art/inkwell-reveal.png', width: 1946, height: 1226, version: '1.0.1' },
+  breaks: { src: '/art/inkwell-breaks.png', width: 700, height: 680, version: '1.0.1' },
+  table: { src: '/art/inkwell-table.png', width: 1946, height: 1226, version: '1.0.1' },
+  history: { src: '/art/inkwell-history.png', width: 1350, height: 960, version: '1.0.1' },
+  review: { src: '/art/inkwell-review.png', width: 1946, height: 1226, version: '1.0.1' },
+  toc: { src: '/art/inkwell-toc.png', width: 1946, height: 1226, version: '1.0.1' },
+  citations: { src: '/art/inkwell-citations.png', width: 1290, height: 960, version: '1.0.1' },
+  focus: { src: '/art/inkwell-focus.png', width: 1946, height: 1226, version: '1.0.1' },
+  urdu: { src: '/art/inkwell-urdu.png', width: 1072, height: 1114, version: '1.0.1' },
+  spelling: { src: '/art/inkwell-spelling.png', width: 1072, height: 200, version: '1.0.1' },
+  export: { src: '/art/inkwell-export.png', width: 840, height: 976, version: '1.0.1' },
+  settings: { src: '/art/inkwell-settings.png', width: 1140, height: 1226, version: '1.0.1' },
 } as const;
 
 /** The five demo documents (Samples/DemoDocuments.cs): the first page of each, cropped from the editor captures (inkwell-doc-<id>.jpg, 560×600). */

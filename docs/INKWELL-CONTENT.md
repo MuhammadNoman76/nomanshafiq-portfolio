@@ -1,9 +1,11 @@
 # Inkwell field note: content evidence
 
-Published article: `/blog/inkwell/`. Download page: `/inkwell/`. Date: 15 October 2026. App version 1.0.0.
-Source: the Inkwell repository at `D:\Inkwell`, commit `bc190e0` ("Inkwell 1.0.0 installers for every edition"),
-published at https://github.com/MuhammadNoman76/Inkwell (capital I; the installers in `release/` are live). Every claim
-below was checked against the source at that commit (paths under `src/` unless noted), not only the README. The repository
+Published article: `/blog/inkwell/`. Download page: `/inkwell/`. Date: 15 October 2026. App version 1.0.1.
+The pages were first written for 1.0.0 (local commit `78a730a`, never pushed) and updated for 1.0.1 before publishing.
+Source: the Inkwell repository at `D:\Inkwell`, commit `0d28b5c` ("Inkwell 1.0.1 installers") on top of `cbc166b` (the
+1.0.1 fixes) and `bc190e0` (1.0.0), published at https://github.com/MuhammadNoman76/Inkwell (capital I; the 1.0.1
+installers in `release/` are live and the 1.0.0 ones are gone). The 1.0.0 claims below were checked against `bc190e0` and
+re-read where 1.0.1 touched them (see "Inkwell 1.0.1"), not only the README. The repository
 has no LICENSE file, so the pages never call Inkwell open source; they credit the Open XML SDK, PDFsharp and the Fluent UI
 System Icons (MIT), Markdig (BSD-2-Clause) and the fonts (SIL OFL 1.1), and link `THIRD-PARTY-NOTICES.txt`.
 
@@ -20,12 +22,13 @@ The four installers are in the Inkwell repository under `release/` and linked th
 
 | Edition | File | Bytes | SHA-256 |
 |---|---|---|---|
-| Windows 10/11 x64 | Inkwell-Setup-1.0.0-x64.exe | 49,025,506 | fdb6930b94206e7c24d7755d7c872c4858a6b7ae0cd2d6e242a3427567b00c88 |
-| Windows 10/11 ARM64 | Inkwell-Setup-1.0.0-arm64.exe | 43,569,277 | e0cb318b7c1d14fee5a4742706f2e8a296aa5e9722a6081f06fe737ed28bd74b |
-| Windows 10 32-bit | Inkwell-Setup-1.0.0-x86.exe | 45,073,988 | 77ef488ea90313b48ae462f3872d7c9c75e490abc981ea4b91ee2cc5e6699d97 |
-| Windows 7 SP1 / 8.1 | Inkwell-Setup-1.0.0-win7-8.exe | 7,014,508 | 9f46c0c3c54dab81f1223c1eda11ca461c889b141f70fc6aa269dea4c8448d4b |
+| Windows 10/11 x64 | Inkwell-Setup-1.0.1-x64.exe | 49,038,301 | 19c10a70fe126e056504829e31eb1f1570410e872ee830514970cda96e62a46d |
+| Windows 10/11 ARM64 | Inkwell-Setup-1.0.1-arm64.exe | 43,571,909 | 930722d616be18d1a73d0f1bb68023503109a84164ff848dfb022297df9f601d |
+| Windows 10 32-bit | Inkwell-Setup-1.0.1-x86.exe | 45,084,054 | df33bac61ac3a5f25985f5c886ed5ccee9bc08e9adc8222a626b3de6b118999e |
+| Windows 7 SP1 / 8.1 | Inkwell-Setup-1.0.1-win7-8.exe | 7,020,082 | a866027a5b26f49841c7f88e2212dd00d28eba8528e7b162b17603c39cc31288 |
 
-The site shows decimal megabytes (49.0 MB); the README shows binary ones (46.8 MB): same files.
+The site shows decimal megabytes (49.0 MB); the README shows binary ones (46.8 MB): same files. Between 1.0.0 and 1.0.1,
+`installer/Inkwell.iss` changed only its version number, so the setup facts below still hold.
 
 Setup (`installer/Inkwell.iss`): all users by default (`PrivilegesRequired=admin`) with "only for me"
 (`PrivilegesRequiredOverridesAllowed=dialog commandline`); `MinVersion=10.0` (x64, arm64, x86) or `6.1sp1` (Windows 7/8.1
@@ -41,8 +44,11 @@ the default value of `.docx` / `.md`: Inkwell never makes itself the default app
 "Inkwell" (`ParseManifest`, case-insensitive), `version`, `released`, `notes`, `page`, and `editions` keyed `x64` / `arm64`
 / `x86` / `win7-8` (`Updater.Edition`, set by `build.ps1` through AssemblyMetadata "Edition"; matched case-insensitively)
 with `url`, `sha256` and `size`; entries without a valid URL, size or SHA-256 are dropped by the app. The feed offers
-1.0.0, the version everyone has, so nobody is offered an update yet. The app shows up to six `notes` as bullets in its
-update bar (`MainWindow.xaml.cs`), so the feed has six. `tests/inkwell.test.mjs` keeps the feed and `src/data/inkwell.ts`
+1.0.1, so copies of 1.0.0 will be offered the update once this is pushed. 1.0.0 still looks for the wrong uninstall key
+(see "Inkwell 1.0.1"), so it falls back to the folder: 1.0.0 in Program Files or `%LOCALAPPDATA%\Programs` updates in
+place, and 1.0.0 in any other folder gets a "Download page" button for this one update. `Updater.cs` parses the same
+schema in both versions. The app shows up to six `notes` as bullets in its update bar (`MainWindow.xaml.cs`), so the
+feed has six, summarising 1.0.1. `tests/inkwell.test.mjs` keeps the feed and `src/data/inkwell.ts`
 in step, and `scripts/check-export.mjs` validates the exported feed. The `/updates/*` rule in `public/_headers` (no-cache,
 JSON) covers it.
 
@@ -53,20 +59,28 @@ Settings: "Check for updates automatically" and "Check now".
 
 ## What was tested
 
-- Engine tests: **323** test cases in `tests/Inkwell.Tests` (counted in the source): 267 `[Fact]`, 51 `[InlineData]`
-  (46 in `DocumentStatsTests`, 5 in `DocxPictureTests`) and one `[MemberData]` theory over the 5 demo documents. The
-  project targets `net10.0-windows;net48`; that they pass on both is as reported by the author's build (`build.ps1` runs
-  them first).
+- Tests: **344** test cases in `tests/Inkwell.Tests` at 1.0.1 (counted in the source): 288 `[Fact]`, 51 `[InlineData]`
+  (46 in `DocumentStatsTests`, 5 in `DocxPictureTests`) and one `[MemberData]` theory over the 5 demo documents. 1.0.1
+  added checks of the app (`ShortcutTests`, `UpdaterTests`, `SettingsTests`, `AppResourceTests`), so the pages say
+  "tests", not "engine tests". The 1.0.1 release build's log (`build.ps1`, kept in the session's scratch folder) reads
+  "Passed: 344, Failed: 0" for both net10.0 and net48. 1.0.0 had 323 (267 + 51 + 5), also passing on both.
 - Performance (`PerformanceTests.ThreeHundredPages_LoadLayoutTypeSave`): builds a long document, loads it, lays out every
   page, types a sentence in the middle (edit + incremental relayout per keystroke) and saves. The test only asserts
   generous limits; the figures on the pages (301 pages, 112,562 words; load 82 ms / 167 ms, full layout 2.6 s / 3.8 s,
   median keystroke 2.9 ms / 2.3 ms on .NET 10 / .NET Framework 4.8) are the author's run with `INKWELL_PERF_OUT`, **as
-  reported**; the repository has no record of them. The pages say "as measured on my PC".
-- Capture-mode checks: `CaptureRunner.Script.cs` (`Smoke`, light theme only) writes `smoke.txt` with 9 checks: open
-  .docx, typing, save, saved text reads back, table of contents kept, automatic save, undo, open Markdown, open text. The
-  capture folder's `smoke.txt` has all nine as PASS ("open .docx — 5 pages", "automatic save — after 4000 ms"). That they
-  ran on the x64, x86 and win7-8 builds is as reported.
-- Installer: a per-user install / uninstall test with **23 checks**, as reported (not in the repository).
+  reported**; the repository has no record of them. The pages say "as measured on my PC with 1.0.0"; 1.0.1 didn't touch
+  `src/Inkwell.Core/Layout` or the editor engine's layout code.
+- Capture-mode checks: `CaptureRunner.Script.cs` (`Smoke`, light theme only) writes `smoke.txt`. In 1.0.0 it had 9
+  checks (open .docx, typing, save, saved text reads back, table of contents kept, automatic save, undo, open Markdown,
+  open text). 1.0.1 adds 11 (focus-mode and pageless messages, autocorrect by Enter and its single undo, a Markdown
+  heading, "Stop doing this", the Settings switch for that rule, turning it back on, Settings following changes, the
+  shortcut working again): **20**. The capture folders of the 1.0.1 release builds (`publish\x64`, `publish\x86`,
+  `publish\legacy`, each `scope.txt` reading "version 1.0.1") have all 20 as PASS. The 1.0.1 x64 capture run also writes
+  layout checks: the command bar at 14 widths from 940 to 3840 px (no clipped label) and the panels, status bar, outline,
+  start screen, Settings, Export and citations at the narrowest window, all PASS.
+- Installer: a per-user install / uninstall test of the **1.0.0** installer with **23 checks**, as reported (not in the
+  repository). The 1.0.1 installers weren't re-tested as far as the record shows; their script differs only in the version
+  number, and the pages list "the 1.0.1 installers themselves" as untested.
 - Microsoft Word: `WordFidelityTests.WriteDocuments` writes 9 documents (`report`, `letter`, `resume`, `essay`,
   `urdu-english`, `sections`, `lists`, `tables`, `fields`) and Inkwell's 13 counts per document (pages, words, tables,
   inline and floating pictures, footnotes, endnotes, comments, sections, hyperlinks, TOCs, sources, revisions: 9 × 13 =
@@ -80,8 +94,34 @@ Settings: "Check for updates automatically" and "Check now".
   `fldChar` begin / end balance inside every `w:hyperlink` and paragraph-level `w:ins`.
 - Not tested, and both pages say so (`testing.untested`): printing on a real printer, screen readers (Narrator, NVDA),
   East Asian input methods, spell checking in languages other than English, the ARM64 edition on ARM64 hardware, real
-  Windows 7 / 8.1 PCs and 32-bit Windows 10 (those editions ran on 64-bit Windows 11), and exported PDFs in other PDF
-  viewers.
+  Windows 7 / 8.1 PCs and 32-bit Windows 10 (those editions ran on 64-bit Windows 11), exported PDFs in other PDF
+  viewers, and the 1.0.1 installers themselves.
+
+## Inkwell 1.0.1
+
+Released 15 October 2026, the same day as 1.0.0. Every item was checked against `cbc166b` ("Inkwell 1.0.1: one key per
+command, every autocorrect rule in Settings, updater finds its install"). The download page's "What's new in 1.0.1" block
+(`whatsNew`), the feed's notes and the changed sentences in the article come from this table.
+
+| Claim | Source |
+|---|---|
+| The updater recognises its own installation (AppId `{B1102FC4-…}`, as in `Inkwell.iss`), so installs in custom folders update in place; a copy that wasn't installed with the installer gets the download page | `Services/Updater.cs` (`InstallerAppId`), `UpdaterTests`, README "Updates" |
+| One table of shortcuts: Ctrl+Shift+E is Track changes, Export is Ctrl+Shift+X, Alt+F opens the menu, zoom Ctrl+Alt+= / Ctrl+Alt+-; menus, tooltips and the palette show the keyboard layout's key names | `Views/Shortcuts.cs` (`Export`, `TrackChanges`, `Menu`, `ZoomIn`, `ZoomOut`), `ShortcutTests` |
+| The app menu: New document, Open…, Save, Save as…, Export…, Print…, Version history…, Document properties…, Start screen, Settings, About Inkwell, Close | `Views/EditorView.Menus.cs` |
+| Settings › Autocorrect lists every rule, "Markdown paragraphs" and "Markdown formatting" included (the separate "Markdown shortcuts" switch is gone), so a rule turned off with "Stop doing this" can be turned on again | `Views/SettingsWindow.cs` (~66–84), `Editing/AutoCorrect.cs` (73–74), `SettingsTests` |
+| A correction made by Enter shows its chip and one Ctrl+Z undoes it | commit message; capture checks "autocorrect by Enter", "one undo after Enter puts back what was typed" |
+| The command bar shortens in whole steps (search box: "Search", then icon and Ctrl+K, then icon; Insert and Export become icons) and never cuts a label | `Views/EditorView.xaml.cs`, `fit.txt` (14 widths, all PASS) |
+| "Start at…" on the right-click menu and "Start numbering at…" in the palette | `Views/EditorView.Navigation.cs` (285), `EditorView.Commands.cs` (106) |
+| .docm documents save automatically; version history follows its size limit when Settings change it; messages close when the view changes | commit message, `EditorView.Files.cs`, capture checks |
+| The start screen's tour: "Never lose work" now reads "Documents with a file save themselves, safely, a few seconds after you stop typing. …"; the other eleven texts are unchanged | `Views/StartView.xaml.cs` |
+| README privacy section covers `error.log` and `info.log` | README "Privacy" |
+
+Still true in 1.0.1, so the pages keep them: "Add page numbers" with the total writes "3 of 10" (`DocEditor.Document.cs`
+is unchanged; the 1.0.1 README says the Page panel "can make them "Page 3 of 10"", which only the checkbox label says);
+equations show as their plain text (`ParaSource.cs` unchanged; the 1.0.1 README still calls them labelled placeholders);
+there's no bookmarks manager. The video's narration line "every command is one search away" is a simplification: panel-only
+actions such as Lock position or the wrap choices aren't palette entries, so the article now says "Commands are one search
+away".
 
 ## Claims and where they come from
 
@@ -182,11 +222,11 @@ Settings: "Check for updates automatically" and "Check now".
   wrapping, text boxes / charts / equations, screen readers and a real printer, code-signing). The owner didn't supply a
   roadmap; adjust it if needed.
 
-### Bugs in Inkwell 1.0.0 found while checking (for the owner, not on the site)
+### Bugs in Inkwell 1.0.0 found while checking (fixed in 1.0.1 unless noted)
 
 - Ctrl+Shift+E opens Export instead of toggling track changes (duplicate binding).
 - `Updater.UninstallKey` uses the wrong AppId (see above).
-- "Add page numbers" with the total writes "3 of 10" though the checkbox says “Page 3 of 10”.
+- "Add page numbers" with the total writes "3 of 10" though the checkbox says “Page 3 of 10” (**not fixed** in 1.0.1).
 - A Markdown rule switched off from the chip ("Stop doing this") can't be switched back on in Settings › Autocorrect
   (those two rules aren't listed there); the chip's tooltip says it can.
 - The "Menu (Alt+F)" tooltip has no Alt+F binding; the zoom tooltips say Ctrl++ / Ctrl+- while the keys are Ctrl+Alt+= /
@@ -195,12 +235,16 @@ Settings: "Check for updates automatically" and "Check now".
 
 ## Screenshots
 
-Every image of Inkwell is a **real screenshot** of Inkwell 1.0.0 x64 on Windows 11 at 150 % scaling, and every caption
+Every still image of Inkwell is a **real screenshot** of Inkwell 1.0.1 x64 on Windows 11 at 150 % scaling, and every caption
 says so and names the version (`screenshots.<key>.version`; a test checks it). They come from Inkwell's own hidden capture
 mode (`--capture`, `Services/CaptureRunner*.cs`): it opens its windows off screen, never activated, waits while another
 app is full screen, drives the editor through test hooks (never the keyboard or the system clipboard) and saves
-`PrintWindow` captures of its own window handles, with the demo documents. The 54 captures (27 views, light and dark) were
-supplied in a scratch folder; nothing was captured for this page, and Inkwell wasn't run.
+`PrintWindow` captures of its own window handles, with the demo documents. Nothing was captured for this page, and
+Inkwell wasn't run. The 1.0.0 pages (`78a730a`) used the 1.0.0 capture set; the 1.0.1 pages use the capture run of the
+1.0.1 code (`capall` in the session's scratch folder: 77 files, the same views light and dark, plus `smoke.txt`,
+`fit.txt` and `scope.txt` reading "version 1.0.1", from a Debug build of that code; the README's new screenshots are
+copies of the same run). Same file names, same crops (the layout didn't move), so only the images whose pixels changed
+differ (mostly the command bar).
 
 Treatment (`sharp`): lossless PNG (compression only), with the Windows 11 rounded corners (12 px at 150 %) restored as
 transparency on the corners that are real window corners, because `PrintWindow` returns square ones; crops of the inside
@@ -212,13 +256,13 @@ of a window keep square edges. Sizes are read from the files by the tests.
 - Crops (captions say "Crop of a real screenshot"): `-tour.png` (the "What Inkwell fixes" cards), `-slash.png`,
   `-autocorrect.png`, `-paste.png`, `-spelling.png`, `-lists.png` (page and panel), `-picture-guides.png`, `-breaks.png`,
   `-urdu.png` (the document column below the command bar, status bar included, so the Nastaliq is readable at article width).
-- **The command-bar search box**: with a short window title, the box shows "Search comr" (the placeholder cut off) and the
-  Ctrl+K badge; with the long report / essay titles it shows only the icon and a clipped badge ("Ctrl+I"-looking).
-  Full-window shots use the long-title captures; the captures of untitled and short-titled documents (slash, autocorrect,
-  paste, spelling, lists, urdu) are cropped below the command bar. The clipped badge remains in the full-window shots, as
-  the app draws it.
-- Not used: `pageless-*` (both carry a stale "Focus mode. Press Esc or F11 to come back." toast from the previous capture
-  step), the other editor captures (letter, résumé, Urdu-English: short titles), and the dark twins.
+- **The command-bar search box**: in the 1.0.0 captures it was clipped ("Search comr" with short titles, a cut "Ctrl+K"
+  badge with long ones), which is why the 1.0.0 pages cropped the short-title shots below the bar. 1.0.1 fixed the bar,
+  and its captures show "Search" and a whole Ctrl+K badge (short titles) or the icon and the badge (long titles). The
+  crops were kept for size and legibility.
+- Not used: `pageless-*` (the 1.0.0 pair carried a stale focus-mode toast; 1.0.1 fixed that, but the page didn't need
+  another view), the other editor captures (letter, résumé, Urdu-English, except as gallery tiles), the dark twins and the
+  `bar-*` / `narrow-*` fit images.
 - **Staged content, said in the captions**: the alignment guides in `-picture-guides.png` were drawn by the capture mode
   (`DocumentView.Guides.Add` at the right margin and the picture's top edge), not by a drag; the version history's four
   versions are demo versions with back-dated times made by the capture mode. The autocorrect, paste and slash shots show
@@ -240,11 +284,42 @@ expects the placeholder and checks that no empty video section is rendered. `.in
 comes next, add a `launchVideo` entry and a `VideoObject` (as in Stagecraft), say in the caption, the closing note and
 `llms.txt` what the video recreates, and turn the placeholder tests into video tests.
 
+## Launch video
+
+`/blog/inkwell/#video` ("11 / The launch video", between "Under the hood" and "Download", in the contents; Download and
+What comes next became 12 and 13) plays `public/media/inkwell-launch.mp4`: 1280×720, 105.1 s, H.264 (30 fps) + AAC
+(48 kHz stereo), fast-start (`moov` at byte 36, before `mdat`), 14,660,961 bytes, no burned-in captions (checked with
+`ffprobe` and two extracted frames with narration playing). `inkwell-launch.en.vtt` (36 cues, the last ending at 1:42.7)
+is the default English captions track, and `inkwell-launch-poster.jpg` is the supplied 1280×720 poster. All three are well
+under Cloudflare Pages' 25 MiB limit and listed in `scripts/check-export.mjs`.
+
+The markup follows Stagecraft's: `<video controls preload="metadata" playsInline poster>` with a `<source>` and a
+`<track kind="captions" srcLang="en" label="English" default>`, in a 16:9 `.inkwell-video` figure, and a `VideoObject`
+(`#launch-video`, with thumbnail, content URL, upload date 2026-10-15, ISO duration `PT1M45S` and the caption file) that
+the `BlogPosting` points to. The data is `launchVideo` in `src/data/inkwell.ts`.
+
+**The video's app shots recreate Inkwell's interface from its source; every page in it is laid out and rendered by
+Inkwell's own engine** (the 1.0.0 engine through a small harness; 1.0.1 didn't change layout or rendering). Demo edits
+that aren't in the shipped samples, from the video's working notes: the report's contents removed and re-inserted with
+`/toc`, the essay's citation removed and re-inserted with `/cite`, typed sentences (the picture scene, the end of the
+essay's conclusion in focus mode), a "Spring fair" Markdown document, a table header row added in the slash scene,
+fabricated version-history entries (times, words, sizes), a hypothetical update offer ("Inkwell 1.0.1 is available / You
+have 1.0.0"; 1.0.1 has since been released), and a generic PDF viewer frame showing Inkwell's page renders with the
+bookmarks read from a real exported PDF. The figure's caption names the demo edits and the PDF frame; the `VideoObject`
+description, the closing note of the article and `public/llms.txt` say the interface is recreated. A test checks that
+every other mention of a recreation on the page refers to the launch video, that every still figure says "real
+screenshot", and the video's data, files, size, poster size, fast-start layout and captions track.
+
+The narration matches the pages, with simplifications the pages make precise: "every command is one search away" (the
+pages: "Commands are one search away"), "it runs on Windows 7 to 11" (Windows 7 SP1, 8.1, 10 and 11; Windows 8 needs 8.1),
+"saves as you go" (documents that have a file, a few seconds after you stop typing; recovery copies for new ones) and "the
+things that drive you mad in Word are fixed" (the pages list the twelve fixes).
+
 ## Download page
 
-`/inkwell/` (`src/app/inkwell/page.tsx`) mirrors `/stagecraft/` as it was for 1.0: hero with the editor screenshot and the
-recommended download (`InkwellDownload`, a `'use client'` wrapper around the shared `WindowsDownload`), three headline
-numbers, every installer with checksums, requirements with the testing note, features, installing and links (five
-numbered sections). It repeats claims from the article and adds none. Its JSON-LD `SoftwareApplication`
+`/inkwell/` (`src/app/inkwell/page.tsx`) mirrors `/stagecraft/`: hero with the editor screenshot and the recommended
+download (`InkwellDownload`, a `'use client'` wrapper around the shared `WindowsDownload`), three headline numbers, every
+installer with checksums, "What's new in 1.0.1" (`whatsNew`), requirements with the testing note, features, installing and
+links (six numbered sections). It repeats claims from the article and adds none. Its JSON-LD `SoftwareApplication`
 (`<site>/inkwell/#app`) is shared with the article's graph. Both routes are in `sitemap.ts`, `public/llms.txt` and
 `scripts/check-export.mjs`, and the blog index lists Inkwell first (its social image is the blog index's share image).

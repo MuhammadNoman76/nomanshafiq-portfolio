@@ -32,7 +32,7 @@ const imageSize = path => {
 };
 
 test('Inkwell downloads cover every supported Windows edition', () => {
-  assert.equal(version, '1.0.0');
+  assert.equal(version, '1.0.1');
   assert.equal(released, '2026-10-15');
   assert.deepEqual(editions.map(e => e.id), ['x64', 'arm64', 'x86', 'win7-8']);
   for (const edition of editions) {
@@ -41,13 +41,14 @@ test('Inkwell downloads cover every supported Windows edition', () => {
     assert.ok(edition.bytes > 1_000_000 && edition.bytes < 100_000_000, `${edition.id} size`);
   }
   assert.equal(new Set(editions.map(e => e.sha256)).size, editions.length, 'checksums are distinct');
-  assert.deepEqual(editions.map(e => e.bytes), [49025506, 43569277, 45073988, 7014508], 'sizes match the installers in the Inkwell repository');
+  assert.deepEqual(editions.map(e => e.bytes), [49038301, 43571909, 45084054, 7020082], 'sizes match the installers in the Inkwell repository');
   assert.deepEqual(editions.map(e => e.sha256), [
-    'fdb6930b94206e7c24d7755d7c872c4858a6b7ae0cd2d6e242a3427567b00c88',
-    'e0cb318b7c1d14fee5a4742706f2e8a296aa5e9722a6081f06fe737ed28bd74b',
-    '77ef488ea90313b48ae462f3872d7c9c75e490abc981ea4b91ee2cc5e6699d97',
-    '9f46c0c3c54dab81f1223c1eda11ca461c889b141f70fc6aa269dea4c8448d4b',
+    '19c10a70fe126e056504829e31eb1f1570410e872ee830514970cda96e62a46d',
+    '930722d616be18d1a73d0f1bb68023503109a84164ff848dfb022297df9f601d',
+    'df33bac61ac3a5f25985f5c886ed5ccee9bc08e9adc8222a626b3de6b118999e',
+    'a866027a5b26f49841c7f88e2212dd00d28eba8528e7b162b17603c39cc31288',
   ], 'checksums match release/SHA256SUMS.txt');
+  assert.doesNotMatch(data + read('public/updates/inkwell.json'), /Inkwell-Setup-1\.0\.0/, 'no 1.0.0 installers are left (they were removed from the repository)');
 });
 
 test('downloads point at the Inkwell repository (capital I) over HTTPS', () => {
@@ -70,7 +71,7 @@ test('Inkwell uses the shared Windows download picker', () => {
 test('the Inkwell field note is published, linked and has its sections', () => {
   assert.match(article, /<InkwellDownload\/>/);
   assert.match(article, /editions\.map/);
-  const ids = ['idea', 'design', 'writing', 'fixes', 'safe', 'serious', 'focus', 'rtl', 'formats', 'engine', 'download', 'next'];
+  const ids = ['idea', 'design', 'writing', 'fixes', 'safe', 'serious', 'focus', 'rtl', 'formats', 'engine', 'video', 'download', 'next'];
   ids.forEach((id, index) => {
     const number = String(index + 1).padStart(2, '0');
     assert.match(articleBody, new RegExp(`href="#${id}">${number} / `), `${id} is number ${number} in the contents`);
@@ -78,9 +79,7 @@ test('the Inkwell field note is published, linked and has its sections', () => {
     else assert.match(articleBody, /<section id="idea"/);
   });
   assert.equal((articleBody.match(/<section id="/g) ?? []).length, ids.length, 'no section without a contents entry');
-  assert.match(article, /\{\/\* LAUNCH VIDEO \(to be added\)/, 'the launch video has a marked place');
-  assert.ok(article.indexOf('<section id="engine"') < article.indexOf('LAUNCH VIDEO (to be added)') && article.indexOf('LAUNCH VIDEO (to be added)') < article.indexOf('<section id="download"'), 'the placeholder sits between Under the hood and Download');
-  assert.doesNotMatch(articleBody, /id="video"|<video|href="#video"/, 'no empty video section is rendered');
+  assert.doesNotMatch(article, /LAUNCH VIDEO \(to be added\)/, 'the placeholder is gone now that the video is in');
   assert.match(article, /JSON\.stringify\(schema\)\.replace\(\/<\/g, '\\\\u003c'\)/, 'structured data is escaped');
   assert.match(article, /'@type': 'BlogPosting'/);
   assert.match(article, /'@type': 'SoftwareApplication', '@id': appId/);
@@ -94,7 +93,8 @@ test('the Inkwell field note is published, linked and has its sections', () => {
   assert.match(llms, /^- Inkwell, a free Windows word processor .*https:\/\/www\.nomanshafiq\.com\/blog\/inkwell\/\r?$/m);
   assert.match(llms, /^- Inkwell download page: https:\/\/www\.nomanshafiq\.com\/inkwell\/\r?$/m);
   assert.match(llms, /^- Inkwell source: https:\/\/github\.com\/MuhammadNoman76\/Inkwell\r?$/m);
-  assert.match(llms, /Inkwell[^\n]*Version 1\.0\.0 has four installers/, 'llms.txt names the current version');
+  assert.match(llms, /Inkwell[^\n]*Version 1\.0\.1 has four installers/, 'llms.txt names the current version');
+  assert.doesNotMatch(llms, /Inkwell[^\n]*Version 1\.0\.0 has four installers/, 'llms.txt has no stale Inkwell version');
   assert.match(read('src/app/layout.tsx'), /import '\.\/inkwell\.css';/);
   assert.match(exportCheck, /'blog\/inkwell','inkwell'/);
   assert.ok(exists('docs/INKWELL-CONTENT.md'), 'evidence doc');
@@ -131,7 +131,7 @@ test('the images are real screenshots with their true sizes', () => {
     assert.ok(statSync(new URL(`../public/art/${file}`, import.meta.url)).size < 400_000, `${file} stays small`);
     assert.match(exportCheck, new RegExp(`'art/${file}'`), `${file} is checked in the export`);
     assert.match(article + downloadPage, new RegExp(`screenshots\\.${key}\\b|\\bs\\.${key}\\b`), `${key} is used`);
-    assert.equal(shotVersion, '1.0.0', `${key} shows the released version`);
+    assert.equal(shotVersion, '1.0.1', `${key} shows the current version`);
   }
   const docs = [...data.matchAll(/\{ id: '([a-z-]+)', name: '[^']+', note: '[^']+' \}/g)].map(([, id]) => id);
   assert.deepEqual(docs, ['report', 'letter', 'resume', 'essay', 'urdu-english'], 'the five demo documents, in the app’s order');
@@ -142,16 +142,56 @@ test('the images are real screenshots with their true sizes', () => {
     assert.match(exportCheck, new RegExp(`'art/inkwell-doc-${id}\\.jpg'`), `${id} tile is checked in the export`);
   }
   assert.match(article, /src=\{`\/art\/inkwell-doc-\$\{doc\.id\}\.jpg`\} width=\{560\} height=\{600\}/, 'the gallery uses the demo document tiles');
-  const figures = articleBody.match(/<Shot shot=[\s\S]*?<\/Shot>|<figure[\s\S]*?<\/figure>/g) ?? [];
+  const all = articleBody.match(/<Shot shot=[\s\S]*?<\/Shot>|<figure[\s\S]*?<\/figure>/g) ?? [];
+  const figures = all.filter(figure => !figure.includes('<video'));
+  assert.equal(all.length - figures.length, 1, 'one video figure');
   assert.ok(figures.length >= 22, 'cover, gallery and screenshots');
-  for (const figure of figures) assert.match(figure, /[Rr]eal screenshot/, 'every figure says it is (made from) a real screenshot');
+  for (const figure of figures) assert.match(figure, /[Rr]eal screenshot/, 'every still figure says it is (made from) a real screenshot');
   for (const figure of figures.filter(f => f.startsWith('<Shot'))) assert.match(figure, /Inkwell \{s\.\w+\.version\}/, 'every screenshot caption names its version');
   assert.match(downloadPage, /A real screenshot of Inkwell \{screenshots\.editor\.version\}/);
-  assert.doesNotMatch(articleBody + downloadPage, /recreat/i, 'no recreated interface on these pages yet');
+  assert.doesNotMatch(downloadPage, /recreat/i, 'the download page shows only real screenshots');
+  // Only the launch video recreates the interface, and every mention of that says it is the video.
+  const videoSection = /<section id="video"[\s\S]*?<\/section>/.exec(articleBody)?.[0] ?? '';
+  for (const sentence of articleBody.replace(videoSection, '').split(/(?<=[.!?])\s+|<[^>]+>/)) {
+    if (/recreat/i.test(sentence)) assert.match(sentence, /launch video/i, `only the launch video is a recreation: ${sentence}`);
+  }
   const guides = figures.find(figure => figure.includes('s.pictureGuides')) ?? '';
   assert.match(guides, /capture mode drew/, 'the guides figure says the capture mode drew the guides');
   const history = figures.find(figure => figure.includes('s.history')) ?? '';
   assert.match(history, /demo versions/, 'the version history figure says its versions are demo versions');
+});
+
+test('the launch video is in the field note with captions, like Stagecraft’s', () => {
+  assert.match(data, /export const launchVideo = \{\s*src: '\/media\/inkwell-launch\.mp4',\s*captions: '\/media\/inkwell-launch\.en\.vtt',\s*poster: '\/media\/inkwell-launch-poster\.jpg',\s*width: 1280,\s*height: 720,\s*duration: 'PT1M45S',\s*uploadDate: '2026-10-15',\s*\};/);
+  for (const media of ['inkwell-launch.mp4', 'inkwell-launch.en.vtt', 'inkwell-launch-poster.jpg']) {
+    assert.ok(exists('public/media/' + media), 'public/media/' + media);
+    assert.ok(statSync(new URL('../public/media/' + media, import.meta.url)).size < 25 * 1024 * 1024, media + ' fits the 25 MiB limit of Cloudflare Pages');
+    assert.match(exportCheck, new RegExp("'media/" + media.replace(/\./g, '\\.') + "'"), media + ' is checked in the export');
+  }
+  assert.equal(statSync(new URL('../public/media/inkwell-launch.mp4', import.meta.url)).size, 14_660_961, 'the MP4 is the supplied file');
+  const vtt = read('public/media/inkwell-launch.en.vtt');
+  assert.match(vtt, /^WEBVTT/);
+  assert.ok((vtt.match(/-->/g) ?? []).length >= 30, 'captions cover the whole video');
+  const ends = [...vtt.matchAll(/--> (\d\d):(\d\d):(\d\d\.\d{3})/g)].map(([, h, m, s]) => Number(h) * 3600 + Number(m) * 60 + Number(s));
+  assert.ok(Math.max(...ends) > 95 && Math.max(...ends) <= 105.1, 'the cues run to the end of the 105-second video and no further');
+  assert.deepEqual(imageSize('public/media/inkwell-launch-poster.jpg'), {width: 1280, height: 720}, 'the poster matches the video size');
+  const mp4 = readFileSync(new URL('../public/media/inkwell-launch.mp4', import.meta.url));
+  assert.equal(mp4.toString('latin1', 4, 8), 'ftyp', 'an MP4 file');
+  assert.ok(mp4.indexOf('moov') > 0 && mp4.indexOf('moov') < mp4.indexOf('mdat'), 'the MP4 is fast-start');
+  const section = /<section id="video"[\s\S]*?<\/section>/.exec(articleBody)?.[0] ?? '';
+  assert.match(section, /11 \/ THE LAUNCH VIDEO/);
+  assert.match(section, /In 105 seconds\./, 'the title matches the real length');
+  assert.match(section, /<video controls preload="metadata" playsInline poster=\{launchVideo\.poster\} width=\{launchVideo\.width\} height=\{launchVideo\.height\}><source src=\{launchVideo\.src\} type="video\/mp4"\/>/);
+  assert.match(section, /<track kind="captions" srcLang="en" label="English" src=\{launchVideo\.captions\} default\/>/);
+  assert.match(section, /The Inkwell launch video \(1:45\)\. Its app shots recreate Inkwell&apos;s interface from its source; every page is laid out and rendered by Inkwell&apos;s own engine\./, 'the caption says the app shots are recreations');
+  assert.match(section, /demo edits \(re-inserted contents and citation, typed paragraphs, illustrative version-history entries, a hypothetical update offer\) aren&apos;t in the shipped samples/, 'the caption owns up to the demo edits');
+  assert.ok(articleBody.indexOf('<section id="engine"') < articleBody.indexOf('<section id="video"') && articleBody.indexOf('<section id="video"') < articleBody.indexOf('<section id="download"'), 'between Under the hood and Download');
+  assert.match(article, /const videoId = `\$\{siteUrl\}\$\{inkwellArticle\.path\}#launch-video`/);
+  assert.match(article, /video: \{ '@id': videoId \}/, 'the article points at its video');
+  assert.match(article, /'@type': 'VideoObject', '@id': videoId[\s\S]*?recreate Inkwell’s interface[\s\S]*?thumbnailUrl: `\$\{siteUrl\}\$\{launchVideo\.poster\}`[\s\S]*?contentUrl: `\$\{siteUrl\}\$\{launchVideo\.src\}`[\s\S]*?uploadDate: launchVideo\.uploadDate, duration: launchVideo\.duration[\s\S]*?encodingFormat: 'text\/vtt'/);
+  assert.match(read('src/app/inkwell.css'), /\.inkwell-video video\{[^}]*aspect-ratio:16\/9/);
+  assert.match(read('public/llms.txt'), /launch video on the article \(English captions\) recreates Inkwell/);
+  assert.match(read('docs/INKWELL-CONTENT.md'), /^## Launch video\r?\n\r?\n`\/blog\/inkwell\/#video`/m, 'the evidence doc describes the video');
 });
 
 test('the copy stays honest about Word, licences and testing', () => {
@@ -164,13 +204,16 @@ test('the copy stays honest about Word, licences and testing', () => {
   assert.match(data, /documents: 9,\s*values: 117,\s*matched: 116,/);
   assert.match(article, /résumé is two pages in Inkwell and one in Word/, 'the one Word difference is stated');
   assert.match(article, /field result outside its hyperlink|field[^.]*outside its hyperlink/i, 'the bug Word found is told');
-  assert.match(data, /engineTests: 323,/);
+  assert.match(data, /tests: 344,/);
+  assert.match(data, /installerVersion: '1\.0\.0',/, 'the installer test is labelled with the version it ran on');
+  assert.match(data, /export const wordCheck = \{\n  version: '1\.0\.0',/, 'the Word check is labelled with its version');
+  assert.match(data, /export const performance = \{\n  version: '1\.0\.0',/, 'the timings are labelled with their version');
   assert.match(data, /installerChecks: 23,/);
   assert.match(data, /pages: 301,\s*words: 112_562,/);
   assert.match(data, /\['Open \(load the \.docx\)', '82 ms', '167 ms'\]/);
   assert.match(data, /\['Lay out every page', '2\.6 s', '3\.8 s'\]/);
   assert.match(data, /\['Median keystroke \(edit and relayout\)', '2\.9 ms', '2\.3 ms'\]/);
-  for (const item of ['real printer', 'screen readers', 'East Asian input methods', 'languages other than English', 'ARM64 hardware', 'real Windows 7 or 8\\.1 PCs', '32-bit Windows 10', 'PDF viewers'])
+  for (const item of ['real printer', 'screen readers', 'East Asian input methods', 'languages other than English', 'ARM64 hardware', 'real Windows 7 or 8\\.1 PCs', '32-bit Windows 10', 'PDF viewers', 'the 1\\.0\\.1 installers themselves'])
     assert.match(untested, new RegExp(item), `untested: ${item}`);
   for (const gap of ['résumé', 'Tight wrapping', 'Text boxes', 'Charts and SmartArt', 'equations appear as their plain text', '0\\.6 to 1\\.6 MB'])
     assert.match(knownGaps, new RegExp(gap), `known gap: ${gap}`);
@@ -182,7 +225,11 @@ test('the copy stays honest about Word, licences and testing', () => {
   assert.doesNotMatch(both, /open[- ]source (?:word processor|app)|Inkwell is open[- ]source|MIT licen[sc]e for Inkwell/i, 'no licence is chosen for Inkwell');
   assert.match(both, /Markdig \(BSD-2-Clause\)/);
   assert.match(article, /href=\{inkwellArticle\.noticesUrl\}/, 'links the third-party notices');
-  assert.doesNotMatch(both, /Ctrl\+Shift\+E\b/,'Ctrl+Shift+E opens Export in 1.0.0, so no page offers it for track changes');
+  assert.match(article, /<strong>Track changes<\/strong> \(<Keys>Ctrl\+Shift\+E<\/Keys>\)/, '1.0.1 gives Ctrl+Shift+E to track changes');
+  assert.match(article, /<strong>Export<\/strong> \(<Keys>Ctrl\+Shift\+X<\/Keys>\)/, 'and Ctrl+Shift+X to Export');
+  assert.doesNotMatch(both, /[Ee]xport(?:<\/strong>)? \((?:<Keys>)?Ctrl\+Shift\+E\b|Ctrl\+Shift\+E(?:<\/Keys>)? (?:opens|for) [Ee]xport/, 'no page gives Ctrl+Shift+E to Export any more');
+  assert.doesNotMatch(both, /folder of your own[^.]*download page|download page[^.]*folder of your own/i, 'custom-folder installs update in place in 1.0.1');
+  assert.doesNotMatch(article, /Enter shows no chip/, '1.0.1 shows the chip after Enter too');
   assert.doesNotMatch(both, /Page 3 of 10/, 'page numbers with the total read “3 of 10”');
   assert.match(article, /only network use is the update check/, 'the network note matches the README');
   assert.match(article, /never makes itself the default/, 'the installer never takes over .docx');
@@ -191,7 +238,7 @@ test('the copy stays honest about Word, licences and testing', () => {
 
 test('the Inkwell download page offers every edition', () => {
   assert.match(data, /export const downloadPage = \{[\s\S]*?path: '\/inkwell\/'/);
-  assert.match(data, /description: 'Download Inkwell 1\.0\.0,/);
+  assert.match(data, /description: 'Download Inkwell 1\.0\.1,/);
   assert.match(downloadPage, /<InkwellDownload\/>/);
   assert.match(downloadPage, /editions\.map\(edition => <tr/);
   assert.match(downloadPage, /aria-label=\{`Download Inkwell for \$\{edition\.name\}`\}/);
@@ -204,8 +251,12 @@ test('the Inkwell download page offers every edition', () => {
   assert.match(downloadPage, /downloadUrl: editions\.map\(downloadUrl\)/);
   assert.match(downloadPage, /JSON\.stringify\(schema\)\.replace\(\/<\/g, '\\\\u003c'\)/, 'structured data is escaped');
   assert.match(downloadPage, /href=\{inkwellArticle\.path\}/, 'links back to the field note');
+  assert.match(downloadPage, /<section id="whats-new"/, 'a What’s new in 1.0.1 block');
+  assert.match(downloadPage, /whatsNew\.map/);
+  for (const title of ['Updates in any folder', 'One key per command', 'Every autocorrect rule in Settings', 'A command bar that fits', 'Smaller fixes'])
+    assert.match(data, new RegExp(`\\['${title}', `), `what's new: ${title}`);
   const numbers = [...downloadPage.matchAll(/<span>(\d\d) \/ /g)].map(([, n]) => n);
-  assert.deepEqual(numbers, ['01', '02', '03', '04', '05'], 'the download page sections are numbered in order');
+  assert.deepEqual(numbers, ['01', '02', '03', '04', '05', '06'], 'the download page sections are numbered in order');
 });
 
 test('the Inkwell update feed offers the same installers as the download pages', () => {
@@ -214,7 +265,8 @@ test('the Inkwell update feed offers the same installers as the download pages',
   assert.equal(feed.version, version, 'the app is offered the version the pages offer');
   assert.equal(feed.released, released);
   assert.equal(feed.page, 'https://www.nomanshafiq.com/inkwell/');
-  assert.ok(Array.isArray(feed.notes) && feed.notes.length > 0 && feed.notes.every(note => typeof note === 'string' && note.trim()), 'release notes');
+  assert.ok(Array.isArray(feed.notes) && feed.notes.length > 0 && feed.notes.length <= 6 && feed.notes.every(note => typeof note === 'string' && note.trim()), 'release notes (the app shows up to six)');
+  assert.match(feed.notes.join(' '), /Ctrl\+Shift\+E[\s\S]*Ctrl\+Shift\+X/, 'the notes summarise 1.0.1');
   assert.deepEqual(Object.keys(feed.editions), editions.map(e => e.id), 'one entry per edition, keyed like Updater.Edition (x64, arm64, x86, win7-8)');
   for (const edition of editions) {
     const entry = feed.editions[edition.id];
