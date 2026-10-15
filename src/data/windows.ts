@@ -1,4 +1,4 @@
-/** Windows installer editions, shared by the desktop apps' download pages (PawSip, VibePlayer, Trove, Stagecraft). */
+/** Windows installer editions, shared by the desktop apps' download pages (PawSip, VibePlayer, Trove, Stagecraft, Inkwell). */
 export type EditionId = 'x64' | 'arm64' | 'x86' | 'win7-8';
 
 export interface Edition {

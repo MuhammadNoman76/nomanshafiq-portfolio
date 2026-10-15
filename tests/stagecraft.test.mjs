@@ -101,17 +101,15 @@ test('the Stagecraft field note is published, linked and has its sections', () =
   assert.match(read('AGENTS.md'), /`\/blog\/stagecraft\/`/);
 });
 
-test('Stagecraft is the first card on the blog index', () => {
+test('Stagecraft is on the blog index, right after the newest field note', () => {
   assert.match(blog, /stagecraftArticle\.path/);
   assert.match(blog, /href=\{stagecraftDownloadPage\.path\}/);
   const order = ['stagecraft-cover.jpg', 'trove-cover.jpg', 'vibeplayer-cover.jpg', 'pawsip-cover.png', 'jev-urdu-cover.webp'].map(art => blog.indexOf(art));
   assert.ok(order.every(index => index > 0), 'every card has its cover');
-  assert.deepEqual([...order].sort((a, b) => a - b), order, 'Stagecraft, then Trove, VibePlayer, PawSip and Jev-Urdu');
-  assert.match(blog, /hasPart: \[\{ '@type': 'BlogPosting', headline: stagecraftArticle\.title/);
+  assert.deepEqual([...order].sort((a, b) => a - b), order, 'Stagecraft, then Trove, VibePlayer, PawSip and Jev-Urdu (Inkwell, the newest, comes first)');
+  assert.match(blog, /\{ '@type': 'BlogPosting', headline: stagecraftArticle\.title/);
   assert.equal((blog.match(/fetchPriority="high"/g) ?? []).length, 1, 'only the first card image is high priority');
-  assert.ok(blog.indexOf('fetchPriority="high"') > blog.indexOf('stagecraft-cover.jpg') && blog.indexOf('fetchPriority="high"') < blog.indexOf('trove-cover.jpg'), 'the high-priority image is Stagecraft’s');
-  assert.match(blog, /images: \[\{ url: '\/art\/stagecraft-social\.jpg', width: 1200, height: 630 \}\]/, 'the blog index shares the Stagecraft card');
-  assert.match(blog, /images: \['\/art\/stagecraft-social\.jpg'\]/);
+  assert.match(blog, /src="\/art\/stagecraft-cover\.jpg" width="1672" height="940" alt="[^"]+" loading="lazy"/, 'Stagecraft is no longer the first card, so its image loads lazily');
   const readTime = /(\d+) MIN READ/.exec(article)?.[1];
   assert.ok(readTime, 'the article states its reading time');
   assert.match(blog, new RegExp(`<span className="blog-read-time">${readTime} MIN</span>`), 'the blog card shows the same reading time');

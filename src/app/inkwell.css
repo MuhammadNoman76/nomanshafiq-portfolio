@@ -1,0 +1,113 @@
+/* Inkwell field note and download page: a soft ink-blue to teal cover, real screenshots on a light stage,
+   and the five demo documents. Inkwell's own colours stay inside the screenshots. */
+
+/* Cover and blog card: the windows sit on the right of a light blue gradient; the title goes on the left. */
+.inkwell-cover>img,.blog-feature-art.inkwell-art,.blog-feature-art.inkwell-art img{background:linear-gradient(135deg,#f5f7fc,#e5ecf9 55%,#d3e9ea)}
+.inkwell-cover>img{object-position:50% 42%}
+.inkwell-cover .jev-cover-type>span{color:#46536a}
+.inkwell-cover .jev-cover-type>strong{color:#141c33}
+.inkwell-cover .jev-cover-type>em{font-style:italic;line-height:1.12;color:#2c4fc2}
+.blog-feature-art.inkwell-art img{object-position:0% 50%}
+.blog-feature-art.inkwell-art>span{color:#141c33}
+.blog-feature-art.inkwell-art>span>span{color:#2c4fc2;font-family:Georgia,'Times New Roman',serif;font-style:italic;line-height:1.15}
+
+/* Real screenshots, shown no larger than their size on a 150% display, on a light stage. */
+.inkwell-shot{margin:30px 0}
+.inkwell-shot-stage{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:22px;padding:clamp(18px,4.2%,40px);background:radial-gradient(circle at 84% 18%,rgba(70,104,214,.18),transparent 55%),radial-gradient(circle at 96% 100%,rgba(28,160,148,.15),transparent 50%),linear-gradient(135deg,#f4f6fb,#e8eef8 60%,#dbe8ef);border:1px solid var(--line)}
+.inkwell-shot-stage img{display:block;width:100%;height:auto;min-width:0;filter:drop-shadow(0 14px 22px rgba(12,26,58,.2)) drop-shadow(0 2px 4px rgba(12,26,58,.12))}
+.inkwell-shot figcaption,.inkwell-dl-stage figcaption,.inkwell-docs figcaption,.inkwell-video figcaption{font:9px/1.7 ui-monospace,Consolas,monospace;color:var(--muted);margin-top:10px}
+.inkwell-shot figcaption strong{font-weight:600;color:var(--ink)}
+
+/* The launch video (when it is added): 16:9, with a light frame while the poster loads. */
+.inkwell-video{margin:30px 0}
+.inkwell-video video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#e5ecf9;border:1px solid var(--line)}
+
+/* The five demo documents: the first page of each, with its name. */
+.inkwell-docs{margin:30px 0}
+.inkwell-docs ul{list-style:none;margin:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px 14px;padding:clamp(16px,3.4%,30px);background:linear-gradient(135deg,#f4f6fb,#e8eef8 60%,#dbe8ef);border:1px solid var(--line)}
+.inkwell-docs li{min-width:0}
+.inkwell-docs img{display:block;width:100%;height:auto;aspect-ratio:14/15;box-shadow:0 6px 14px rgba(12,26,58,.16),0 1px 2px rgba(12,26,58,.12)}
+.inkwell-docs strong{display:block;font-size:13px;font-weight:600;line-height:1.3;margin-top:9px;color:var(--ink)}
+.inkwell-docs li>span{display:block;font-size:11px;line-height:1.45;color:#5a6168;margin-top:2px}
+
+/* Boxed lists (the PawSip pattern), tags and the twelve fixes. */
+.inkwell-rules{border-left-color:#2c4fc2}
+.jev-prose .inkwell-rules small{color:#2c4fc2}
+.inkwell-tags{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.inkwell-tags li{font-size:14px;line-height:1.4;padding:7px 12px;background:#f6f7f8;border:1px solid #c6cfd7;color:var(--ink)}
+.inkwell-tags code{font-size:13px}
+/* Short entries (the templates) in two columns on wide screens. */
+.inkwell-twocol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px}
+.inkwell-twocol>span{grid-column:1/-1}
+.inkwell-twocol>div{margin-top:16px}
+.jev-prose .inkwell-fixes{list-style:none;margin:26px 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.jev-prose .inkwell-fixes li{margin:0;padding:18px 20px 20px;background:#f8f9fb}
+.jev-prose .inkwell-fixes small{display:block;font:10px/1.5 ui-monospace,Consolas,monospace;color:#2c4fc2;letter-spacing:.04em}
+.jev-prose .inkwell-fixes strong{display:block;font-size:16px;line-height:1.35;font-weight:600;margin:4px 0 6px;color:var(--ink)}
+.jev-prose .inkwell-fixes p{margin:0;font-size:14px;line-height:1.6;color:#464e55}
+
+/* Plain bulleted lists in the prose (the long-document tools, the known gaps). */
+.jev-prose .inkwell-list{list-style:none;margin:22px 0;padding:0;display:grid;gap:12px}
+.jev-prose .inkwell-list li{position:relative;padding-left:22px;font-size:16px;line-height:1.8;color:#414950}
+.jev-prose .inkwell-list li::before{content:"";position:absolute;left:3px;top:.72em;width:6px;height:6px;background:#2c4fc2}
+.jev-prose .inkwell-list strong{color:var(--ink);font-weight:600}
+.jev-prose .inkwell-list code{font:13px/1.5 ui-monospace,Consolas,monospace;background:#dce2e7;padding:2px 5px;color:var(--ink)}
+
+/* The Word compatibility and performance tables: prose in every column, so no monospace last column. */
+.inkwell-table{margin-block:22px 8px}
+.inkwell-table th,.inkwell-table td{font-size:13px;line-height:1.6}
+.inkwell-compat tbody th{min-width:180px;width:56%}
+.inkwell-table td{min-width:110px}
+.benchmark-data-table.inkwell-table td:last-child{font-family:inherit;white-space:normal}
+.inkwell-status{display:inline-block;font:10px/1.5 ui-monospace,Consolas,monospace;letter-spacing:.03em;padding:1px 6px;margin-right:6px;border:1px solid currentColor;white-space:nowrap}
+.inkwell-status-edited{color:#0f6b4e}
+.inkwell-status-shown{color:#2c4fc2}
+.inkwell-status-kept{color:#6b3fb0}
+.inkwell-status-placeholder{color:#8a5a00}
+.inkwell-status-unsupported{color:#a12b2b}
+.inkwell-perf td{font-variant-numeric:tabular-nums}
+/* On phones each compatibility row becomes a small card, with no sideways scrolling. */
+@media(max-width:600px){
+  .inkwell-compat table,.inkwell-compat tbody,.inkwell-compat tr,.inkwell-compat th,.inkwell-compat td{display:block;width:auto;min-width:0}
+  .inkwell-compat thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  .inkwell-compat tr{border-bottom:1px solid #ccd3d9;padding-block:12px}
+  .inkwell-compat th,.inkwell-compat td{border:0;padding:0}
+  .inkwell-compat caption{display:block}
+  .inkwell-compat tbody th{font-weight:600;margin-bottom:4px;width:auto;min-width:0}
+}
+
+/* Long commands, paths and the feed address wrap on narrow screens instead of widening the page. */
+.inkwell-article .jev-prose p code,.inkwell-dl .jev-prose p code{overflow-wrap:anywhere}
+
+/* Download page (/inkwell/): a real screenshot takes the place of PawSip's cat. */
+.inkwell-dl-stage{grid-area:stage;align-self:start;margin:0;min-width:0}
+.inkwell-dl-stage .inkwell-shot-stage{padding:clamp(16px,3vw,30px)}
+.jev-prose .inkwell-dl-more{margin-top:8px}
+.jev-prose .inkwell-dl-more a{display:inline-flex;align-items:center;gap:12px;min-height:44px;font-size:14px;color:var(--blue);text-decoration:none}
+.jev-prose .inkwell-dl-more a:hover{color:var(--ink)}
+.inkwell-dl-more svg{width:15px}
+
+@media(max-width:900px){.inkwell-dl-stage{margin-top:36px}}
+@media(max-width:850px){.blog-feature-art.inkwell-art>span>span{font-size:22px}}
+@media(max-width:760px){.jev-prose .inkwell-fixes,.inkwell-twocol{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:700px){.inkwell-docs ul{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){
+  /* Keep the image's left edge so the windows sit right of the overlay title. */
+  .inkwell-cover>img{object-position:0% 50%}
+  .inkwell-cover .jev-cover-type>strong{font-size:28px}
+  .inkwell-cover .jev-cover-type>em{font-size:16px}
+  .blog-feature-art.inkwell-art>span{font-size:min(30px,7vw)}
+  .blog-feature-art.inkwell-art>span>span{font-size:min(16px,4vw);margin-top:6px}
+  .inkwell-shot-stage{padding:14px;gap:14px}
+  .inkwell-docs ul{gap:16px 12px;padding:14px}
+  .inkwell-docs strong{font-size:12px}
+  .inkwell-docs li>span{font-size:10px}
+  .inkwell-tags li{font-size:13px}
+  .jev-prose .inkwell-fixes li{padding:16px}
+  .jev-prose .inkwell-list li{font-size:14px;line-height:1.85}
+  .inkwell-dl-stage{margin-top:28px}
+  .inkwell-dl-stage figcaption{font-size:8px}
+}
+
+/* Ctrl+K, SHA-256 and other short terms stay on one line (src/components/NoWrap.tsx). */
+.inkwell-nw{white-space:nowrap}

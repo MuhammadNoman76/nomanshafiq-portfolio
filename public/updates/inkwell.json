@@ -1,0 +1,36 @@
+{
+  "app": "Inkwell",
+  "version": "1.0.0",
+  "released": "2026-10-15",
+  "notes": [
+    "First release: a free word processor for Windows that opens and saves Word documents (.docx) and keeps the parts it doesn't edit exactly as they were.",
+    "Eight templates and six designs, a command palette (Ctrl+K), slash commands, Markdown shortcuts and autocorrect that one Ctrl+Z undoes.",
+    "Pictures that stay put, lists that number as expected, paste that matches your document, Reveal formatting, visible breaks and no stray blank last page.",
+    "Automatic save, recovery copies and version history; tables of contents, footnotes, captions, cross-references, citations, comments and track changes.",
+    "Urdu and Arabic turn a paragraph right-to-left by themselves, with Noto Nastaliq Urdu and Noto Naskh Arabic included.",
+    "Opens Markdown, text, RTF, ODT and web pages; exports PDF, Markdown, a web page and plain text."
+  ],
+  "page": "https://www.nomanshafiq.com/inkwell/",
+  "editions": {
+    "x64": {
+      "url": "https://github.com/MuhammadNoman76/Inkwell/raw/refs/heads/main/release/Inkwell-Setup-1.0.0-x64.exe",
+      "sha256": "fdb6930b94206e7c24d7755d7c872c4858a6b7ae0cd2d6e242a3427567b00c88",
+      "size": 49025506
+    },
+    "arm64": {
+      "url": "https://github.com/MuhammadNoman76/Inkwell/raw/refs/heads/main/release/Inkwell-Setup-1.0.0-arm64.exe",
+      "sha256": "e0cb318b7c1d14fee5a4742706f2e8a296aa5e9722a6081f06fe737ed28bd74b",
+      "size": 43569277
+    },
+    "x86": {
+      "url": "https://github.com/MuhammadNoman76/Inkwell/raw/refs/heads/main/release/Inkwell-Setup-1.0.0-x86.exe",
+      "sha256": "77ef488ea90313b48ae462f3872d7c9c75e490abc981ea4b91ee2cc5e6699d97",
+      "size": 45073988
+    },
+    "win7-8": {
+      "url": "https://github.com/MuhammadNoman76/Inkwell/raw/refs/heads/main/release/Inkwell-Setup-1.0.0-win7-8.exe",
+      "sha256": "9f46c0c3c54dab81f1223c1eda11ca461c889b141f70fc6aa269dea4c8448d4b",
+      "size": 7014508
+    }
+  }
+}
