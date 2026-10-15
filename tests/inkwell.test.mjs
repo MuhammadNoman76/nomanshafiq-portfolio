@@ -213,7 +213,7 @@ test('the copy stays honest about Word, licences and testing', () => {
   assert.match(data, /\['Open \(load the \.docx\)', '82 ms', '167 ms'\]/);
   assert.match(data, /\['Lay out every page', '2\.6 s', '3\.8 s'\]/);
   assert.match(data, /\['Median keystroke \(edit and relayout\)', '2\.9 ms', '2\.3 ms'\]/);
-  for (const item of ['real printer', 'screen readers', 'East Asian input methods', 'languages other than English', 'ARM64 hardware', 'real Windows 7 or 8\\.1 PCs', '32-bit Windows 10', 'PDF viewers', 'the 1\\.0\\.1 installers themselves'])
+  for (const item of ['real printer', 'screen readers', 'East Asian input methods', 'languages other than English', 'ARM64 hardware', 'real Windows 7 or 8\\.1 PCs', '32-bit Windows 10', 'PDF viewers', 'the 1\\.0\\.1 ARM64, 32-bit and Windows 7 / 8\\.1 installers'])
     assert.match(untested, new RegExp(item), `untested: ${item}`);
   for (const gap of ['résumé', 'Tight wrapping', 'Text boxes', 'Charts and SmartArt', 'equations appear as their plain text', '0\\.6 to 1\\.6 MB'])
     assert.match(knownGaps, new RegExp(gap), `known gap: ${gap}`);

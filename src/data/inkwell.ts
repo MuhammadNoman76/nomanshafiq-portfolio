@@ -230,7 +230,7 @@ export const testing = {
     'the ARM64 edition on ARM64 hardware',
     'any build on real Windows 7 or 8.1 PCs, or on 32-bit Windows 10 (those editions ran on 64-bit Windows 11)',
     'how exported PDFs look in other PDF viewers',
-    'the 1.0.1 installers themselves (the 1.0.0 installer passed the install test, and the 1.0.1 setup script differs only in its version number)',
+    'the 1.0.1 ARM64, 32-bit and Windows 7 / 8.1 installers (only the 1.0.1 x64 installer was installed and uninstalled)',
   ],
 } as const;
 

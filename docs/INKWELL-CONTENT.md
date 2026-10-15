@@ -79,8 +79,10 @@ Settings: "Check for updates automatically" and "Check now".
   layout checks: the command bar at 14 widths from 940 to 3840 px (no clipped label) and the panels, status bar, outline,
   start screen, Settings, Export and citations at the narrowest window, all PASS.
 - Installer: a per-user install / uninstall test of the **1.0.0** installer with **23 checks**, as reported (not in the
-  repository). The 1.0.1 installers weren't re-tested as far as the record shows; their script differs only in the version
-  number, and the pages list "the 1.0.1 installers themselves" as untested.
+  repository). The 1.0.1 x64 installer was then installed per user into a custom scratch folder (`/CURRENTUSER /DIR=…
+  /TASKS="mdopenwith"`): it wrote the `{B1102FC4-…}_is1` uninstall entry, Inkwell detected the install as "only for me"
+  (the 1.0.1 updater fix), and the uninstall removed the entry, folder and shortcut (as reported by the 1.0.1 release
+  run). The other three 1.0.1 installers weren't installed, and the pages say so.
 - Microsoft Word: `WordFidelityTests.WriteDocuments` writes 9 documents (`report`, `letter`, `resume`, `essay`,
   `urdu-english`, `sections`, `lists`, `tables`, `fields`) and Inkwell's 13 counts per document (pages, words, tables,
   inline and floating pictures, footnotes, endnotes, comments, sections, hyperlinks, TOCs, sources, revisions: 9 × 13 =
@@ -95,7 +97,7 @@ Settings: "Check for updates automatically" and "Check now".
 - Not tested, and both pages say so (`testing.untested`): printing on a real printer, screen readers (Narrator, NVDA),
   East Asian input methods, spell checking in languages other than English, the ARM64 edition on ARM64 hardware, real
   Windows 7 / 8.1 PCs and 32-bit Windows 10 (those editions ran on 64-bit Windows 11), exported PDFs in other PDF
-  viewers, and the 1.0.1 installers themselves.
+  viewers, and the 1.0.1 ARM64, 32-bit and Windows 7 / 8.1 installers.
 
 ## Inkwell 1.0.1
 
