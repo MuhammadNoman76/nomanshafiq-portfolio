@@ -102,18 +102,16 @@ test('the Inkwell field note is published, linked and has its sections', () => {
   assert.match(read('AGENTS.md'), /`src\/data\/inkwell\.ts`/);
 });
 
-test('Inkwell is the first card on the blog index', () => {
+test('Inkwell is on the blog index, right after the newest field note', () => {
   assert.match(blog, /inkwellArticle\.path/);
   assert.match(blog, /href=\{inkwellDownloadPage\.path\}/);
-  const order = ['inkwell-cover.jpg', 'stagecraft-cover.jpg', 'trove-cover.jpg', 'vibeplayer-cover.jpg', 'pawsip-cover.png', 'jev-urdu-cover.webp'].map(art => blog.indexOf(art));
+  const order = ['vibevideo-ai-cover.jpg', 'inkwell-cover.jpg', 'stagecraft-cover.jpg', 'trove-cover.jpg', 'vibeplayer-cover.jpg', 'pawsip-cover.png', 'jev-urdu-cover.webp'].map(art => blog.indexOf(art));
   assert.ok(order.every(index => index > 0), 'every card has its cover');
-  assert.deepEqual([...order].sort((a, b) => a - b), order, 'Inkwell, then Stagecraft, Trove, VibePlayer, PawSip and Jev-Urdu');
-  assert.match(blog, /hasPart: \[\{ '@type': 'BlogPosting', headline: inkwellArticle\.title/);
+  assert.deepEqual([...order].sort((a, b) => a - b), order, 'Inkwell, then Stagecraft, Trove, VibePlayer, PawSip and Jev-Urdu (VibeVideo AI, the newest, comes first)');
+  assert.match(blog, /\{ '@type': 'BlogPosting', headline: inkwellArticle\.title/);
   assert.equal((blog.match(/fetchPriority="high"/g) ?? []).length, 1, 'only the first card image is high priority');
-  assert.ok(blog.indexOf('fetchPriority="high"') > blog.indexOf('inkwell-cover.jpg') && blog.indexOf('fetchPriority="high"') < blog.indexOf('stagecraft-cover.jpg'), 'the high-priority image is Inkwell’s');
+  assert.match(blog, /src="\/art\/inkwell-cover\.jpg" width="1672" height="940" alt="[^"]+" loading="lazy"/, 'Inkwell is no longer the first card, so its image loads lazily');
   assert.match(blog, /src="\/art\/stagecraft-cover\.jpg" width="1672" height="940" alt="[^"]+" loading="lazy"/, 'Stagecraft is no longer the first card, so its image loads lazily');
-  assert.match(blog, /images: \[\{ url: '\/art\/inkwell-social\.jpg', width: 1200, height: 630 \}\]/, 'the blog index shares the Inkwell card');
-  assert.match(blog, /images: \['\/art\/inkwell-social\.jpg'\]/);
   const readTime = /(\d+) MIN READ/.exec(article)?.[1];
   assert.ok(readTime, 'the article states its reading time');
   assert.match(blog, new RegExp(`<span className="blog-read-time">${readTime} MIN</span>`), 'the blog card shows the same reading time');

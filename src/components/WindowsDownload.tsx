@@ -59,6 +59,8 @@ export interface WindowsDownloadProps {
   /** Every installer; the x64 one doubles as the default before detection finishes (and without JavaScript). */
   editions: Edition[];
   downloadUrl: (edition: Edition) => string;
+  /** For an app without every edition: what it needs, shown instead of a download on PCs it can't run on. */
+  requirement?: string;
 }
 
 /**
@@ -66,7 +68,7 @@ export interface WindowsDownloadProps {
  * so render it from a small 'use client' wrapper (PawSipDownload, VibePlayerDownload, TroveDownload, StagecraftDownload, InkwellDownload), not from a page.
  * Styles: the .pawsip-download rules in src/app/pawsip.css.
  */
-export function WindowsDownload({ appName, version, editions, downloadUrl }: WindowsDownloadProps) {
+export function WindowsDownload({ appName, version, editions, downloadUrl, requirement }: WindowsDownloadProps) {
   const [detection, setDetection] = useState<Detection>({ state: 'pending' });
 
   useEffect(() => {
@@ -78,7 +80,9 @@ export function WindowsDownload({ appName, version, editions, downloadUrl }: Win
   }, [appName]);
 
   const editionId: EditionId = detection.state === 'windows' ? detection.edition : 'x64';
-  const recommended = editions.find(edition => edition.id === editionId) ?? editions[0];
+  const match = editions.find(edition => edition.id === editionId);
+  const recommended = match ?? editions[0];
+  const unsupported = detection.state === 'too-old' || (detection.state === 'windows' && !match && !!requirement);
   const status = detection.state === 'pending' ? 'Checking your Windows version…'
     : detection.state === 'windows' ? `Detected: ${detection.label}`
     : detection.state === 'too-old' ? `Detected: ${detection.label}`
@@ -86,15 +90,17 @@ export function WindowsDownload({ appName, version, editions, downloadUrl }: Win
 
   return <div className="pawsip-download">
     <div className="pawsip-download-top"><span>{detection.state === 'other' ? 'FOR YOUR WINDOWS PC' : 'RECOMMENDED FOR THIS PC'}</span><span role="status" aria-live="polite">{status}</span></div>
-    {detection.state === 'too-old'
-      ? <p className="pawsip-download-note">{`${appName} needs Windows 7 Service Pack 1 or newer, so it won't run on ${detection.label}. Any of the installers below will work on a newer PC.`}</p>
+    {unsupported
+      ? <p className="pawsip-download-note">{requirement
+          ? `${appName} needs ${requirement}, so it won't run on ${detection.label}. The installers below are for a PC that does.`
+          : `${appName} needs Windows 7 Service Pack 1 or newer, so it won't run on ${detection.label}. Any of the installers below will work on a newer PC.`}</p>
       : <a className="pawsip-download-main" href={downloadUrl(recommended)}>
           <span className="pawsip-download-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 4v12m-5-5 5 5 5-5M5 20h14" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
           <span className="pawsip-download-label"><strong>{`Download ${appName} ${version}`}</strong><small>{recommended.name} · {formatSize(recommended.bytes)}</small></span>
           <Arrow/>
         </a>}
     {detection.state === 'other' && <p className="pawsip-download-note">{`${appName} is a Windows app. Open this page on your Windows PC, or pick the right installer from the table below.`}</p>}
-    {detection.state === 'windows' && detection.note && <p className="pawsip-download-note">{detection.note}</p>}
+    {detection.state === 'windows' && match && detection.note && <p className="pawsip-download-note">{detection.note}</p>}
     {detection.state === 'windows' && detection.label.startsWith('Windows 10 or 11') && <p className="pawsip-download-note">Your browser doesn&apos;t say whether this is Windows 10 or 11. The same installer works on both.</p>}
   </div>;
 }

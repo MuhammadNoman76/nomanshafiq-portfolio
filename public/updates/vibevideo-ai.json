@@ -1,0 +1,23 @@
+{
+  "app": "VibeVideoAI",
+  "version": "0.1.0",
+  "released": "2026-10-18",
+  "notes": [
+    "The first preview of VibeVideo AI: VibePlayer with an AI scene filter that runs on your PC.",
+    "It finds scenes with nudity, sex or kissing, marks them in pink on the progress bar and skips them.",
+    "Uses the NPU if there is one, then the graphics card, then the CPU."
+  ],
+  "page": "https://www.nomanshafiq.com/vibevideo-ai/",
+  "editions": {
+    "x64": {
+      "url": "https://github.com/MuhammadNoman76/VibePlayer/raw/refs/heads/vibevideo-ai/release/VibeVideoAI-Setup-0.1.0-x64.exe",
+      "sha256": "bc13dcf48cb36eb1281666a95cdb0111b4feb40d4fb57eda4fb331cc72807025",
+      "size": 86822224
+    },
+    "arm64": {
+      "url": "https://github.com/MuhammadNoman76/VibePlayer/raw/refs/heads/vibevideo-ai/release/VibeVideoAI-Setup-0.1.0-arm64.exe",
+      "sha256": "2d9afde5e6829fac0aa381d5eb1e755cfce147d9fe3456b1b57a345fc7385c05",
+      "size": 78137144
+    }
+  }
+}

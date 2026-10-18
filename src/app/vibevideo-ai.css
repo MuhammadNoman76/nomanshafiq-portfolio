@@ -1,0 +1,30 @@
+/* VibeVideo AI field note and download page. They reuse VibePlayer's classes (vibe-*) for the dark cover, figures and video;
+   VibeVideo AI's own pink (#FF3D8B) appears only in the cover type, the step labels and the figures. */
+.vv-cover .jev-cover-type>em,.blog-feature-art.vv-art>span>span{color:#ff5c9d}
+.blog-feature-art.vv-art,.blog-feature-art.vv-art img{background:linear-gradient(#0e060a,#190a0f 35%,#130b10 60%,#07060b)}
+.blog-feature-art.vv-art img{object-position:20% 50%}
+.blog-feature-art.vv-art>span{color:#f1f1f1}
+.blog-feature-art.vv-art>span>span{line-height:1.15}
+
+.vv-steps{border-left-color:#e0337a}
+.jev-prose .vv-steps small{color:#b0175a}
+
+.vv-controls tbody th,.vv-speeds tbody th{min-width:150px}
+.benchmark-data-table.vv-controls td:last-child{font-family:inherit;white-space:normal}
+.vv-speeds td:nth-child(3){font-weight:600;white-space:nowrap}
+.vv-speeds td:nth-child(4){white-space:nowrap}
+
+.jev-prose .vv-limits{margin:24px 0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.jev-prose .vv-limits li{margin:0;padding:16px 0 16px 26px;border-bottom:1px solid var(--line);position:relative;line-height:1.75}
+.jev-prose .vv-limits li::before{content:"";position:absolute;left:2px;top:27px;width:9px;height:9px;border-radius:50%;background:#e0337a}
+.vv-article .jev-prose p code,.vv-page .jev-prose p code{overflow-wrap:anywhere}
+
+@media(max-width:1100px){.blog-feature-art.vv-art img{object-position:0% 50%}}
+@media(max-width:850px){.blog-feature-art.vv-art>span>span{font-size:22px}}
+@media(max-width:600px){
+  .blog-feature-art.vv-art img{object-position:40px 50%}
+  .blog-feature-art.vv-art>span{font-size:30px}
+  .blog-feature-art.vv-art>span>span{font-size:18px;margin-top:6px}
+  .vv-controls tbody th,.vv-speeds tbody th{min-width:0}
+  .jev-prose .vv-limits li{padding-left:22px}
+}

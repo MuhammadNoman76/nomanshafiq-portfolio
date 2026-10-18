@@ -33,7 +33,7 @@ test('downloads point at the published VibePlayer repository over HTTPS', () => 
 
 test('both desktop apps share one Windows download picker', () => {
   const picker = read('src/components/WindowsDownload.tsx');
-  assert.match(picker, /export function WindowsDownload\(\{ appName, version, editions, downloadUrl \}/);
+  assert.match(picker, /export function WindowsDownload\(\{ appName, version, editions, downloadUrl(?:, requirement)? \}/);
   assert.doesNotMatch(picker.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, ''), /PawSip|VibePlayer/, 'no app names baked into the shared picker');
   for (const [file, app] of [['src/components/PawSipDownload.tsx', 'PawSip'], ['src/components/VibePlayerDownload.tsx', 'VibePlayer']]) {
     const wrapper = read(file);
@@ -62,7 +62,7 @@ test('the VibePlayer field note is published, linked and has its media', () => {
   assert.match(article, /JSON\.stringify\(schema\)\.replace\(\/<\/g, '\\\\u003c'\)/, 'structured data is escaped');
   const blog = read('src/app/blog/page.tsx');
   assert.match(blog, /vibeplayerArticle\.path/);
-  assert.ok(blog.indexOf('vibeplayer-cover.jpg') < blog.indexOf('pawsip-cover.png'), 'VibePlayer comes before PawSip (Inkwell, Stagecraft and Trove, the newest, come first)');
+  assert.ok(blog.indexOf('vibeplayer-cover.jpg') < blog.indexOf('pawsip-cover.png'), 'VibePlayer comes before PawSip (VibeVideo AI, Inkwell, Stagecraft and Trove, the newest, come first)');
   assert.match(blog, /\{ '@type': 'BlogPosting', headline: vibeplayerArticle\.title/);
   assert.match(read('src/app/sitemap.ts'), /\$\{siteUrl\}\/blog\/vibeplayer\/`,lastModified:'2026-10-13'/);
   assert.match(read('public/llms.txt'), /\/blog\/vibeplayer\//);

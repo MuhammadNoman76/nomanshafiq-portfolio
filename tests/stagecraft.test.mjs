@@ -101,12 +101,12 @@ test('the Stagecraft field note is published, linked and has its sections', () =
   assert.match(read('AGENTS.md'), /`\/blog\/stagecraft\/`/);
 });
 
-test('Stagecraft is on the blog index, right after the newest field note', () => {
+test('Stagecraft is on the blog index, after the two newest field notes', () => {
   assert.match(blog, /stagecraftArticle\.path/);
   assert.match(blog, /href=\{stagecraftDownloadPage\.path\}/);
   const order = ['stagecraft-cover.jpg', 'trove-cover.jpg', 'vibeplayer-cover.jpg', 'pawsip-cover.png', 'jev-urdu-cover.webp'].map(art => blog.indexOf(art));
   assert.ok(order.every(index => index > 0), 'every card has its cover');
-  assert.deepEqual([...order].sort((a, b) => a - b), order, 'Stagecraft, then Trove, VibePlayer, PawSip and Jev-Urdu (Inkwell, the newest, comes first)');
+  assert.deepEqual([...order].sort((a, b) => a - b), order, 'Stagecraft, then Trove, VibePlayer, PawSip and Jev-Urdu (VibeVideo AI and Inkwell, the newest, come first)');
   assert.match(blog, /\{ '@type': 'BlogPosting', headline: stagecraftArticle\.title/);
   assert.equal((blog.match(/fetchPriority="high"/g) ?? []).length, 1, 'only the first card image is high priority');
   assert.match(blog, /src="\/art\/stagecraft-cover\.jpg" width="1672" height="940" alt="[^"]+" loading="lazy"/, 'Stagecraft is no longer the first card, so its image loads lazily');
