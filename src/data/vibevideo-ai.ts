@@ -10,8 +10,8 @@ export const vibevideoArticle = {
   version: '0.1.0',
   /** When this version was released (the article itself was published on `date`). */
   released: '2026-10-18',
-  repoUrl: 'https://github.com/MuhammadNoman76/VibePlayer/tree/vibevideo-ai',
-  checksumsUrl: 'https://github.com/MuhammadNoman76/VibePlayer/blob/vibevideo-ai/release/VibeVideoAI-SHA256SUMS.txt',
+  repoUrl: 'https://github.com/MuhammadNoman76/vibeplayer-ai',
+  checksumsUrl: 'https://github.com/MuhammadNoman76/vibeplayer-ai/blob/main/release/VibeVideoAI-SHA256SUMS.txt',
 };
 
 /** The standalone download page. Its claims mirror the field note. */
@@ -24,17 +24,17 @@ export const downloadPage = {
 /** What the app needs: shown by the download picker on PCs it can't run on. */
 export const requirement = '64-bit Windows 10 (version 1903 or later) or Windows 11, on an x64 or ARM64 PC';
 
-/** Installers published on the VibePlayer repository's vibevideo-ai branch (release/), verified against the files on GitHub. */
+/** Installers published in the vibeplayer-ai repository (release/ on main), verified against the files on GitHub. */
 export const editions: Edition[] = [
   {
     id: 'x64', name: 'Windows 10 & 11 · 64-bit', forWho: 'Intel or AMD processor. Most PCs.',
     windows: 'Windows 10 (1903 or later), Windows 11', cpu: '64-bit (x64)', runtime: 'Self-contained. The AI models download on first use.',
-    file: 'VibeVideoAI-Setup-0.1.0-x64.exe', bytes: 86822224, sha256: 'bc13dcf48cb36eb1281666a95cdb0111b4feb40d4fb57eda4fb331cc72807025',
+    file: 'VibeVideoAI-Setup-0.1.0-x64.exe', bytes: 86821647, sha256: '51732bc6d96efc448c60c3bf63ce61de1c1b3918d828b86362e68ca217fb8c19',
   },
   {
     id: 'arm64', name: 'Windows 11 & 10 on ARM', forWho: 'Snapdragon laptops and other ARM PCs. Not yet tested on ARM hardware.',
     windows: 'Windows 10 (1903 or later), Windows 11', cpu: 'ARM64', runtime: 'Self-contained. The AI models download on first use.',
-    file: 'VibeVideoAI-Setup-0.1.0-arm64.exe', bytes: 78137144, sha256: '2d9afde5e6829fac0aa381d5eb1e755cfce147d9fe3456b1b57a345fc7385c05',
+    file: 'VibeVideoAI-Setup-0.1.0-arm64.exe', bytes: 78144183, sha256: '2027fcfbedb68a398ba3e1b78ec0a0e4d6bbbb4e272c5d85ee34b3e0a5642197',
   },
 ];
 
@@ -42,7 +42,7 @@ export const editions: Edition[] = [
 export const updateFeed = 'https://www.nomanshafiq.com/updates/vibevideo-ai.json';
 
 export const downloadUrl = (edition: Edition) =>
-  `https://github.com/MuhammadNoman76/VibePlayer/raw/refs/heads/vibevideo-ai/release/${edition.file}`;
+  `https://github.com/MuhammadNoman76/vibeplayer-ai/raw/refs/heads/main/release/${edition.file}`;
 
 /**
  * Model files the app downloads the first time it scans (src/VibePlayer/Core/Ai/Onnx/ModelStore.cs), each checked
@@ -74,7 +74,7 @@ export const launchVideo = {
   poster: '/media/vibevideo-ai-launch-poster.jpg',
   width: 1280,
   height: 720,
-  duration: 'PT1M17S',
+  duration: 'PT1M18S',
   uploadDate: '2026-10-18',
 };
 

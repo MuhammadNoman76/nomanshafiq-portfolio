@@ -24,9 +24,10 @@ test('VibeVideo AI offers its two 64-bit installers', () => {
   assert.match(data, /export const requirement = '64-bit Windows 10 \(version 1903 or later\) or Windows 11/);
 });
 
-test('downloads point at the vibevideo-ai branch of the VibePlayer repository over HTTPS', () => {
-  assert.match(data, /https:\/\/github\.com\/MuhammadNoman76\/VibePlayer\/raw\/refs\/heads\/vibevideo-ai\/release\/\$\{edition\.file\}/);
-  assert.match(data, /checksumsUrl: 'https:\/\/github\.com\/MuhammadNoman76\/VibePlayer\/blob\/vibevideo-ai\/release\/VibeVideoAI-SHA256SUMS\.txt'/);
+test('downloads point at the vibeplayer-ai repository over HTTPS', () => {
+  assert.match(data, /https:\/\/github\.com\/MuhammadNoman76\/vibeplayer-ai\/raw\/refs\/heads\/main\/release\/\$\{edition\.file\}/);
+  assert.match(data, /checksumsUrl: 'https:\/\/github\.com\/MuhammadNoman76\/vibeplayer-ai\/blob\/main\/release\/VibeVideoAI-SHA256SUMS\.txt'/);
+  assert.match(data, /repoUrl: 'https:\/\/github\.com\/MuhammadNoman76\/vibeplayer-ai'/);
   assert.doesNotMatch(data, /http:\/\//);
 });
 
@@ -44,6 +45,8 @@ test('the VibeVideo AI field note is published, linked and has its media', () =>
   assert.match(article, /editions\.map/);
   for (const id of ['idea', 'how', 'control', 'hardware', 'limits', 'video', 'download', 'next']) assert.match(article, new RegExp(`id="${id}"`), id);
   for (const art of ['cover', 'social', 'scan', 'frames', 'menu', 'skip', 'processor']) assert.ok(exists(`public/art/vibevideo-ai-${art}.jpg`), `public/art/vibevideo-ai-${art}.jpg`);
+  assert.ok(exists('public/art/vibevideo-ai-scenes.png'), 'the Scenes to skip screenshot');
+  assert.match(read('scripts/check-export.mjs'), /'art\/vibevideo-ai-scenes\.png'/);
   for (const media of ['vibevideo-ai-launch.mp4', 'vibevideo-ai-launch.en.vtt', 'vibevideo-ai-launch-poster.jpg']) {
     assert.ok(exists(`public/media/${media}`), `public/media/${media}`);
     assert.ok(statSync(new URL(`../public/media/${media}`, import.meta.url)).size < 25 * 1024 * 1024, `${media} fits Cloudflare Pages' 25 MiB limit`);
@@ -52,7 +55,7 @@ test('the VibeVideo AI field note is published, linked and has its media', () =>
   assert.match(article, /<video controls preload="metadata" playsInline poster=\{launchVideo\.poster\}/);
   assert.match(article, /<track kind="captions" srcLang="en" label="English" src=\{launchVideo\.captions\} default\/>/);
   assert.match(article, /'@type': 'VideoObject'[\s\S]*?thumbnailUrl[\s\S]*?contentUrl[\s\S]*?uploadDate[\s\S]*?duration: launchVideo\.duration/);
-  assert.match(data, /duration: 'PT1M17S'/);
+  assert.match(data, /duration: 'PT1M18S'/);
   assert.match(article, /JSON\.stringify\(schema\)\.replace\(\/<\/g, '\\\\u003c'\)/, 'structured data is escaped');
   assert.match(article, /const appId = `\$\{siteUrl\}\$\{downloadPage\.path\}#app`/, 'the app id is shared with the download page');
   assert.match(read('src/app/sitemap.ts'), /\$\{siteUrl\}\/blog\/vibevideo-ai\/`,lastModified:'2026-10-18'/);
@@ -82,8 +85,12 @@ test('the pages are honest about recreations, footage, licences and what is unte
   assert.match(credit, /all in the public domain/);
   for (const source of ['https://archive.org/details/DuckandC1951', 'https://archive.org/details/the-kiss-1896', 'https://commons.wikimedia.org/wiki/File:Kissing_the_War_Goodbye.jpg']) assert.ok(data.includes(source), source);
   const figures = article.match(/<figure[\s\S]*?<\/figure>/g) ?? [];
-  assert.ok(figures.length >= 7, 'cover, five figures and the video');
-  for (const figure of figures) assert.match(figure, /<ReelCredit\/>/, 'every figure credits the footage');
+  assert.ok(figures.length >= 8, 'cover, six figures and the video');
+  const screenshot = figures.filter(figure => figure.includes('vibevideo-ai-scenes.png'));
+  assert.equal(screenshot.length, 1, 'the Scenes to skip window is shown once');
+  assert.match(screenshot[0], /a real screenshot \(the app drew it with its own interface code/, 'the real screenshot says how it was made');
+  assert.match(screenshot[0], /example scenes/, 'and that its scenes are examples');
+  for (const figure of figures.filter(figure => !figure.includes('vibevideo-ai-scenes.png'))) assert.match(figure, /<ReelCredit\/>/, 'every figure with footage credits it');
   assert.match(article, /<FootageCredit\/>/, 'the video credits the Big Buck Bunny shot');
   assert.match(article, /recreated from the app&apos;s interface code/);
   assert.match(article, /not a screenshot/);
@@ -139,7 +146,7 @@ test('the update feed offers the same installers as the download pages', () => {
   for (const edition of editions) {
     const entry = feed.editions[edition.id];
     assert.deepEqual(Object.keys(entry).sort(), ['sha256', 'size', 'url'], edition.id);
-    assert.equal(entry.url, `https://github.com/MuhammadNoman76/VibePlayer/raw/refs/heads/vibevideo-ai/release/${edition.file}`, `${edition.id} url`);
+    assert.equal(entry.url, `https://github.com/MuhammadNoman76/vibeplayer-ai/raw/refs/heads/main/release/${edition.file}`, `${edition.id} url`);
     assert.equal(entry.sha256, edition.sha256, `${edition.id} sha256`);
     assert.equal(entry.size, edition.bytes, `${edition.id} size`);
   }
@@ -149,4 +156,12 @@ test('the update feed offers the same installers as the download pages', () => {
   assert.match(article, /<code>\{updateFeed\}<\/code>/);
   assert.match(downloadPage, /<code>\{updateFeed\}<\/code>/);
   assert.match(downloadPage, /Settings › Updates/);
+});
+
+test('the pages describe the scene controls the app has', () => {
+  for (const action of ['Stretch or trim it.', 'Keep it.', 'Watch it once.', 'Undo your changes.', 'Add one it missed.']) assert.ok(article.includes(`'${action}'`), action);
+  assert.match(article, /Scenes to skip…/);
+  assert.match(article, /−1 s and \+1 s/);
+  assert.match(downloadPage, /'Every scene, your call'/);
+  assert.match(read('public/llms.txt'), /Scenes to skip/);
 });

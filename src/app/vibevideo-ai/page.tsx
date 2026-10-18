@@ -27,7 +27,7 @@ const features = [
   ['Finds the scenes', 'Open a video and VibeVideo AI looks through it on your PC, two pictures for every second of film, starting where you are watching. Scenes with nudity, sex or kissing turn pink on the progress bar.'],
   ['Skips them', 'When playback reaches a pink part, the player jumps to its end and says so: “Skipped a scene (AI filter)”.'],
   ['Your choice of what and how strict', 'Switch nudity and sex, or kissing, on or off. Low, Medium or High sensitivity, changed at any time without a new scan.'],
-  ['Don’t skip', 'Every found scene is listed in the menu with its times. One click keeps a scene you’d like to see.'],
+  ['Every scene, your call', 'Scenes to skip lists every scene with its times. Stretch or trim one a second at a time, keep it, watch it once, or add a scene the AI missed. Your changes are saved for that file.'],
   ['On your own PC', `Nothing is uploaded, and the file is never changed. It uses the NPU if there is one: on my laptop it scans full-HD video at about ${fullHdSpeed}× real time.`],
   ['Everything VibePlayer does', 'The YouTube-style player, hold for 2x, the mouse-wheel tricks, resume, and skip mode for the parts you mark yourself.'],
 ] as const;
@@ -97,7 +97,7 @@ export default function VibeVideoAiDownloadPage() {
     <section id="preview" className="pawsip-dl-section" aria-labelledby="preview-heading">
       <div className="section-eyebrow"><span>04 / AN EARLY PREVIEW</span><span>WHAT TO EXPECT</span></div>
       <div className="pawsip-dl-cols"><h2 id="preview-heading">Good, not perfect.<br/><em>Yet.</em></h2><div className="pawsip-dl-body jev-prose">
-        <p>This is version 0.1. It can miss a scene, especially a dark or quick one, and it can mark a harmless one: at High sensitivity it once marked five seconds of a 1951 civil defence film for schools. The pink marks are there so you can see what it found before it skips, and <strong>Don&apos;t skip</strong> keeps any scene you choose.</p>
+        <p>This is version 0.1. It can miss a scene, especially a dark or quick one, and it can mark a harmless one: at High sensitivity it once marked five seconds of a 1951 civil defence film for schools. The pink marks are there so you can see what it found before it skips. In <strong>Scenes to skip</strong> you keep any scene you choose, move its start and end, or add one it missed.</p>
         <p>It isn&apos;t parental control: anyone at the PC can switch it off. It scans files on your PC, not network streams. The optional extra nudity detector, NudeNet, is off by default because of its AGPL-3.0 licence; switching it on downloads it ({formatSize(models.nudenet.bytes)}).</p>
       </div></div>
     </section>
@@ -119,7 +119,7 @@ export default function VibeVideoAiDownloadPage() {
     <section id="more" className="pawsip-dl-section" aria-labelledby="more-heading">
       <div className="section-eyebrow"><span>06 / MORE ABOUT VIBEVIDEO AI</span><span>THE STORY AND THE SOURCE</span></div>
       <div className="pawsip-dl-cols"><h2 id="more-heading">Curious how<br/><em>it decides?</em></h2><div className="pawsip-dl-body jev-prose">
-        <p>I wrote about how it looks at a film, the real scores behind one found scene, the speed on each chip, and what it still gets wrong. There&apos;s a 77-second launch video, too.</p>
+        <p>I wrote about how it looks at a film, the real scores behind one found scene, the speed on each chip, and what it still gets wrong. There&apos;s a 78-second launch video, too.</p>
         <div className="jev-downloads"><a href={vibevideoArticle.path}>Read the story behind VibeVideo AI <Arrow/></a><a href={vibevideoArticle.repoUrl} target="_blank" rel="noopener noreferrer">View the source on GitHub <Arrow diagonal/></a><a href={vibevideoArticle.checksumsUrl} target="_blank" rel="noopener noreferrer">SHA-256 checksums file <Arrow diagonal/></a></div>
         <p className="jev-small-note">VibeVideo AI uses LibVLC, the open-source engine of the VLC project, under the LGPL, and CLIP ViT-B/32 by OpenAI under the MIT licence. It is not affiliated with or endorsed by VideoLAN or OpenAI. The image above is a recreation of the app&apos;s interface, not a screenshot.</p>
       </div></div>
