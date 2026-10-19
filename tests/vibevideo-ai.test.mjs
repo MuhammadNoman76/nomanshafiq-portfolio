@@ -66,15 +66,13 @@ test('the VibeVideo AI field note is published, linked and has its media', () =>
   assert.match(read('AGENTS.md'), /`src\/data\/vibevideo-ai\.ts`/);
 });
 
-test('VibeVideo AI is the first card on the blog index', () => {
+test('VibeVideo AI is the second card on the blog index, after Tall Screenshot', () => {
   assert.match(blog, /vibevideoArticle\.path/);
   assert.match(blog, /href=\{vibevideoDownloadPage\.path\}/);
-  assert.ok(blog.indexOf('vibevideo-ai-cover.jpg') > 0 && blog.indexOf('vibevideo-ai-cover.jpg') < blog.indexOf('inkwell-cover.jpg'), 'VibeVideo AI comes before Inkwell');
-  assert.match(blog, /hasPart: \[\{ '@type': 'BlogPosting', headline: vibevideoArticle\.title/);
+  assert.ok(blog.indexOf('tall-screenshot-cover.jpg') < blog.indexOf('vibevideo-ai-cover.jpg') && blog.indexOf('vibevideo-ai-cover.jpg') < blog.indexOf('inkwell-cover.jpg'), 'Tall Screenshot (the newest), then VibeVideo AI, then Inkwell');
+  assert.match(blog, /\}, \{ '@type': 'BlogPosting', headline: vibevideoArticle\.title/, 'second in the structured data, after Tall Screenshot');
   assert.equal((blog.match(/fetchPriority="high"/g) ?? []).length, 1, 'only the first card image is high priority');
-  assert.ok(blog.indexOf('fetchPriority="high"') > blog.indexOf('vibevideo-ai-cover.jpg') && blog.indexOf('fetchPriority="high"') < blog.indexOf('inkwell-cover.jpg'), 'the high-priority image is VibeVideo AI’s');
-  assert.match(blog, /images: \[\{ url: '\/art\/vibevideo-ai-social\.jpg', width: 1200, height: 630 \}\]/, 'the blog index shares the VibeVideo AI card');
-  assert.match(blog, /images: \['\/art\/vibevideo-ai-social\.jpg'\]/);
+  assert.match(blog, /src="\/art\/vibevideo-ai-cover\.jpg" width="1672" height="940" alt="[^"]+" loading="lazy"/, 'VibeVideo AI is no longer the first card, so its image loads lazily');
   const readTime = /(\d+) MIN READ/.exec(article)?.[1];
   assert.ok(readTime, 'the article states its reading time');
   assert.match(blog, new RegExp(`<span className="blog-read-time">${readTime} MIN</span>`), 'the blog card shows the same reading time');

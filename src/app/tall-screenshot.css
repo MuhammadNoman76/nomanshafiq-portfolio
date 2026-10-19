@@ -1,0 +1,66 @@
+/* Tall Screenshot field note and download page: a deep violet cover, real screenshots on a light violet stage,
+   and the launch video. The extension's own violet (#7C3AED) appears only in the cover, the labels and the bullets. */
+
+/* Cover and blog card: the popup and the stitched page sit on the right of a dark violet image; the title goes on the left. */
+.ts-cover>img,.blog-feature-art.ts-art,.blog-feature-art.ts-art img{background:linear-gradient(135deg,#0b0a10,#160f26 55%,#1d1033)}
+.ts-cover>img{object-position:100% 50%}
+.ts-cover .jev-cover-type>span{color:rgba(244,242,250,.7)}
+.ts-cover .jev-cover-type>strong{color:#f4f2fa}
+.ts-cover .jev-cover-type>em{color:#c4b5fd;font-style:italic;line-height:1.12}
+.blog-feature-art.ts-art img{object-position:100% 50%}
+.blog-feature-art.ts-art>span{color:#f4f2fa}
+.blog-feature-art.ts-art>span>span{color:#c4b5fd;font-family:Georgia,'Times New Roman',serif;font-style:italic;line-height:1.15}
+
+/* Boxed list (the PawSip pattern) */
+.ts-rules{border-left-color:#7c3aed}
+.jev-prose .ts-rules small{color:#6d28d9}
+
+/* Real screenshots on a light violet stage. */
+.ts-shot{margin:30px 0}
+.ts-shot-stage{display:flex;justify-content:center;align-items:center;padding:clamp(16px,3.6%,34px);background:radial-gradient(circle at 86% 14%,rgba(124,58,237,.16),transparent 55%),radial-gradient(circle at 6% 100%,rgba(56,189,248,.12),transparent 50%),linear-gradient(135deg,#f6f5fb,#eeebf7 60%,#e6e9f4);border:1px solid var(--line)}
+.ts-shot-stage img{display:block;width:100%;height:auto;min-width:0;filter:drop-shadow(0 14px 22px rgba(30,16,70,.18)) drop-shadow(0 2px 4px rgba(30,16,70,.12))}
+.ts-shot-popup .ts-shot-stage img{width:auto;max-width:min(340px,100%)}
+.ts-shot-tall .ts-shot-stage img{width:auto;max-width:min(420px,100%)}
+.ts-shot figcaption,.ts-video figcaption,.ts-dl-stage figcaption{font:9px/1.7 ui-monospace,Consolas,monospace;color:var(--muted);margin-top:10px}
+.ts-shot figcaption strong{font-weight:600;color:var(--ink)}
+
+/* Launch video */
+.ts-video{margin:30px 0}
+.ts-video video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#0b0a10;border:1px solid var(--line)}
+
+/* Bulleted lists in the prose */
+.jev-prose .ts-list,.jev-prose .ts-limits{list-style:none;margin:24px 0;padding:0;border-top:1px solid var(--line)}
+.jev-prose .ts-list li,.jev-prose .ts-limits li{margin:0;padding:16px 0 16px 26px;border-bottom:1px solid var(--line);position:relative;line-height:1.75}
+.jev-prose .ts-list li::before,.jev-prose .ts-limits li::before{content:"";position:absolute;left:2px;top:27px;width:9px;height:9px;border-radius:50%;background:#7c3aed}
+
+/* Tables: prose in the last column, not monospace. */
+.ts-keys tbody th,.ts-perms tbody th{min-width:150px}
+.benchmark-data-table.ts-keys td:last-child,.benchmark-data-table.ts-perms td:last-child{font-family:inherit;white-space:normal}
+.ts-keys kbd{white-space:nowrap}
+
+/* Download box note and checksum */
+.ts-download .pawsip-download-note strong{font-weight:600;color:var(--ink)}
+.jev-prose .ts-checksum,.pawsip-dl-body .ts-checksum{margin:22px 0}
+.ts-checksum summary{cursor:pointer;font-size:13px;color:var(--blue)}
+.ts-article .jev-prose p code,.ts-page .jev-prose p code,.ts-page .pawsip-dl-steps code,.ts-article .pawsip-dl-steps code{overflow-wrap:anywhere}
+
+/* Download page: the popup takes the place of PawSip's cat. */
+.ts-dl-stage{grid-area:stage;align-self:start;margin:0;min-width:0}
+.ts-dl-stage .ts-shot-stage{padding:clamp(22px,4vw,44px)}
+.ts-dl-stage .ts-shot-stage img{width:auto;max-width:min(340px,100%)}
+
+@media(max-width:900px){.ts-dl-stage{margin-top:36px}}
+@media(max-width:850px){.blog-feature-art.ts-art>span>span{font-size:22px}}
+@media(max-width:600px){
+  .ts-cover>img{object-position:72% 50%}
+  .ts-cover .jev-cover-type>strong{font-size:28px}
+  .ts-cover .jev-cover-type>em{font-size:17px}
+  .blog-feature-art.ts-art img{object-position:72% 50%}
+  .blog-feature-art.ts-art>span{font-size:min(30px,7vw)}
+  .blog-feature-art.ts-art>span>span{font-size:min(17px,4vw);margin-top:6px}
+  .ts-shot-stage{padding:14px}
+  .ts-keys tbody th,.ts-perms tbody th{min-width:0}
+  .jev-prose .ts-list li,.jev-prose .ts-limits li{padding-left:22px}
+  .ts-dl-stage{margin-top:28px}
+  .ts-dl-stage figcaption{font-size:8px}
+}

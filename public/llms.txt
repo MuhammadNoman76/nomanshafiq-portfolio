@@ -5,6 +5,9 @@ AI engineer and full-stack developer based in Karachi, Pakistan.
 - Portfolio: https://www.nomanshafiq.com/
 - Projects: https://www.nomanshafiq.com/work/
 - Blog: https://www.nomanshafiq.com/blog/
+- Tall Screenshot, a free Chrome and Edge extension for full-page, custom-length and select-area screenshots with a crop editor, a colour picker and a ruler (article and download): https://www.nomanshafiq.com/blog/tall-screenshot/
+- Tall Screenshot download page: https://www.nomanshafiq.com/tall-screenshot/
+- Tall Screenshot source: https://github.com/MuhammadNoman76/Tall-Screenshot
 - VibeVideo AI, a free preview of VibePlayer with an on-device AI scene filter that finds and skips scenes with nudity, sex or kissing (article and downloads): https://www.nomanshafiq.com/blog/vibevideo-ai/
 - VibeVideo AI download page: https://www.nomanshafiq.com/vibevideo-ai/
 - VibeVideo AI source: https://github.com/MuhammadNoman76/vibeplayer-ai
