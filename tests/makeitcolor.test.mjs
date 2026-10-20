@@ -30,7 +30,7 @@ const imageSize = path => {
 /** Every picture on the pages, with its true size. */
 const art = {
   cover: [1672, 940], social: [1200, 630], app: [1600, 973], 'app-light': [1600, 973], settings: [900, 917],
-  restore: [1612, 600], enhance: [1612, 450], film: [1598, 476], doraha: [1612, 450], strength: [1878, 520],
+  restore: [1612, 600], enhance: [1612, 450], film: [1598, 476], doraha: [1612, 450], strength: [1839, 340],
 };
 
 test('MakeItColor 1.0.0 offers its two 64-bit installers', () => {
@@ -85,7 +85,7 @@ test('the MakeItColor field note is published, linked and has its media', () => 
   assert.match(article, /<video controls preload="metadata" playsInline poster=\{launchVideo\.poster\}/);
   assert.match(article, /<track kind="captions" srcLang="en" label="English" src=\{launchVideo\.captions\} default\/>/);
   assert.match(article, /'@type': 'VideoObject'[\s\S]*?thumbnailUrl[\s\S]*?contentUrl[\s\S]*?uploadDate[\s\S]*?duration: launchVideo\.duration/);
-  assert.match(data, /duration: 'PT1M11S'/);
+  assert.match(data, /duration: 'PT1M15S'/);
   assert.match(data, /uploadDate: '2026-10-20'/);
   assert.match(article, /JSON\.stringify\(schema\)\.replace\(\/<\/g, '\\\\u003c'\)/, 'structured data is escaped');
   assert.match(article, /const appId = `\$\{siteUrl\}\$\{downloadPage\.path\}#app`/, 'the app id is shared with the download page');
@@ -135,14 +135,15 @@ test('the pages are honest about screenshots, footage, licences and what is unte
   assert.ok(figures.length >= 9, 'cover, seven figures and the video');
   for (const figure of figures.filter(f => /makeitcolor-(app|app-light|settings)\.jpg/.test(f))) assert.match(figure, /real screenshot/, 'each app screenshot says it is real');
   for (const figure of figures.filter(f => /makeitcolor-(restore|enhance|film|doraha|strength)\.jpg/.test(f))) assert.match(figure, /[Rr]eal output/, 'each before/after says it is real output');
-  for (const figure of figures.filter(f => f.includes('<img'))) assert.match(figure, /<MakeItColorCredit source="(kiss|duck|doraha)"\/>|Settings, a real screenshot/, 'every figure with footage credits it');
+  for (const figure of figures.filter(f => f.includes('<img'))) assert.match(figure, /<MakeItColorCredit source="(duck|doraha)"\/>|Settings, a real screenshot/, 'every figure with footage credits it');
   const cover = figures.find(f => f.includes('makeitcolor-cover.jpg'));
   assert.match(cover, /The labels and the name were added for this cover/, 'the cover says what was added');
   assert.match(downloadPage, /real screenshot/);
-  assert.match(downloadPage, /<MakeItColorCredit source="kiss"\/>/);
+  assert.match(downloadPage, /<MakeItColorCredit source="doraha"\/>/);
   assert.doesNotMatch(article + downloadPage, /recreat/i, 'every picture is real, so nothing is called a recreation');
   assert.doesNotMatch(article + downloadPage, /open[- ]source/i, 'no licence is published, so the app is not called open source');
-  for (const source of ['https://archive.org/details/DuckandC1951', 'https://commons.wikimedia.org/wiki/File:Kissing_the_War_Goodbye.jpg']) assert.ok(data.includes(source), source);
+  assert.ok(data.includes('https://archive.org/details/DuckandC1951'), 'Duck and Cover source');
+  assert.doesNotMatch(article + downloadPage + data, /Kissing the War Goodbye|1945/, 'the 1945 photo is no longer used');
   assert.match(data, /doraha: \{ title: 'Doraha', year: 1967, [^}]*use: 'short excerpts' \}/);
   for (const licence of ['Apache 2.0', 'BSD 3-Clause', 'MIT', 'LGPL 2.1']) assert.ok(data.includes(licence) && downloadPage.includes(licence), licence);
   assert.match(article + downloadPage, /not affiliated with the DDColor or Real-ESRGAN authors/);

@@ -135,22 +135,20 @@ the taskbar), puts it in a state, renders it to a PNG with the app's own interfa
 |---|---|---|
 | makeitcolor-cover.jpg | 1672 × 940 | A Doraha frame: left 30 % the original, right MakeItColor's colour + enhanced output; "Original" / "MakeItColor" labels and the name and line "Old photos and films, in colour and restored. On your own PC." added for the cover (its caption says so). Shown whole (no type overlay), since the name is in the picture. |
 | makeitcolor-social.jpg | 1200 × 630 | The same, for Open Graph / Twitter. |
-| makeitcolor-app.jpg | 1600 × 973 | Real screenshot, dark theme: colouring and enhancing a 600 px copy of "Kissing the War Goodbye"; "Done in 9.3 s on the NPU · enhanced · 600 × 618 → 2400 × 2472". |
-| makeitcolor-app-light.jpg | 1600 × 973 | Real screenshot, light theme (download page); "Done in 10.1 s on the NPU …". |
+| makeitcolor-app.jpg | 1600 × 973 | Real screenshot, dark theme: colouring and enhancing a still of Doraha's opening shot (a convertible on a mountain road, 996 × 560, cropped without the channel logo); "Doraha (1967).png · Done in 5.3 s on the NPU · enhanced · 996 × 560 → 3984 × 2240". |
+| makeitcolor-app-light.jpg | 1600 × 973 | Real screenshot, light theme (download page); the same still, "Done in 4.7 s on the NPU …". |
 | makeitcolor-settings.jpg | 900 × 917 | Real screenshot of Settings (Colouring, Enhancing, Saving). |
 | makeitcolor-restore.jpg | 1612 × 600 | Duck and Cover title card: faded gray original vs. MakeItColor (brightness fixed, enhanced 4×, coloured). |
-| makeitcolor-enhance.jpg | 1612 × 450 | Faces from a 600 px copy of the 1945 photo: coloured without the enhancer and enlarged 4× (bicubic) vs. MakeItColor's enhanced 4×. |
+| makeitcolor-enhance.jpg | 1612 × 450 | A small 560 × 315 still of the singer from Doraha: coloured without the enhancer and enlarged 4× (bicubic) vs. MakeItColor's enhanced 4× (2240 × 1260). |
 | makeitcolor-film.jpg | 1598 × 476 | A Doraha frame: coloured only vs. coloured + Full clean-up. |
 | makeitcolor-doraha.jpg | 1612 × 450 | The same frame: original black and white vs. MakeItColor (colour + Full clean-up). |
-| makeitcolor-strength.jpg | 1878 × 520 | The 1945 photo at colour strength 60 %, 100 %, 140 %. |
+| makeitcolor-strength.jpg | 1839 × 340 | A still of the singer from Doraha at colour strength 60 %, 100 %, 140 %. |
 
 ## Footage and credits
 
 - Doraha (1967), the song "Tumhain Kaisay Bata Dun", sung by Ahmad Rushdi: short excerpts (a VHS-era YouTube transfer,
   1280 × 720, with a channel logo and an address ticker). Not claimed to be in the public domain.
 - Duck and Cover (1951, U.S. Federal Civil Defense Administration), public domain: https://archive.org/details/DuckandC1951
-- "Kissing the War Goodbye" (1945, Victor Jorgensen, U.S. Navy), public domain:
-  https://commons.wikimedia.org/wiki/File:Kissing_the_War_Goodbye.jpg
 - Colour model DDColor (Kang et al., ICCV 2023; Apache 2.0) via the MakeItColor model on Hugging Face
   (https://huggingface.co/muhammadnoman76/makeitcolor); enhancer Real-ESRGAN (Xintao Wang et al., BSD 3-Clause), network
   from BasicSR (Apache 2.0); Windows ML / ONNX Runtime (MIT); FFmpeg (LGPL 2.1, unmodified BtbN build). MakeItColor is not
@@ -158,8 +156,11 @@ the taskbar), puts it in a state, renders it to a PNG with the app's own interfa
 
 ## Launch video
 
-`public/media/makeitcolor-launch.mp4` (1280 × 720, H.264 + AAC, about 71 s; `duration: 'PT1M11S'`, uploadDate 2026-10-20),
+`public/media/makeitcolor-launch.mp4` (1280 × 720, H.264 + AAC, about 75 s; `duration: 'PT1M15S'`, uploadDate 2026-10-20),
 `public/media/makeitcolor-launch.en.vtt` (English captions) and `public/media/makeitcolor-launch-poster.jpg` (1280 × 720),
-added by the author. The field note embeds it like the Tall Screenshot note (captions on by default); the download pages
-don't embed launch videos. Its caption on the page only says what it is ("The MakeItColor launch video (1:11), with English
-captions."); if the video recreates any of the app's interface, say so in that caption, as the other notes do.
+made in `D:\Work\makeitcolor-launch-video` (Remotion). The field note embeds it like the Tall Screenshot note (captions on
+by default); the download pages don't embed launch videos. Nothing in it is recreated: the app screens are the app's
+capture-mode renders and every picture is MakeItColor's output (Doraha clips and stills, the Duck and Cover title card).
+The soundtrack is the song itself, "Tumhain Kaisay Bata Dun" from Doraha (1967), sung by Ahmad Rushdi: it opens in sync
+with the singer on screen, sits under the narration, and ends on the song's own last 14 seconds. The caption on the page
+says this and credits the footage.

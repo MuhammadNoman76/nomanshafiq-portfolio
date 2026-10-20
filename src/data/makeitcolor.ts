@@ -116,7 +116,7 @@ export const launchVideo = {
   poster: '/media/makeitcolor-launch-poster.jpg',
   width: 1280,
   height: 720,
-  duration: 'PT1M11S',
+  duration: 'PT1M15S',
   uploadDate: '2026-10-20',
 };
 
@@ -124,7 +124,6 @@ export const launchVideo = {
 export const footage = {
   doraha: { title: 'Doraha', year: 1967, by: 'the song “Tumhain Kaisay Bata Dun”, sung by Ahmad Rushdi', use: 'short excerpts' },
   duck: { title: 'Duck and Cover', year: 1951, by: 'U.S. Federal Civil Defense Administration', url: 'https://archive.org/details/DuckandC1951', use: 'public domain' },
-  kiss: { title: 'Kissing the War Goodbye', year: 1945, by: 'Victor Jorgensen, U.S. Navy', url: 'https://commons.wikimedia.org/wiki/File:Kissing_the_War_Goodbye.jpg', use: 'public domain' },
 } as const;
 
 /** The parts MakeItColor is built on, and their licences. */
