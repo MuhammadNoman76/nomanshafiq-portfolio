@@ -11,6 +11,7 @@ import './stagecraft.css';
 import './inkwell.css';
 import './vibevideo-ai.css';
 import './tall-screenshot.css';
+import './makeitcolor.css';
 export const metadata:Metadata={
  metadataBase:new URL(siteUrl),
  title:{default:'Muhammad Noman - AI Engineer & Product Builder',template:'%s | Muhammad Noman'},

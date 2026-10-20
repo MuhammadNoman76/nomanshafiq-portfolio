@@ -1,0 +1,23 @@
+{
+  "app": "MakeItColor",
+  "version": "1.0.0",
+  "released": "2026-10-20",
+  "notes": [
+    "The first release of MakeItColor: black-and-white photos and videos, in colour and restored, on your own PC.",
+    "Fixes faded brightness and contrast, takes out blur, noise and JPEG damage, and can make small photos 2× or 4× larger.",
+    "Uses the NPU if there is one, then the graphics card, then the CPU."
+  ],
+  "page": "https://www.nomanshafiq.com/makeitcolor/",
+  "editions": {
+    "x64": {
+      "url": "https://github.com/MuhammadNoman76/make-it-color/releases/download/v1.0.0/MakeItColor-Setup-1.0.0-x64.exe",
+      "sha256": "3a0d2efe03bda5308c47eb61757eb25fbfef43eeb5b92ae20ced75de4992a58d",
+      "size": 111640097
+    },
+    "arm64": {
+      "url": "https://github.com/MuhammadNoman76/make-it-color/releases/download/v1.0.0/MakeItColor-Setup-1.0.0-arm64.exe",
+      "sha256": "4e50f36eea792a901de4cb372d9c4d76456f30c9337f5a67e8e0d82a3171247a",
+      "size": 93063064
+    }
+  }
+}

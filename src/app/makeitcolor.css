@@ -1,0 +1,54 @@
+/* MakeItColor field note and download page: a dark cover with the name already in the picture, real screenshots and
+   real before/after output on a dark ground, and the launch video. The app's teal (from its logo) appears only in the
+   labels and the bullets. */
+
+/* Cover and blog card: the cover image carries the name and the tagline, so it is shown whole and gets no type overlay. */
+.jev-cover.mic-cover>img{aspect-ratio:1672/940;object-fit:cover;background:#111}
+.blog-feature-art.mic-art,.blog-feature-art.mic-art img{background:#111}
+.blog-feature-art.mic-art img{object-position:0% 50%}
+
+/* Boxed list (the PawSip pattern) */
+.mic-steps{border-left-color:#0e8f7e}
+.jev-prose .mic-steps small{color:#0b6f62}
+
+/* Real screenshots and real output */
+.mic-shot{margin:30px 0}
+.mic-shot img{display:block;width:100%;height:auto;background:#111;border:1px solid var(--line)}
+.mic-shot-stage{display:flex;justify-content:center;padding:clamp(16px,3.6%,34px);background:linear-gradient(135deg,#17191c,#202326 60%,#1a1d1f);border:1px solid var(--line)}
+.mic-shot-stage img{width:auto;max-width:min(560px,100%);border:0;filter:drop-shadow(0 14px 22px rgba(0,0,0,.35))}
+.mic-shot figcaption,.mic-video figcaption,.mic-dl-stage figcaption{font:9px/1.7 ui-monospace,Consolas,monospace;color:var(--muted);margin-top:10px}
+.mic-shot figcaption code{font-size:inherit}
+.mic-credit a{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.mic-credit a:hover{color:var(--blue)}
+
+/* Launch video */
+.mic-video{margin:30px 0}
+.mic-video video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#111;border:1px solid var(--line)}
+
+/* Bulleted lists in the prose */
+.jev-prose .mic-list,.jev-prose .mic-limits{list-style:none;margin:24px 0;padding:0;border-top:1px solid var(--line)}
+.jev-prose .mic-list li,.jev-prose .mic-limits li{margin:0;padding:16px 0 16px 26px;border-bottom:1px solid var(--line);position:relative;line-height:1.75}
+.jev-prose .mic-list li::before,.jev-prose .mic-limits li::before{content:"";position:absolute;left:2px;top:27px;width:9px;height:9px;border-radius:50%;background:#0e8f7e}
+
+/* Tables: prose in the last column, not monospace. */
+.mic-settings tbody th,.mic-speeds tbody th{min-width:150px}
+.benchmark-data-table.mic-settings td:last-child{font-family:inherit;white-space:normal}
+.mic-speeds td:last-child{font-weight:600}
+.mic-speeds td small{font-weight:400}
+.mic-article .jev-prose p code,.mic-page .jev-prose p code{overflow-wrap:anywhere}
+
+/* Download page: the app's window takes the place of PawSip's cat. */
+.mic-dl-stage{grid-area:stage;align-self:start;margin:0;min-width:0}
+.mic-dl-stage img{display:block;width:100%;height:auto;background:#111;border:1px solid var(--line)}
+
+@media(max-width:900px){.mic-dl-stage{margin-top:36px}}
+@media(max-width:850px){.blog-feature-art.mic-art img{object-position:10% 50%}}
+@media(max-width:600px){
+  .jev-cover.mic-cover>img{aspect-ratio:1672/940;object-position:50% 50%}
+  .blog-feature-art.mic-art img{object-position:0% 50%}
+  .mic-shot-stage{padding:14px}
+  .mic-settings tbody th,.mic-speeds tbody th{min-width:0}
+  .jev-prose .mic-list li,.jev-prose .mic-limits li{padding-left:22px}
+  .mic-dl-stage{margin-top:28px}
+  .mic-dl-stage figcaption{font-size:8px}
+}

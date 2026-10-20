@@ -72,20 +72,18 @@ test('the Tall Screenshot field note is published, linked and has its media', ()
   assert.match(read('public/llms.txt'), /\/blog\/tall-screenshot\//);
   assert.match(read('src/app/layout.tsx'), /import '\.\/tall-screenshot\.css';/);
   assert.ok(exists('docs/TALL-SCREENSHOT-CONTENT.md'), 'evidence doc');
-  assert.match(read('AGENTS.md'), /`\/blog\/tall-screenshot\/` \(first on the blog index\)/);
+  assert.match(read('AGENTS.md'), /`\/blog\/tall-screenshot\/`/);
   assert.match(read('AGENTS.md'), /`src\/data\/tall-screenshot\.ts`/);
   assert.ok(articleBody.indexOf('<section id="limits"') < articleBody.indexOf('<section id="video"') && articleBody.indexOf('<section id="video"') < articleBody.indexOf('<section id="download"'), 'the video comes after the limits, before the download');
 });
 
-test('Tall Screenshot is the first card on the blog index', () => {
+test('Tall Screenshot is the second card on the blog index, after MakeItColor', () => {
   assert.match(blog, /tallScreenshotArticle\.path/);
   assert.match(blog, /href=\{tallScreenshotDownloadPage\.path\}/);
-  assert.ok(blog.indexOf('tall-screenshot-cover.jpg') > 0 && blog.indexOf('tall-screenshot-cover.jpg') < blog.indexOf('vibevideo-ai-cover.jpg'), 'Tall Screenshot comes before VibeVideo AI');
-  assert.match(blog, /hasPart: \[\{ '@type': 'BlogPosting', headline: tallScreenshotArticle\.title/);
+  assert.ok(blog.indexOf('makeitcolor-cover.jpg') < blog.indexOf('tall-screenshot-cover.jpg') && blog.indexOf('tall-screenshot-cover.jpg') < blog.indexOf('vibevideo-ai-cover.jpg'), 'MakeItColor (the newest), then Tall Screenshot, then VibeVideo AI');
+  assert.match(blog, /\}, \{ '@type': 'BlogPosting', headline: tallScreenshotArticle\.title/, 'second in the structured data, after MakeItColor');
   assert.equal((blog.match(/fetchPriority="high"/g) ?? []).length, 1, 'only the first card image is high priority');
-  assert.ok(blog.indexOf('fetchPriority="high"') > blog.indexOf('tall-screenshot-cover.jpg') && blog.indexOf('fetchPriority="high"') < blog.indexOf('vibevideo-ai-cover.jpg'), 'the high-priority image is Tall Screenshot’s');
-  assert.match(blog, /images: \[\{ url: '\/art\/tall-screenshot-social\.jpg', width: 1200, height: 630 \}\]/, 'the blog index shares the Tall Screenshot card');
-  assert.match(blog, /images: \['\/art\/tall-screenshot-social\.jpg'\]/);
+  assert.match(blog, /src="\/art\/tall-screenshot-cover\.jpg" width="1672" height="940" alt="[^"]+" loading="lazy"/, 'Tall Screenshot is no longer the first card, so its image loads lazily');
   const readTime = /(\d+) MIN READ/.exec(article)?.[1];
   assert.ok(readTime, 'the article states its reading time');
   assert.match(blog, new RegExp(`Read the field note <span className="blog-read-time">${readTime} MIN</span></a><a className="plain-link" href=\\{tallScreenshotDownloadPage\\.path\\}`), 'the blog card shows the same reading time');
